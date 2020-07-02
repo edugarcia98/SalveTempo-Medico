@@ -1,0 +1,37 @@
+<h1>Cadastro de Médico</h1>
+
+<label><b>Nome:</b></label><br>
+<input #medicoNome type="text"><br><br>
+
+<label><b>Sexo:</b></label><br>
+<select [(ngModel)]="selectedSexo" [ngModelOptions]="{standalone: true}">
+  <option value="M">Masculino</option>
+  <option value="F">Feminino</option>
+</select><br><br>
+
+<label><b>Data de Nascimento:</b></label><br>
+<input #medicoDataNasc type="date"><br><br>
+
+<label><b>Especialização:</b></label><br>
+<select [(ngModel)]="selectedEspecializacao" [ngModelOptions]="{standalone: true}">
+  <option *ngFor="let especializacao of especializacoes" value={{especializacao.id}}>
+    {{especializacao.nome}}
+  </option>
+</select><br><br>
+
+<label><b>CRM:</b></label><br>
+<input #medicoCRM type="text"><br><br>
+
+<label><b>E-mail:</b></label><br>
+<input #medicoEmail type="email"><br><br>
+
+<label><b>Senha:</b></label><br>
+<input #medicoSenha type="password"><br><br>
+
+<label><b>Confirme sua senha:</b></label><br>
+<input #medicoSenhaConfirm type="password"><br><br>
+
+<button type="button" class="btn btn-primary" 
+ (click)="addMedico(medicoNome.value, medicoDataNasc.value, medicoCRM.value, medicoEmail.value, medicoSenha.value, medicoSenhaConfirm.value)">
+  CADASTRAR MÉDICO
+</button> 
