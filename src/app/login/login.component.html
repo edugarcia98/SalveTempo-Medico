@@ -1,0 +1,14 @@
+<h1>SalveTempo Médico</h1>
+
+<label><b>E-mail:</b></label><br>
+<input #medicoEmail type="email"><br><br>
+
+<label><b>Senha:</b></label><br>
+<input #medicoSenha type="password"><br><br>
+
+<button type="button" class="btn btn-primary"
+(click)="login(medicoEmail.value, medicoSenha.value)">
+  LOGIN
+</button><br><br>
+
+<a href="cadastro">Cadastre-se</a>

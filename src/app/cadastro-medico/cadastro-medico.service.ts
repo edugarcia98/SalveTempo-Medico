@@ -7,12 +7,13 @@ export class CadastroMedicoService {
   constructor(private http: HttpClient) { }
 
   cadastroUsuario(email: string, username: string, password: string, confirmPassword: string){
-    var url = 'http://192.168.1.21:8000/users/';
+    var url = 'http://192.168.1.21:8000/rest-auth/registration/';
+    
     var data = {
-      "email": email,
       "username": username,
-      "password": password,
-      "confirm_password": confirmPassword
+      "email": email,
+      "password1": password,
+      "password2": password
     };
 
     return this.http.post(url, data);

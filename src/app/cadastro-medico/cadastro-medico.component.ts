@@ -4,7 +4,10 @@ import { CadastroMedicoService } from './cadastro-medico.service'
 
 import { EspecializacaoService } from '../especializacao/especializacao.service';
 import { Especializacao } from '../especializacao/especializacao';
+
 import { User } from './user';
+
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cadastro-medico',
@@ -20,7 +23,8 @@ export class CadastroMedicoComponent implements OnInit {
   usuarioCadastrado: User[];
 
   constructor(private cadastroMedicoService: CadastroMedicoService,
-              private especializacaoService: EspecializacaoService) {
+              private especializacaoService: EspecializacaoService,
+              private router: Router) {
 
   }
 
@@ -41,11 +45,24 @@ export class CadastroMedicoComponent implements OnInit {
             this.usuarioCadastrado = items;
             this.cadastroMedicoService.cadastroMedico(this.usuarioCadastrado[0].id, this.selectedEspecializacao,
             medicoNome, this.selectedSexo, medicoDataNasc, medicoCRM).subscribe(
-              (error: any) => this.error = error
+              () => {
+                this.router.navigate(['aguarda-confirmacao']);
+              },
+              (error: any) => {
+                this.error = error;
+                console.log(this.error);
+              }
             );
           },
-          (error: any) => this.error = error
+          (error: any) => {
+            this.error = error;
+            console.log(this.error);
+          }
         );
+      },
+      (error: any) => {
+        this.error = error;
+        console.log(this.error);
       }
     );
     
