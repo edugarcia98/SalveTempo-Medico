@@ -1,0 +1,14 @@
+<h2>Unidades de Saúde</h2>
+
+<br><br>
+<button type="button" class="btn btn-primary"
+ (click)="goToCadastro()">
+ Adicionar Relação
+</button>
+
+<br><br>
+<div *ngFor="let item of unidadesSaudeMedico">
+  <button type="button" class="btn btn-primary" (click)="goToDetails(item.id)">Mostrar</button>&nbsp;
+  <button type="button" class="btn btn-primary" (click)="goToDelete(item.id)">Excluir</button>&nbsp;
+  {{ item.unidadeSaude.nome }}
+</div>

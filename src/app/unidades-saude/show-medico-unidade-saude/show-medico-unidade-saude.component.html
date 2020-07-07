@@ -1,0 +1,15 @@
+<h2>{{ medicoUnidadeSaude?.unidadeSaude.nome }}</h2>
+
+<label><b>Endereço: </b></label>
+{{ medicoUnidadeSaude?.unidadeSaude.endereco.logradouro }},
+{{ medicoUnidadeSaude?.unidadeSaude.endereco.numero }} - 
+{{ medicoUnidadeSaude?.unidadeSaude.endereco.bairro }}, 
+{{ medicoUnidadeSaude?.unidadeSaude.endereco.cidade.nome }} - 
+{{ medicoUnidadeSaude?.unidadeSaude.endereco.cidade.estado.sigla }}<br><br>
+
+<label><b>Dias de Trabalho:</b></label><br><br>
+<div *ngFor="let item of diasPeriodoTrabalho">
+  <b>{{ item.diaSemana }}:</b>&nbsp;{{ item.periodos }}.
+</div><br><br>
+
+<label><b>Status:</b></label> {{ statusAtual }}.

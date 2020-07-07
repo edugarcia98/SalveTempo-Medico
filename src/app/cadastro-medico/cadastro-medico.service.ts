@@ -37,4 +37,9 @@ export class CadastroMedicoService {
     var url = 'http://192.168.1.21:8000/users/?search=' + email;
     return this.http.get(url);
   }
+
+  getMedicoByEmail(email: string) {
+    var url = 'http://192.168.1.21:8000/medicos/?search=' + email;
+    return this.http.get(url);
+  }
 }
