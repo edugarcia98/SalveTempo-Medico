@@ -28,7 +28,7 @@ export class ShowMedicoUnidadeSaudeComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (sessionStorage.getItem('key') == null) {
+    if (sessionStorage.getItem('key') == null || sessionStorage.getItem('tipo') != 'M') {
       this.router.navigate(['']);
     } else {
       let id = parseInt(this.route.snapshot.paramMap.get('uid'));

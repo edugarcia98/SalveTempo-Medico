@@ -43,7 +43,7 @@ export class AddMedicoUnidadeSaudeComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (sessionStorage.getItem('key') == null) {
+    if (sessionStorage.getItem('key') == null || sessionStorage.getItem('tipo') != 'M') {
       this.router.navigate(['']);
     } else {
       this.unidadeSaudeService.getEstados().subscribe(

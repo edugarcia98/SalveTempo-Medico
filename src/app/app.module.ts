@@ -41,18 +41,32 @@ import { ConfirmMedicoUnidadeSaudeComponent } from './unidades-saude/confirm-med
 import { ShowMedicoUnidadeSaudeComponent } from './unidades-saude/show-medico-unidade-saude/show-medico-unidade-saude.component';
 import { DeleteMedicoUnidadeSaudeComponent } from './unidades-saude/delete-medico-unidade-saude/delete-medico-unidade-saude.component';
 
+//Administradores de Unidades de Saúde
+import { AdminUnidadeSaudeComponent } from './admin-unidade-saude/admin-unidade-saude.component';
+import { AdminUnidadeSaudeService } from './admin-unidade-saude/admin-unidade-saude.service';
+import { SolicitacoesIntegracaoComponent } from './admin-unidade-saude/solicitacoes-integracao/solicitacoes-integracao.component';
+import { ShowSolicitacaoIngracaoComponent } from './admin-unidade-saude/show-solicitacao-ingracao/show-solicitacao-ingracao.component';
+
 const appRoutes: Routes = [
+  //Autenticação
   { path: '', component: LoginComponent},
   { path: 'cadastro', component: CadastroMedicoComponent},
   { path: 'aguarda-confirmacao', component: ConfirmationScreenComponent},
   { path: 'redefinir-senha', component: ForgotPasswordComponent},
   { path: 'redefinir-senha-confirmacao', component: ResetConfirmationScreenComponent },
+
+  //Médico
   { path: 'medico', component: MedicoPanelComponent },
   { path: 'medico/unidades-saude', component: UnidadesSaudeComponent },
   { path: 'medico/unidades-saude/cadastrar', component: AddMedicoUnidadeSaudeComponent },
   { path: 'medico/unidades-saude/aguarde-confirmacao', component: ConfirmMedicoUnidadeSaudeComponent },
   { path: 'medico/unidades-saude/:uid/detail', component: ShowMedicoUnidadeSaudeComponent },
   { path: 'medico/unidades-saude/:uid/delete', component: DeleteMedicoUnidadeSaudeComponent },
+
+  //Administrador de Unidade de Saúde
+  { path: 'administracao', component: AdminUnidadeSaudeComponent },
+  { path: 'administracao/solicitacoes-integracao-medico', component: SolicitacoesIntegracaoComponent },
+  { path: 'administracao/solicitacoes-integracao-medico/:mid/detail', component: ShowSolicitacaoIngracaoComponent },
 ];
 
 @NgModule({
@@ -68,7 +82,10 @@ const appRoutes: Routes = [
     AddMedicoUnidadeSaudeComponent,
     ConfirmMedicoUnidadeSaudeComponent,
     ShowMedicoUnidadeSaudeComponent,
-    DeleteMedicoUnidadeSaudeComponent
+    DeleteMedicoUnidadeSaudeComponent,
+    AdminUnidadeSaudeComponent,
+    SolicitacoesIntegracaoComponent,
+    ShowSolicitacaoIngracaoComponent
   ],
   imports: [
     BrowserModule,
@@ -86,7 +103,8 @@ const appRoutes: Routes = [
     LoginService,
     ForgotPasswordService,
     MedicoService,
-    UnidadeSaudeService
+    UnidadeSaudeService,
+    AdminUnidadeSaudeService
   ],
   bootstrap: [AppComponent]
 })

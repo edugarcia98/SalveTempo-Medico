@@ -21,7 +21,7 @@ export class MedicoPanelComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (sessionStorage.getItem('key') == null) {
+    if (sessionStorage.getItem('key') == null || sessionStorage.getItem('tipo') != 'M') {
       this.router.navigate(['']);
     } else {
       this.medicoService.getMedicoById(sessionStorage.getItem('id')).subscribe(

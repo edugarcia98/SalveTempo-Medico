@@ -1,5 +1,12 @@
 <h1>SalveTempo Médico</h1>
 
+<label><b>Tipo de Usuário:</b></label><br>
+<select [(ngModel)]="selectedTipoUsuario" [ngModelOptions]="{standalone: true}" (change)="changeTipoUsuario()">
+  <option value="" selected disabled hidden>Médico</option>
+  <option value="M">Médico</option>
+  <option value="A">Administrador</option>
+</select><br><br>
+
 <label><b>E-mail:</b></label><br>
 <input #medicoEmail type="email"><br><br>
 
@@ -11,5 +18,5 @@
   LOGIN
 </button><br><br>
 
-<a href="cadastro">Cadastre-se</a><br>
-<a href="redefinir-senha">Esqueceu sua senha?</a>
+<a href="redefinir-senha">Esqueceu sua senha?</a><br>
+<a id="cad-medico" href="cadastro">Cadastre-se</a>

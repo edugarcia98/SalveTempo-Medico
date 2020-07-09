@@ -14,7 +14,7 @@ export class ConfirmMedicoUnidadeSaudeComponent implements OnInit {
   constructor(private router: Router) { }
 
   ngOnInit() {
-    if (sessionStorage.getItem('key') == null) {
+    if (sessionStorage.getItem('key') == null || sessionStorage.getItem('tipo') != 'M') {
       this.router.navigate(['']);
     }
   }
