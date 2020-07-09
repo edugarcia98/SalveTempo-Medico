@@ -37,8 +37,8 @@ export class ShowMedicoUnidadeSaudeComponent implements OnInit {
       this.unidadeSaudeService.getUnidadeSaudeMedicoById(sessionStorage.getItem('key'), this.id).subscribe(
         (item: MedicoUnidadeSaude) => {
           this.medicoUnidadeSaude = item;
-          this.defineDiasTrabalho(this.medicoUnidadeSaude.diaPeriodoTrabalho);
-          this.defineStatus(this.medicoUnidadeSaude.status);
+          this.diasPeriodoTrabalho = this.unidadeSaudeService.defineDiasTrabalho(this.medicoUnidadeSaude.diaPeriodoTrabalho);
+          this.statusAtual = this.unidadeSaudeService.defineStatus(this.medicoUnidadeSaude.status);
         },
         (error: any) => {
           this.error = error;
@@ -46,36 +46,5 @@ export class ShowMedicoUnidadeSaudeComponent implements OnInit {
         }
       )
     }
-  }
-
-  defineDiasTrabalho(diasTrabalhoPeriodo: string) {
-    var dias = diasTrabalhoPeriodo.split('|');
-    dias.forEach(
-      (dia: string) => {
-        var item = new DiaPeriodoTrabalhoShow();
-
-        var sep = dia.split(':');
-        if (sep.length >= 2) {
-
-          item.diaSemana = sep[0];
-
-          var periodos = sep[1].split(';').join(', ');
-          periodos += '.';
-          periodos = periodos.replace(', .', '');
-          item.periodos = periodos;
-          
-          this.diasPeriodoTrabalho.push(item)
-        }        
-      }
-    )
-  }
-
-  defineStatus(status: string) {
-    if (status == 'P')
-      this.statusAtual = 'Pendente';
-    else if (status == 'A')
-      this.statusAtual = 'Aprovado';
-    else if (status == 'R')
-      this.statusAtual = 'Recusado';
   }
 }

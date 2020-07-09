@@ -47,6 +47,9 @@ import { AdminUnidadeSaudeService } from './admin-unidade-saude/admin-unidade-sa
 import { SolicitacoesIntegracaoComponent } from './admin-unidade-saude/solicitacoes-integracao/solicitacoes-integracao.component';
 import { ShowSolicitacaoIngracaoComponent } from './admin-unidade-saude/show-solicitacao-ingracao/show-solicitacao-ingracao.component';
 
+//Keys
+import { KeyService } from './key/key.service';
+
 const appRoutes: Routes = [
   //Autenticação
   { path: '', component: LoginComponent},
@@ -104,7 +107,8 @@ const appRoutes: Routes = [
     ForgotPasswordService,
     MedicoService,
     UnidadeSaudeService,
-    AdminUnidadeSaudeService
+    AdminUnidadeSaudeService,
+    KeyService
   ],
   bootstrap: [AppComponent]
 })
