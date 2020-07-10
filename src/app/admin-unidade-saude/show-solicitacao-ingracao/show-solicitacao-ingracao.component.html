@@ -1,6 +1,7 @@
 <h2>{{ medicoUnidadeSaude?.medico.nome }}</h2><br>
 
 <h3>Informações do Médico</h3>
+<label><b>E-mail: </b></label> {{ medicoUnidadeSaude?.medico.usuario.email }}.<br><br>
 <label><b>Sexo: </b></label> {{ medicoSexo }}.<br><br>
 <label><b>Data de Nascimento: </b></label> {{ medicoUnidadeSaude?.medico.dataNasc | date:'MM/dd/yyyy' }}.<br><br>
 <label><b>Especialização: </b></label> {{ medicoUnidadeSaude?.medico.especializacao.nome }}.<br><br>

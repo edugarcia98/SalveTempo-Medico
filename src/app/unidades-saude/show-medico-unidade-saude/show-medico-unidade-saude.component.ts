@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
-import { ActivatedRoute } from '@angular/router';
-
 import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 import { UnidadeSaudeService } from '../unidade-saude.service';
 import { MedicoUnidadeSaude, DiaPeriodoTrabalhoShow } from '../medico-unidade-saude';
+import { KeyService } from 'src/app/key/key.service';
 
 @Component({
   selector: 'app-show-medico-unidade-saude',
@@ -22,6 +22,7 @@ export class ShowMedicoUnidadeSaudeComponent implements OnInit {
   statusAtual: string;
 
   constructor(private unidadeSaudeService: UnidadeSaudeService,
+              private keyService: KeyService,
               private route: ActivatedRoute,
               private router: Router) {
 
@@ -31,8 +32,7 @@ export class ShowMedicoUnidadeSaudeComponent implements OnInit {
     if (sessionStorage.getItem('key') == null || sessionStorage.getItem('tipo') != 'M') {
       this.router.navigate(['']);
     } else {
-      let id = parseInt(this.route.snapshot.paramMap.get('uid'));
-      this.id = id;
+      this.id = this.keyService.getUrlId('uid', this.route);
 
       this.unidadeSaudeService.getUnidadeSaudeMedicoById(sessionStorage.getItem('key'), this.id).subscribe(
         (item: MedicoUnidadeSaude) => {

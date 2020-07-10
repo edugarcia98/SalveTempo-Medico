@@ -44,4 +44,17 @@ export class AdminUnidadeSaudeService {
 
     return this.http.put(url, data, options);
   }
+
+  enviaEmailRespostaMedico(key: string, medicoUnidadeSaudeId: number, status: string) {
+    var url = 'http://192.168.1.21:8000/resposta_solicitacao/';
+
+    var data = {
+      "medicoUnidadeSaude_id": medicoUnidadeSaudeId,
+      "status": status
+    }
+
+    var options = this.keyService.defineOptions(key);
+
+    return this.http.post(url, data, options);
+  }
 }

@@ -6,6 +6,8 @@ import { Router } from '@angular/router';
 
 import { UnidadeSaudeService } from '../unidade-saude.service';
 
+import { KeyService } from 'src/app/key/key.service';
+
 @Component({
   selector: 'app-delete-medico-unidade-saude',
   templateUrl: './delete-medico-unidade-saude.component.html',
@@ -17,6 +19,7 @@ export class DeleteMedicoUnidadeSaudeComponent implements OnInit {
   error: any;
 
   constructor(private unidadeSaudeService: UnidadeSaudeService,
+              private keyService: KeyService,
               private route: ActivatedRoute,
               private router: Router) { 
 
@@ -26,8 +29,7 @@ export class DeleteMedicoUnidadeSaudeComponent implements OnInit {
     if (sessionStorage.getItem('key') == null || sessionStorage.getItem('tipo') != 'M') {
       this.router.navigate(['']);
     } else { 
-      let id = parseInt(this.route.snapshot.paramMap.get('uid'));
-      this.id = id;
+      this.id = this.keyService.getUrlId('uid', this.route);
     }
   }
 

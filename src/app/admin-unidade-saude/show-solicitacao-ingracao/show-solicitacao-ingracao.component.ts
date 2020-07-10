@@ -11,6 +11,10 @@ import { AdminUnidadeSaudeService } from '../admin-unidade-saude.service';
 
 import { DiaPeriodoTrabalhoShow } from 'src/app/unidades-saude/medico-unidade-saude';
 
+import { KeyService } from 'src/app/key/key.service';
+
+import { AdminUnidadeSaude } from '../admin-unidade-saude';
+
 @Component({
   selector: 'app-show-solicitacao-ingracao',
   templateUrl: './show-solicitacao-ingracao.component.html',
@@ -28,6 +32,7 @@ export class ShowSolicitacaoIngracaoComponent implements OnInit {
 
   constructor(private unidadeSaudeService: UnidadeSaudeService,
               private adminUnidadeSaudeService: AdminUnidadeSaudeService,
+              private keyService: KeyService,
               private route: ActivatedRoute,
               private router: Router) {
                 
@@ -37,13 +42,12 @@ export class ShowSolicitacaoIngracaoComponent implements OnInit {
     if (sessionStorage.getItem('key') == null || sessionStorage.getItem('tipo') != 'A') {
       this.router.navigate(['']);
     } else {
-      let id = parseInt(this.route.snapshot.paramMap.get('mid'));
-      this.id = id;
+      this.id = this.keyService.getUrlId('mid', this.route)
       
       this.unidadeSaudeService.getUnidadeSaudeMedicoById(sessionStorage.getItem('key'), this.id).subscribe(
         (item: MedicoUnidadeSaude) => {
           this.medicoUnidadeSaude = item;
-
+          
           this.diasPeriodoTrabalho = this.unidadeSaudeService.defineDiasTrabalho(this.medicoUnidadeSaude.diaPeriodoTrabalho);
           this.statusAtual = this.unidadeSaudeService.defineStatus(this.medicoUnidadeSaude.status);
           this.medicoSexo = this.medicoUnidadeSaude.medico.sexo == 'M' ? 'Masculino' : 'Feminino';
@@ -62,7 +66,16 @@ export class ShowSolicitacaoIngracaoComponent implements OnInit {
     this.id, this.medicoUnidadeSaude.medico.id, this.medicoUnidadeSaude.unidadeSaude.id,
     this.medicoUnidadeSaude.diaPeriodoTrabalho, status).subscribe(
       () => {
-        console.log('Atualizou');
+        this.adminUnidadeSaudeService.enviaEmailRespostaMedico(sessionStorage.getItem('key'), this.id,
+        status).subscribe(
+          () => {
+            console.log('Enviado');
+          },
+          (error: any) => {
+            this.error = error;
+            console.log(this.error);
+          }
+        )
       },
       (error: any) => {
         this.error = error;
