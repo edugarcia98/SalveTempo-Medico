@@ -5,6 +5,8 @@ import { Router } from '@angular/router';
 import { AdminUnidadeSaudeService } from './admin-unidade-saude.service';
 import { AdminUnidadeSaude } from './admin-unidade-saude';
 
+import { KeyService } from '../key/key.service';
+
 @Component({
   selector: 'app-admin-unidade-saude',
   templateUrl: './admin-unidade-saude.component.html',
@@ -16,14 +18,13 @@ export class AdminUnidadeSaudeComponent implements OnInit {
   admin: AdminUnidadeSaude;
 
   constructor(private adminUnidadeSaudeService: AdminUnidadeSaudeService,
+              private keyService: KeyService,
               private router: Router) { 
 
   }
 
   ngOnInit() {
-    if (sessionStorage.getItem('key') == null || sessionStorage.getItem('tipo') != 'A') {
-      this.router.navigate(['']);
-    } else {
+    if (this.keyService.validaAutorizacao('A')) {
       this.adminUnidadeSaudeService.getAdminUnidadeSaudeById(sessionStorage.getItem('id')).subscribe(
         (admin: AdminUnidadeSaude) => {
           this.admin = admin;
@@ -33,6 +34,8 @@ export class AdminUnidadeSaudeComponent implements OnInit {
           console.log(this.error);
         }
       )
+    } else {
+      this.router.navigate(['not-authorized']);
     }
   }
 

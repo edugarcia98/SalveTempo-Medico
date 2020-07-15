@@ -7,8 +7,7 @@ import { UnidadeSaude } from './unidade-saude';
 
 import { MedicoUnidadeSaude } from './medico-unidade-saude';
 
-import { Observable } from 'rxjs';
-import { forEach } from '@angular/router/src/utils/collection';
+import { KeyService } from '../key/key.service';
 
 @Component({
   selector: 'app-unidades-saude',
@@ -21,14 +20,13 @@ export class UnidadesSaudeComponent implements OnInit {
   unidadesSaudeMedico: MedicoUnidadeSaude[];
 
   constructor(private unidadeSaudeService: UnidadeSaudeService,
+              private keyService: KeyService,
               private router: Router) {
 
   }
 
   ngOnInit() {
-    if (sessionStorage.getItem('key') == null || sessionStorage.getItem('tipo') != 'M') {
-      this.router.navigate(['']);
-    } else {
+    if (this.keyService.validaAutorizacao('M')) {
       this.unidadeSaudeService.getUnidadesSaudeFromMedico(sessionStorage.getItem('key'),
       sessionStorage.getItem('id')).subscribe(
         (items: MedicoUnidadeSaude[]) => {
@@ -39,6 +37,8 @@ export class UnidadesSaudeComponent implements OnInit {
           console.log(this.error);
         }
       )
+    } else {
+      this.router.navigate(['not-authorized']);
     }
   }
 
@@ -51,6 +51,6 @@ export class UnidadesSaudeComponent implements OnInit {
   }
 
   goToDelete(id: number) {
-    this.router.navigate([`medico/unidades-saude/${id}/delete`])
+    this.router.navigate([`medico/unidade-saude/${id}/delete`])
   }
 }

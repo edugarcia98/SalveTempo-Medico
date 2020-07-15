@@ -1,0 +1,8 @@
+<h2>Equipe</h2>
+
+<br><br>
+<div *ngFor="let item of medicosUnidadeSaude">
+  <button type="button" class="btn btn-primary" (click)="goToInfo(item.id)">Informações</button>&nbsp;
+  <button type="button" class="btn btn-primary" (click)="goToDelete(item.id)">Excluir</button>&nbsp;
+  {{ item.medico.nome }}
+</div>

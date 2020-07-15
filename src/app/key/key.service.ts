@@ -26,4 +26,11 @@ export class KeyService {
     let id = parseInt(route.snapshot.paramMap.get(identifier));
     return id;
   }
+
+  validaAutorizacao(tipoUsuario: string) {
+    if (sessionStorage.getItem('key') == null || sessionStorage.getItem('tipo') != tipoUsuario) {
+      return false;
+    }
+    return true;
+  }
 }

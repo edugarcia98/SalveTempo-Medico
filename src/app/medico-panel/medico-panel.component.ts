@@ -5,6 +5,8 @@ import { Router } from '@angular/router';
 import { MedicoService } from './medico.service';
 import { Medico } from './medico';
 
+import { KeyService } from '../key/key.service';
+
 @Component({
   selector: 'app-medico-panel',
   templateUrl: './medico-panel.component.html',
@@ -15,15 +17,14 @@ export class MedicoPanelComponent implements OnInit {
   error: any;
   medico: Medico;
 
-  constructor(private medicoService: MedicoService,
+  constructor(private keyService: KeyService,
+              private medicoService: MedicoService,
               private router: Router) {
 
   }
 
   ngOnInit() {
-    if (sessionStorage.getItem('key') == null || sessionStorage.getItem('tipo') != 'M') {
-      this.router.navigate(['']);
-    } else {
+    if (this.keyService.validaAutorizacao('M')) {
       this.medicoService.getMedicoById(sessionStorage.getItem('id')).subscribe(
         (medico: Medico) => {
           this.medico = medico;
@@ -34,7 +35,10 @@ export class MedicoPanelComponent implements OnInit {
           console.log(this.error);
         }
       )
+    } else {
+      this.router.navigate(['not-authorized']);
     }
+    
   }
 
 }

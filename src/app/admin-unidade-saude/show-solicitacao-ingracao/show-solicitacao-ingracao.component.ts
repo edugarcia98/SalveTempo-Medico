@@ -39,9 +39,7 @@ export class ShowSolicitacaoIngracaoComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (sessionStorage.getItem('key') == null || sessionStorage.getItem('tipo') != 'A') {
-      this.router.navigate(['']);
-    } else {
+    if (this.keyService.validaAutorizacao('A')) {
       this.id = this.keyService.getUrlId('mid', this.route)
       
       this.unidadeSaudeService.getUnidadeSaudeMedicoById(sessionStorage.getItem('key'), this.id).subscribe(
@@ -58,6 +56,8 @@ export class ShowSolicitacaoIngracaoComponent implements OnInit {
           console.log(this.error);
         }
       )
+    } else {
+      this.router.navigate(['not-authorized']);
     }
   }
 
@@ -69,7 +69,7 @@ export class ShowSolicitacaoIngracaoComponent implements OnInit {
         this.adminUnidadeSaudeService.enviaEmailRespostaMedico(sessionStorage.getItem('key'), this.id,
         status).subscribe(
           () => {
-            console.log('Enviado');
+            this.router.navigate(['administracao/solicitacoes-integracao-medico/email-enviado']);
           },
           (error: any) => {
             this.error = error;

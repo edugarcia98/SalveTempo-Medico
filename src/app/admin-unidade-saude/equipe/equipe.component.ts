@@ -10,15 +10,15 @@ import { MedicoUnidadeSaude } from 'src/app/unidades-saude/medico-unidade-saude'
 import { KeyService } from 'src/app/key/key.service';
 
 @Component({
-  selector: 'app-solicitacoes-integracao',
-  templateUrl: './solicitacoes-integracao.component.html',
-  styleUrls: ['./solicitacoes-integracao.component.css']
+  selector: 'app-equipe',
+  templateUrl: './equipe.component.html',
+  styleUrls: ['./equipe.component.css']
 })
-export class SolicitacoesIntegracaoComponent implements OnInit {
+export class EquipeComponent implements OnInit {
 
   error: any;
   admin: AdminUnidadeSaude;
-  medicosUnidadeSaude: MedicoUnidadeSaude[]
+  medicosUnidadeSaude: MedicoUnidadeSaude[];
 
   constructor(private adminUnidadeSaudeService: AdminUnidadeSaudeService,
               private keyService: KeyService,
@@ -36,7 +36,7 @@ export class SolicitacoesIntegracaoComponent implements OnInit {
             (items: MedicoUnidadeSaude[]) => {
               items.forEach(
                 (item: MedicoUnidadeSaude) => {
-                  if (item.status == 'P') {
+                  if (item.status == 'A') {
                     this.medicosUnidadeSaude.push(item);
                   }
                 }
@@ -59,6 +59,10 @@ export class SolicitacoesIntegracaoComponent implements OnInit {
   }
 
   goToInfo(id: number) {
-    this.router.navigate([`administracao/solicitacoes-integracao-medico/${id}/detail`])
+    this.router.navigate([`administracao/medico/${id}/detail`])
+  }
+
+  goToDelete(id: number) {
+    this.router.navigate([`administracao/medico/${id}/delete`])
   }
 }

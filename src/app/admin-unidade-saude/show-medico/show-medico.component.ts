@@ -1,42 +1,51 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 
-import { UnidadeSaudeService } from '../unidade-saude.service';
-import { MedicoUnidadeSaude, DiaPeriodoTrabalhoShow } from '../medico-unidade-saude';
+import { Router } from '@angular/router';
+
+import { UnidadeSaudeService } from 'src/app/unidades-saude/unidade-saude.service';
+import { MedicoUnidadeSaude } from 'src/app/unidades-saude/medico-unidade-saude';
+
+import { AdminUnidadeSaudeService } from '../admin-unidade-saude.service';
+
+import { DiaPeriodoTrabalhoShow } from 'src/app/unidades-saude/medico-unidade-saude';
+
 import { KeyService } from 'src/app/key/key.service';
 
 @Component({
-  selector: 'app-show-medico-unidade-saude',
-  templateUrl: './show-medico-unidade-saude.component.html',
-  styleUrls: ['./show-medico-unidade-saude.component.css']
+  selector: 'app-show-medico',
+  templateUrl: './show-medico.component.html',
+  styleUrls: ['./show-medico.component.css']
 })
-export class ShowMedicoUnidadeSaudeComponent implements OnInit {
+export class ShowMedicoComponent implements OnInit {
 
   public id;
   error: any;
   medicoUnidadeSaude: MedicoUnidadeSaude;
 
   diasPeriodoTrabalho: Array<DiaPeriodoTrabalhoShow> = [];
-  statusAtual: string;
+  medicoSexo: string;
 
   constructor(private unidadeSaudeService: UnidadeSaudeService,
+              private adminUnidadeSaudeService: AdminUnidadeSaudeService,
               private keyService: KeyService,
               private route: ActivatedRoute,
               private router: Router) {
-
+      
   }
 
   ngOnInit() {
-    if (this.keyService.validaAutorizacao('M')) {
-      this.id = this.keyService.getUrlId('uid', this.route);
-
+    if (this.keyService.validaAutorizacao('A')) {
+      this.id = this.keyService.getUrlId('mid', this.route)
+      
       this.unidadeSaudeService.getUnidadeSaudeMedicoById(sessionStorage.getItem('key'), this.id).subscribe(
         (item: MedicoUnidadeSaude) => {
           this.medicoUnidadeSaude = item;
+          
           this.diasPeriodoTrabalho = this.unidadeSaudeService.defineDiasTrabalho(this.medicoUnidadeSaude.diaPeriodoTrabalho);
-          this.statusAtual = this.unidadeSaudeService.defineStatus(this.medicoUnidadeSaude.status);
+          this.medicoSexo = this.medicoUnidadeSaude.medico.sexo == 'M' ? 'Masculino' : 'Feminino';
+
         },
         (error: any) => {
           this.error = error;
@@ -47,4 +56,5 @@ export class ShowMedicoUnidadeSaudeComponent implements OnInit {
       this.router.navigate(['not-authorized']);
     }
   }
+
 }

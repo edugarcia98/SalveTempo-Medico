@@ -9,6 +9,7 @@ import { DiaPeriodoTrabalho } from '../medico-unidade-saude';
 
 import { Estado } from '../endereco/estado';
 import { Cidade } from '../endereco/cidade';
+import { KeyService } from 'src/app/key/key.service';
 
 @Component({
   selector: 'app-add-medico-unidade-saude',
@@ -38,14 +39,13 @@ export class AddMedicoUnidadeSaudeComponent implements OnInit {
   selectedDiaPeriodoTrabalho;
 
   constructor(private unidadeSaudeService: UnidadeSaudeService,
+              private keyService: KeyService,
               private router: Router) {
 
   }
 
   ngOnInit() {
-    if (sessionStorage.getItem('key') == null || sessionStorage.getItem('tipo') != 'M') {
-      this.router.navigate(['']);
-    } else {
+    if (this.keyService.validaAutorizacao('M')) {
       this.unidadeSaudeService.getEstados().subscribe(
         (items: Estado[]) => {
           this.estados = items;
@@ -54,8 +54,9 @@ export class AddMedicoUnidadeSaudeComponent implements OnInit {
           this.error = error;
           console.log(this.error);
         }
-      )
-
+      )  
+    } else {
+      this.router.navigate(['not-authorized']);
     }
   }
 
@@ -150,6 +151,7 @@ export class AddMedicoUnidadeSaudeComponent implements OnInit {
       },
       (error: any) => {
         this.error = error;
+        console.log(this.error);
       }
     )
   }

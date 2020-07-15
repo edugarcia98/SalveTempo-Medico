@@ -46,9 +46,18 @@ import { AdminUnidadeSaudeComponent } from './admin-unidade-saude/admin-unidade-
 import { AdminUnidadeSaudeService } from './admin-unidade-saude/admin-unidade-saude.service';
 import { SolicitacoesIntegracaoComponent } from './admin-unidade-saude/solicitacoes-integracao/solicitacoes-integracao.component';
 import { ShowSolicitacaoIngracaoComponent } from './admin-unidade-saude/show-solicitacao-ingracao/show-solicitacao-ingracao.component';
+import { EquipeComponent } from './admin-unidade-saude/equipe/equipe.component';
+import { ShowMedicoComponent } from './admin-unidade-saude/show-medico/show-medico.component';
+import { MensagemEmailEnviadoComponent } from './admin-unidade-saude/mensagem-email-enviado/mensagem-email-enviado.component';
 
 //Keys
 import { KeyService } from './key/key.service';
+
+//Tela padrão de confirmação de exclusão
+import { DeleteConfirmationComponent } from './delete-confirmation/delete-confirmation.component';
+
+//Não autorizado
+import { NotAuthorizedComponent } from './not-authorized/not-authorized.component';
 
 const appRoutes: Routes = [
   //Autenticação
@@ -57,19 +66,28 @@ const appRoutes: Routes = [
   { path: 'aguarda-confirmacao', component: ConfirmationScreenComponent},
   { path: 'redefinir-senha', component: ForgotPasswordComponent},
   { path: 'redefinir-senha-confirmacao', component: ResetConfirmationScreenComponent },
-
+  
   //Médico
   { path: 'medico', component: MedicoPanelComponent },
   { path: 'medico/unidades-saude', component: UnidadesSaudeComponent },
   { path: 'medico/unidades-saude/cadastrar', component: AddMedicoUnidadeSaudeComponent },
   { path: 'medico/unidades-saude/aguarde-confirmacao', component: ConfirmMedicoUnidadeSaudeComponent },
   { path: 'medico/unidades-saude/:uid/detail', component: ShowMedicoUnidadeSaudeComponent },
-  { path: 'medico/unidades-saude/:uid/delete', component: DeleteMedicoUnidadeSaudeComponent },
+  //{ path: 'medico/unidades-saude/:uid/delete', component: DeleteMedicoUnidadeSaudeComponent },
 
   //Administrador de Unidade de Saúde
   { path: 'administracao', component: AdminUnidadeSaudeComponent },
   { path: 'administracao/solicitacoes-integracao-medico', component: SolicitacoesIntegracaoComponent },
   { path: 'administracao/solicitacoes-integracao-medico/:mid/detail', component: ShowSolicitacaoIngracaoComponent },
+  { path: 'administracao/solicitacoes-integracao-medico/email-enviado', component: MensagemEmailEnviadoComponent },
+  { path: 'administracao/equipe', component: EquipeComponent},
+  { path: 'administracao/medico/:mid/detail', component: ShowMedicoComponent},
+
+  //Tela padrão de confirmação de exclusão
+  { path: ':tipousuario/:item/:id/delete', component: DeleteConfirmationComponent},
+
+  //Não autorizado
+  { path: 'not-authorized', component: NotAuthorizedComponent}
 ];
 
 @NgModule({
@@ -88,7 +106,12 @@ const appRoutes: Routes = [
     DeleteMedicoUnidadeSaudeComponent,
     AdminUnidadeSaudeComponent,
     SolicitacoesIntegracaoComponent,
-    ShowSolicitacaoIngracaoComponent
+    ShowSolicitacaoIngracaoComponent,
+    EquipeComponent,
+    ShowMedicoComponent,
+    MensagemEmailEnviadoComponent,
+    DeleteConfirmationComponent,
+    NotAuthorizedComponent
   ],
   imports: [
     BrowserModule,

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Router } from '@angular/router';
+import { KeyService } from 'src/app/key/key.service';
 
 @Component({
   selector: 'app-confirm-medico-unidade-saude',
@@ -11,11 +12,12 @@ export class ConfirmMedicoUnidadeSaudeComponent implements OnInit {
 
   error: any;
 
-  constructor(private router: Router) { }
+  constructor(private keyService: KeyService,
+              private router: Router) { }
 
   ngOnInit() {
-    if (sessionStorage.getItem('key') == null || sessionStorage.getItem('tipo') != 'M') {
-      this.router.navigate(['']);
+    if (!(this.keyService.validaAutorizacao('M'))) {
+      this.router.navigate(['not-authorized']);
     }
   }
 
