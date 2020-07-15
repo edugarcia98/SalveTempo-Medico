@@ -9,55 +9,55 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 //Cadastro de Médico
-import { CadastroMedicoComponent } from './cadastro-medico/cadastro-medico.component';
-import { CadastroMedicoService } from './cadastro-medico/cadastro-medico.service';
+import { CadastroMedicoComponent } from  './autenticacao/cadastro-medico/cadastro-medico.component';
+import { CadastroMedicoService } from './autenticacao/cadastro-medico/cadastro-medico.service';
 
 //Tela de Confirmação de Cadastro
-import { ConfirmationScreenComponent } from './confirmation-screen/confirmation-screen.component';
+import { ConfirmationScreenComponent } from './autenticacao/confirmation-screen/confirmation-screen.component';
 
 //Especialização
-import { EspecializacaoService } from './especializacao/especializacao.service';
+import { EspecializacaoService } from './medico/especializacao/especializacao.service';
 
 //Login
-import { LoginComponent } from './login/login.component';
-import { LoginService } from './login/login.service';
+import { LoginComponent } from './autenticacao/login/login.component';
+import { LoginService } from './autenticacao/login/login.service';
 
 //Esqueci a senha
-import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
-import { ForgotPasswordService } from './forgot-password/forgot-password.service';
+import { ForgotPasswordComponent } from './autenticacao/forgot-password/forgot-password.component';
+import { ForgotPasswordService } from './autenticacao/forgot-password/forgot-password.service';
 
 //Tela de Confirmação de Recuperação de Senha
-import { ResetConfirmationScreenComponent } from './reset-confirmation-screen/reset-confirmation-screen.component';
+import { ResetConfirmationScreenComponent } from './autenticacao/reset-confirmation-screen/reset-confirmation-screen.component';
 
 //Painel do Médico
-import { MedicoPanelComponent } from './medico-panel/medico-panel.component';
-import { MedicoService } from './medico-panel/medico.service';
+import { MedicoPanelComponent } from './medico/medico-panel/medico-panel.component';
+import { MedicoService } from './medico/medico-panel/medico.service';
 
 //Unidades de Saúde
-import { UnidadesSaudeComponent } from './unidades-saude/unidades-saude.component';
-import { UnidadeSaudeService } from './unidades-saude/unidade-saude.service';
-import { AddMedicoUnidadeSaudeComponent } from './unidades-saude/add-medico-unidade-saude/add-medico-unidade-saude.component';
-import { ConfirmMedicoUnidadeSaudeComponent } from './unidades-saude/confirm-medico-unidade-saude/confirm-medico-unidade-saude.component';
-import { ShowMedicoUnidadeSaudeComponent } from './unidades-saude/show-medico-unidade-saude/show-medico-unidade-saude.component';
-import { DeleteMedicoUnidadeSaudeComponent } from './unidades-saude/delete-medico-unidade-saude/delete-medico-unidade-saude.component';
+import { UnidadesSaudeComponent } from './medico/unidades-saude/unidades-saude.component';
+import { UnidadeSaudeService } from './medico/unidades-saude/unidade-saude.service';
+import { AddMedicoUnidadeSaudeComponent } from './medico/unidades-saude/add-medico-unidade-saude/add-medico-unidade-saude.component';
+import { ConfirmMedicoUnidadeSaudeComponent } from './medico/unidades-saude/confirm-medico-unidade-saude/confirm-medico-unidade-saude.component';
+import { ShowMedicoUnidadeSaudeComponent } from './medico/unidades-saude/show-medico-unidade-saude/show-medico-unidade-saude.component';
+import { DeleteMedicoUnidadeSaudeComponent } from './medico/unidades-saude/delete-medico-unidade-saude/delete-medico-unidade-saude.component';
 
 //Administradores de Unidades de Saúde
-import { AdminUnidadeSaudeComponent } from './admin-unidade-saude/admin-unidade-saude.component';
-import { AdminUnidadeSaudeService } from './admin-unidade-saude/admin-unidade-saude.service';
-import { SolicitacoesIntegracaoComponent } from './admin-unidade-saude/solicitacoes-integracao/solicitacoes-integracao.component';
-import { ShowSolicitacaoIngracaoComponent } from './admin-unidade-saude/show-solicitacao-ingracao/show-solicitacao-ingracao.component';
-import { EquipeComponent } from './admin-unidade-saude/equipe/equipe.component';
-import { ShowMedicoComponent } from './admin-unidade-saude/show-medico/show-medico.component';
-import { MensagemEmailEnviadoComponent } from './admin-unidade-saude/mensagem-email-enviado/mensagem-email-enviado.component';
+import { AdminUnidadeSaudeComponent } from './administracao/admin-unidade-saude/admin-unidade-saude.component';
+import { AdminUnidadeSaudeService } from './administracao/admin-unidade-saude/admin-unidade-saude.service';
+import { SolicitacoesIntegracaoComponent } from './administracao/admin-unidade-saude/solicitacoes-integracao/solicitacoes-integracao.component';
+import { ShowSolicitacaoIngracaoComponent } from './administracao/admin-unidade-saude/show-solicitacao-ingracao/show-solicitacao-ingracao.component';
+import { EquipeComponent } from './administracao/admin-unidade-saude/equipe/equipe.component';
+import { ShowMedicoComponent } from './administracao/admin-unidade-saude/show-medico/show-medico.component';
+import { MensagemEmailEnviadoComponent } from './administracao/admin-unidade-saude/mensagem-email-enviado/mensagem-email-enviado.component';
 
 //Keys
-import { KeyService } from './key/key.service';
+import { KeyService } from './geral/key/key.service';
 
 //Tela padrão de confirmação de exclusão
-import { DeleteConfirmationComponent } from './delete-confirmation/delete-confirmation.component';
+import { DeleteConfirmationComponent } from './geral/delete-confirmation/delete-confirmation.component';
 
 //Não autorizado
-import { NotAuthorizedComponent } from './not-authorized/not-authorized.component';
+import { NotAuthorizedComponent } from './geral/not-authorized/not-authorized.component';
 
 const appRoutes: Routes = [
   //Autenticação
