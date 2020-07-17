@@ -6,14 +6,14 @@ export class CadastroMedicoService {
 
   constructor(private http: HttpClient) { }
 
-  cadastroUsuario(email: string, username: string, password: string, confirmPassword: string){
+  cadastroUsuario(email: string, username: string, password: string, confirmPassword: string) {
     var url = 'http://192.168.1.21:8000/rest-auth/registration/';
-    
+
     var data = {
       "username": username,
       "email": email,
       "password1": password,
-      "password2": password
+      "password2": confirmPassword
     };
 
     return this.http.post(url, data);
