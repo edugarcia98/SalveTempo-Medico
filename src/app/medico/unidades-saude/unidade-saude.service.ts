@@ -80,7 +80,38 @@ export class UnidadeSaudeService {
         var sep = dia.split(':');
         if (sep.length >= 2) {
 
-          item.diaSemana = sep[0];
+          //item.diaSemana = sep[0];
+          //refatorar isso depois - é uma solução provisória
+          switch (parseInt(sep[0])) {
+            case 1: {
+              item.diaSemana = 'Segunda-feira'
+              break;
+            }
+            case 2: {
+              item.diaSemana = 'Terça-feira'
+              break;
+            }
+            case 3: {
+              item.diaSemana = 'Quarta-feira'
+              break;
+            }
+            case 4: {
+              item.diaSemana = 'Quinta-feira'
+              break;
+            }
+            case 5: {
+              item.diaSemana = 'Sexta-feira'
+              break;
+            }
+            case 6: {
+              item.diaSemana = 'Sábado'
+              break;
+            }
+            case 7: {
+              item.diaSemana = 'Domingo'
+              break;
+            }
+          }
 
           var periodos = sep[1].split(';').join(', ');
           periodos += '.';

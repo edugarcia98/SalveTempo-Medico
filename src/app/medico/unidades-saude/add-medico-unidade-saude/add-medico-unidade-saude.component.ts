@@ -24,13 +24,13 @@ export class AddMedicoUnidadeSaudeComponent implements OnInit {
   cidades: Cidade[];
 
   diasPeriodoTrabalho: Array<DiaPeriodoTrabalho> = [
-    {id: 1, diaSemana: 'Domingo', trabalha: false, manha: false, tarde: false, noite: false},
-    {id: 2, diaSemana: 'Segunda-feira', trabalha: false, manha: false, tarde: false, noite: false},
-    {id: 3, diaSemana: 'Terça-feira', trabalha: false, manha: false, tarde: false, noite: false},
-    {id: 4, diaSemana: 'Quarta-feira', trabalha: false, manha: false, tarde: false, noite: false},
-    {id: 5, diaSemana: 'Quinta-feira', trabalha: false, manha: false, tarde: false, noite: false},
-    {id: 6, diaSemana: 'Sexta-feira', trabalha: false, manha: false, tarde: false, noite: false},
-    {id: 7, diaSemana: 'Sábado', trabalha: false, manha: false, tarde: false, noite: false},
+    {id: 1, diaSemana: 'Segunda-feira', trabalha: false, manha: false, tarde: false, noite: false},
+    {id: 2, diaSemana: 'Terça-feira', trabalha: false, manha: false, tarde: false, noite: false},
+    {id: 3, diaSemana: 'Quarta-feira', trabalha: false, manha: false, tarde: false, noite: false},
+    {id: 4, diaSemana: 'Quinta-feira', trabalha: false, manha: false, tarde: false, noite: false},
+    {id: 5, diaSemana: 'Sexta-feira', trabalha: false, manha: false, tarde: false, noite: false},
+    {id: 6, diaSemana: 'Sábado', trabalha: false, manha: false, tarde: false, noite: false},
+    {id: 7, diaSemana: 'Domingo', trabalha: false, manha: false, tarde: false, noite: false},
   ]
 
   selectedEstado = 0;
@@ -132,11 +132,11 @@ export class AddMedicoUnidadeSaudeComponent implements OnInit {
         var possuiPeriodosCadastrados = false;
 
         if (dia.trabalha) {
-          item += dia.diaSemana + ':';
+          item += dia.id.toString() + ':';
 
-          if (dia.manha) { item += 'Manhã;'; possuiPeriodosCadastrados = true; }
-          if (dia.tarde) { item += 'Tarde;'; possuiPeriodosCadastrados = true; }
-          if (dia.noite) { item += 'Noite;'; possuiPeriodosCadastrados = true; }
+          if (dia.manha) { item += 'manha;'; possuiPeriodosCadastrados = true; }
+          if (dia.tarde) { item += 'tarde;'; possuiPeriodosCadastrados = true; }
+          if (dia.noite) { item += 'noite;'; possuiPeriodosCadastrados = true; }
 
           if (possuiPeriodosCadastrados) diaPeriodoTrabalho += item + '|';
         }
