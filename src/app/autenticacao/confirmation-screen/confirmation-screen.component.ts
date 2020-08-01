@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Router } from '@angular/router';
+import { MenuVisibilityService } from 'src/app/geral/menu-visibility/menu-visibility.service';
 
 @Component({
   selector: 'app-confirmation-screen',
@@ -9,9 +10,12 @@ import { Router } from '@angular/router';
 })
 export class ConfirmationScreenComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(private menuVisibilityService: MenuVisibilityService,
+              private router: Router) { }
 
   ngOnInit() {
+    sessionStorage.clear();
+    this.menuVisibilityService.controlMenuVisibility('medico;admin', 'none');
   }
 
   goToLogin() {

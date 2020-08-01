@@ -8,6 +8,7 @@ import { AdminUnidadeSaudeService } from 'src/app/administracao/admin-unidade-sa
 
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { MenuVisibilityService } from 'src/app/geral/menu-visibility/menu-visibility.service';
 
 @Component({
   selector: 'app-login',
@@ -23,11 +24,14 @@ export class LoginComponent implements OnInit {
   constructor(private loginService: LoginService,
               private cadastroMedicoService: CadastroMedicoService,
               private adminUnidadeSaudeService: AdminUnidadeSaudeService,
+              private menuVisibilityService: MenuVisibilityService,
               private router: Router) {
 
   }
 
   ngOnInit() {
+    sessionStorage.clear();
+    this.menuVisibilityService.controlMenuVisibility('medico;admin', 'none');
   }
 
   login(email: string, senha: string) {
@@ -42,6 +46,8 @@ export class LoginComponent implements OnInit {
             (medico: Observable<Object>) => {
               var medicoId = medico[0]['id'];
               sessionStorage.setItem('id', medicoId);
+              
+              this.menuVisibilityService.controlMenuVisibility('medico', 'block');
 
               this.router.navigate(['medico']);
             },
@@ -56,6 +62,8 @@ export class LoginComponent implements OnInit {
             (admin: Observable<Object>) => {
               var adminId = admin[0]['id'];
               sessionStorage.setItem('id', adminId);
+              
+              this.menuVisibilityService.controlMenuVisibility('admin', 'block');
 
               this.router.navigate(['administracao']);
             },

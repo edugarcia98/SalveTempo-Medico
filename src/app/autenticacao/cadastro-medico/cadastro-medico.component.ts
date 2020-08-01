@@ -8,6 +8,7 @@ import { Especializacao } from 'src/app/medico/especializacao/especializacao';
 import { User } from './user';
 
 import { Router } from '@angular/router';
+import { MenuVisibilityService } from 'src/app/geral/menu-visibility/menu-visibility.service';
 
 @Component({
   selector: 'app-cadastro-medico',
@@ -24,11 +25,15 @@ export class CadastroMedicoComponent implements OnInit {
 
   constructor(private cadastroMedicoService: CadastroMedicoService,
               private especializacaoService: EspecializacaoService,
+              private menuVisibilityService: MenuVisibilityService,
               private router: Router) {
 
   }
 
   ngOnInit() {
+    sessionStorage.clear();
+    this.menuVisibilityService.controlMenuVisibility('medico;admin', 'none');
+
     this.especializacaoService.getEspecializacoes().subscribe(
       (items: Especializacao[]) => {
         this.especializacoes = items;

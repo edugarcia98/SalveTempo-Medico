@@ -59,6 +59,17 @@ import { DeleteConfirmationComponent } from './geral/delete-confirmation/delete-
 //Não autorizado
 import { NotAuthorizedComponent } from './geral/not-authorized/not-authorized.component';
 
+//Controle de visibilidade do menu
+import { MenuVisibilityService } from './geral/menu-visibility/menu-visibility.service';
+
+//Exibição de consultas
+import { ShowConsultaComponent } from './medico/consulta/show-consulta/show-consulta.component';
+import { ConsultaService } from './medico/consulta/consulta.service';
+import { ConsultaInfoComponent } from './medico/consulta/consulta-info/consulta-info.component';
+
+//Filtro de consultas por data
+import { FilterdataPipe } from './medico/consulta/filterdata.pipe';
+
 const appRoutes: Routes = [
   //Autenticação
   { path: '', component: LoginComponent},
@@ -73,6 +84,8 @@ const appRoutes: Routes = [
   { path: 'medico/unidades-saude/cadastrar', component: AddMedicoUnidadeSaudeComponent },
   { path: 'medico/unidades-saude/aguarde-confirmacao', component: ConfirmMedicoUnidadeSaudeComponent },
   { path: 'medico/unidades-saude/:uid/detail', component: ShowMedicoUnidadeSaudeComponent },
+  { path: 'medico/:tipoviewconsulta', component: ShowConsultaComponent },
+  { path: 'medico/consulta/:cid/detail', component: ConsultaInfoComponent },
   //{ path: 'medico/unidades-saude/:uid/delete', component: DeleteMedicoUnidadeSaudeComponent },
 
   //Administrador de Unidade de Saúde
@@ -111,7 +124,10 @@ const appRoutes: Routes = [
     ShowMedicoComponent,
     MensagemEmailEnviadoComponent,
     DeleteConfirmationComponent,
-    NotAuthorizedComponent
+    NotAuthorizedComponent,
+    ShowConsultaComponent,
+    FilterdataPipe,
+    ConsultaInfoComponent
   ],
   imports: [
     BrowserModule,
@@ -131,7 +147,9 @@ const appRoutes: Routes = [
     MedicoService,
     UnidadeSaudeService,
     AdminUnidadeSaudeService,
-    KeyService
+    KeyService,
+    MenuVisibilityService,
+    ConsultaService
   ],
   bootstrap: [AppComponent]
 })
