@@ -51,7 +51,7 @@ export class ShowConsultaComponent implements OnInit {
                   this.datas.push(item.data);
                 }
               }
-            )
+            );
             
             this.datas.sort(
               (a: Date, b: Date) => {

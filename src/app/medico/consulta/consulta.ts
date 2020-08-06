@@ -40,3 +40,23 @@ export interface Consulta {
     formattedId: string;
     completePeriodo: string;
 }
+
+export interface ConsultaSintoma {
+    id: number;
+    consulta: Consulta;
+    sintoma: Sintoma;
+    possui: number;
+
+    //variáveis fora do JSON
+    possuiDescription: string;
+}
+
+export interface Prognostico {
+    id: number;
+    consulta: Consulta;
+    doenca: Doenca;
+    percentual: number;
+
+    //variáveis fora do JSON
+    rgbColor: string;
+}

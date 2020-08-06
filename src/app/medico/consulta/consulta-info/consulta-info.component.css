@@ -1,0 +1,16 @@
+.scroll-div{
+    border: 1px solid #303030;
+    border-radius: 5px;
+    height: 400px;
+    width: 650px;
+    overflow-y:auto;
+}
+
+.percentual-div{
+    background-color: #303030;
+    float: left;
+}
+
+.text-div{
+    float: right;
+}

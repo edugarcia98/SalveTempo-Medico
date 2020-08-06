@@ -1,3 +1,59 @@
-<p>
-  consulta-info works!
-</p>
+<h2>Consulta</h2>
+
+<label><b>Paciente:</b></label>
+{{ consulta?.paciente.nome }}<br>
+
+<label><b>Unidade de Saúde:</b></label>
+{{ consulta?.unidadeSaude.nome }}<br><br>
+
+<label><b>Data:</b></label>
+{{ consulta?.data | date: 'dd/MM/yyyy' }}<br><br><br>
+
+<div>
+  <label><b>Sintomas</b></label><br><br>
+  <table>
+    <tr>
+      <th><b>Sintoma</b></th>
+      <th><b>Possui</b></th>
+    </tr>
+    <tr *ngFor="let sintoma of sintomas">
+      <td>{{ sintoma?.sintoma.nome }}</td>
+      <td>{{ sintoma?.possuiDescription }}</td>
+    </tr>
+  </table><br>
+
+  <label><b>Prognósticos</b></label><br><br>
+  <table>
+    <tr>
+      <th><b>Doença</b></th>
+      <th><b>Percentual</b></th>
+    </tr>
+    <tr *ngFor="let prognostico of prognosticos">
+      <td>{{ prognostico?.doenca.nome }}</td>
+      <td>
+        <div class="percentual-div"
+          [style.width.px]="prognostico.percentual * 2.5"
+          [style.background-color]="prognostico.rgbColor"
+          >&nbsp;</div>
+        <div class="text-div">&nbsp;{{ prognostico?.percentual }}%</div>
+      </td>
+    </tr>
+    <tr>
+      <td>Nenhuma das opções</td>
+    </tr>
+  </table>
+</div><br><br>
+
+<label><b>Adicionar novos sintomas</b></label><br><br>
+<label><b>Sintoma:&nbsp;</b></label>
+<input type="text" [(ngModel)]="sintomaFilter"><br><br>
+
+<div class="scroll-div">
+  <div *ngFor="let item of novosSintomasOptions | filtersintoma:sintomaFilter">
+    <input #checkbox *ngIf="verificaListaNovosSintomas(item.id); else notThere" type="checkbox" (click)="selecionaNovoSintoma(item, checkbox.checked)" checked/>
+    <ng-template #notThere>
+      <input #checkbox type="checkbox" (click)="selecionaNovoSintoma(item, checkbox.checked)"/>
+    </ng-template>
+    {{ item.nome }}
+  </div>
+</div>

@@ -70,6 +70,9 @@ import { ConsultaInfoComponent } from './medico/consulta/consulta-info/consulta-
 //Filtro de consultas por data
 import { FilterdataPipe } from './medico/consulta/filterdata.pipe';
 
+//Filtro de Sintomas
+import { FiltersintomaPipe } from './medico/consulta/consulta-info/filtersintoma.pipe';
+
 const appRoutes: Routes = [
   //Autenticação
   { path: '', component: LoginComponent},
@@ -127,7 +130,8 @@ const appRoutes: Routes = [
     NotAuthorizedComponent,
     ShowConsultaComponent,
     FilterdataPipe,
-    ConsultaInfoComponent
+    ConsultaInfoComponent,
+    FiltersintomaPipe
   ],
   imports: [
     BrowserModule,

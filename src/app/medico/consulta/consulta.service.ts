@@ -18,4 +18,32 @@ export class ConsultaService {
 
     return this.http.get(url, options);
   }
+
+  getConsultaById(key: string, consulta_id: string) {
+    var url = 'http://192.168.1.21:8000/consultas/' + consulta_id + '/';
+    var options = this.keyService.defineOptions(key);
+
+    return this.http.get(url, options);
+  }
+
+  getSintomasFromConsulta(key: string, consulta_id: string) {
+    var url = 'http://192.168.1.21:8000/consultas-sintomas/?search=' + consulta_id;
+    var options = this.keyService.defineOptions(key);
+
+    return this.http.get(url, options);
+  }
+
+  getPrognosticosFromConsulta(key: string, consulta_id: string) {
+    var url = 'http://192.168.1.21:8000/consultas-prognosticos/?search=' + consulta_id;
+    var options = this.keyService.defineOptions(key);
+
+    return this.http.get(url, options);
+  }
+
+  getSintomas(key: string) {
+    var url = 'http://192.168.1.21:8000/sintomas/';
+    var options = this.keyService.defineOptions(key);
+
+    return this.http.get(url, options);
+  }
 }
