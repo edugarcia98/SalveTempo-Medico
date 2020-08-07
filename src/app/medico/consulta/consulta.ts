@@ -28,6 +28,7 @@ export interface Consulta {
     paciente: Paciente;
     unidadeSaude: UnidadeSaude;
     medico: Medico;
+    diagnostico: Doenca;
     data: Date;
     periodo: string;
     percentual_assertividade_prognostico: number;

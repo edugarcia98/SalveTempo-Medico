@@ -6,7 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 import { KeyService } from 'src/app/geral/key/key.service';
 
 import { ConsultaService } from '../consulta.service';
-import { Consulta, ConsultaSintoma, Prognostico, Sintoma } from '../consulta';
+import { Consulta, ConsultaSintoma, Prognostico, Sintoma, Doenca } from '../consulta';
 
 @Component({
   selector: 'app-consulta-info',
@@ -25,8 +25,11 @@ export class ConsultaInfoComponent implements OnInit{
   novosSintomasOptions: Sintoma[];
   novosSintomas: Sintoma[];
 
+  novasDoencasOptions: Doenca[];
+
+  selectedPrognostico = 0;
+
   private sintomaFilter: string;
-  //show: boolean = false;
 
   constructor(private keyService: KeyService,
               private consultaService: ConsultaService,
@@ -34,6 +37,7 @@ export class ConsultaInfoComponent implements OnInit{
               private router: Router) { 
     this.novosSintomasOptions = [];
     this.novosSintomas = [];
+    this.novasDoencasOptions = [];
   }
 
   ngOnInit() {
@@ -102,6 +106,22 @@ export class ConsultaInfoComponent implements OnInit{
                   console.log(this.error);
                 }
               );
+
+              this.consultaService.getDoencas(sessionStorage.getItem('key')).subscribe(
+                (items: Doenca[]) => {
+                  items.forEach(
+                    (item: Doenca) => {
+                      if (this.prognosticos.filter(i => i.doenca.id == item.id).length == 0) {
+                        this.novasDoencasOptions.push(item);
+                      }
+                    }
+                  )
+                },
+                (error: any) => {
+                  this.error = error;
+                  console.log(this.error);
+                }
+              )
             },
             (error: any) => {
               this.error = error;
@@ -158,5 +178,33 @@ export class ConsultaInfoComponent implements OnInit{
       r.toFixed(2).toString() + ', ' +
       g.toFixed(2).toString() + ', ' +
       b.toFixed(2).toString() + ')';
+  }
+
+  definePrognostico(prognostico: Prognostico) {
+    for(var i = 0; i < document.getElementsByClassName("option-btn").length; i++) {
+      var htmlId = document.getElementsByClassName("option-btn").item(i).id;
+      document.getElementById(htmlId).style.backgroundColor = "#f7f7f7";
+    }
+    document.getElementById("selection-doenca").style.display = "none";
+
+    if (prognostico == null) {
+      document.getElementById("prog-none").style.backgroundColor = "#c4c4c4";
+      document.getElementById("selection-doenca").style.display = "block";
+      this.selectedPrognostico = 0;
+    } else {
+      document.getElementById("prog-" + prognostico.id.toString()).style.backgroundColor = prognostico.rgbColor;
+      this.selectedPrognostico = prognostico.doenca.id;
+    }
+  }
+
+  proximoPassoConsulta(isFim: boolean) {
+    console.log(this.novosSintomas);
+    if (isFim) {
+      if (this.selectedPrognostico == 0) {
+        console.log("Selecione um possível diagnóstico.")
+      } else {
+        console.log(this.selectedPrognostico);
+      }
+    }
   }
 }

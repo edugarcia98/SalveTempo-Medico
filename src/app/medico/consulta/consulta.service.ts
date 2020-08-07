@@ -46,4 +46,11 @@ export class ConsultaService {
 
     return this.http.get(url, options);
   }
+
+  getDoencas(key: string) {
+    var url = 'http://192.168.1.21:8000/doencas/';
+    var options = this.keyService.defineOptions(key);
+
+    return this.http.get(url, options);
+  }
 }

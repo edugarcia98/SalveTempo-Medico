@@ -9,6 +9,9 @@
 <label><b>Data:</b></label>
 {{ consulta?.data | date: 'dd/MM/yyyy' }}<br><br><br>
 
+<label><b>Observação:</b></label>
+{{ consulta?.observacao }}<br><br><br>
+
 <div>
   <label><b>Sintomas</b></label><br><br>
   <table>
@@ -29,7 +32,11 @@
       <th><b>Percentual</b></th>
     </tr>
     <tr *ngFor="let prognostico of prognosticos">
-      <td>{{ prognostico?.doenca.nome }}</td>
+      <td>
+        <button type="button" id="prog-{{ prognostico?.id }}" class="option-btn" (click)="definePrognostico(prognostico)">
+          {{ prognostico?.doenca.nome }}
+        </button>
+      </td>
       <td>
         <div class="percentual-div"
           [style.width.px]="prognostico.percentual * 2.5"
@@ -39,7 +46,19 @@
       </td>
     </tr>
     <tr>
-      <td>Nenhuma das opções</td>
+      <td>
+        <button type="button" id="prog-none" class="option-btn" (click)="definePrognostico(null)">
+          Nenhuma das opções
+        </button>
+      </td>
+      <td>
+        <select id="selection-doenca" [(ngModel)]="selectedPrognostico" [ngModelOptions]="{standalone: true}"
+          style="display: none;">
+          <option *ngFor="let doenca of novasDoencasOptions" value={{doenca.id}}>
+            {{ doenca.nome }}
+          </option>
+        </select>
+      </td>
     </tr>
   </table>
 </div><br><br>
@@ -56,4 +75,13 @@
     </ng-template>
     {{ item.nome }}
   </div>
+</div><br><br>
+
+<div style="display: inline;">
+  <button type="button" class="btn btn-primary" (click)="proximoPassoConsulta(false)">
+    ENCAMINHAR PARA EXAME
+  </button>&nbsp;&nbsp;
+  <button type="button" class="btn btn-primary" (click)="proximoPassoConsulta(true)">
+    FINALIZAR CONSULTA
+  </button>
 </div>
