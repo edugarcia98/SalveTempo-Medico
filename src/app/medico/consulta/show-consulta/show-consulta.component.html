@@ -12,6 +12,8 @@
     </tr>
     <tr *ngFor="let consulta of consultas | filterdata:data">
       <td>
+        <button type="button" class="btn btn-primary" (click)="goToAnamnese(consulta.id)">Anamnese</button>
+        &nbsp;
         <button type="button" class="btn btn-primary" (click)="goToDetails(consulta.id)">Informações</button>
       </td>
       <td>{{ consulta.formattedId }}</td>

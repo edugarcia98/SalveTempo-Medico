@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { KeyService } from 'src/app/geral/key/key.service';
 
 import { DiaPeriodoTrabalhoShow } from './medico-unidade-saude';
+import { GlobalConstants } from 'src/app/common/global-constants';
 
 @Injectable()
 export class UnidadeSaudeService {
@@ -14,39 +15,39 @@ export class UnidadeSaudeService {
   }
 
   getUnidadesSaudeFromMedico(key: string, id: string) {
-    var url = 'http://192.168.1.21:8000/medicos_unidades_saude/?search=' + id;
+    var url = GlobalConstants.apiBaseUrl + 'medicos_unidades_saude/?search=' + id;
     var options = this.keyService.defineOptions(key);
 
     return this.http.get(url, options);
   }
 
   getUnidadeSaudeMedicoById(key: string, id: string) {
-    var url = 'http://192.168.1.21:8000/medicos_unidades_saude/' + id;
+    var url = GlobalConstants.apiBaseUrl + 'medicos_unidades_saude/' + id + '/';
     var options = this.keyService.defineOptions(key);
 
     return this.http.get(url, options);
   }
 
   getEstados() {
-    var url = 'http://192.168.1.21:8000/estados/';
+    var url = GlobalConstants.apiBaseUrl + 'estados/';
 
     return this.http.get(url);
   }
 
   getCidadeByEstadoId(id: string) {
-    var url = 'http://192.168.1.21:8000/cidades/?search=' + id;
+    var url = GlobalConstants.apiBaseUrl + 'cidades/?search=' + id;
 
     return this.http.get(url);
   }
 
   getUnidadesSaudeByCidadeId(id: string) {
-    var url = 'http://192.168.1.21:8000/unidades_saude/?search=' + id;
+    var url = GlobalConstants.apiBaseUrl + 'unidades_saude/?search=' + id;
 
     return this.http.get(url);
   }
 
   postMedicoUnidadeSaude(key: string, medicoId: number, unidadeSaudeId: number, diaPeriodoTrabalho: string) {
-    var url = 'http://192.168.1.21:8000/medicos_unidades_saude/';
+    var url = GlobalConstants.apiBaseUrl + 'medicos_unidades_saude/';
 
     var data = {
       "medico_id": medicoId,
@@ -61,7 +62,7 @@ export class UnidadeSaudeService {
   }
 
   deleteMedicoUnidadeSaude(key: string, id: string) {
-    var url = 'http://192.168.1.21:8000/medicos_unidades_saude/' + id;
+    var url = GlobalConstants.apiBaseUrl + 'medicos_unidades_saude/' + id + '/';
     var options = this.keyService.defineOptions(key);
 
     return this.http.delete(url, options);

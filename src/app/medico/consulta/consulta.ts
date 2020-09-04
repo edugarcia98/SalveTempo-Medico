@@ -23,10 +23,45 @@ export interface Doenca {
     especializacoes: Especializacao[];
 }
 
+export interface Anamnese {
+    id: number;
+    peso: number;
+    altura: number;
+    fuma: boolean;
+    qtdCigarrosDia: number;
+    bebe: boolean;
+    freqBebeDiasSemana: number;
+    qualidadeAlimentacaoIngestaoAgua: number;
+    praticaAtividadeFisica: boolean;
+    tipoAtividadeFisica: string;
+    freqAtividadeFisicaDiasSemana: number;
+    utilizaAnticoncepcional: boolean;
+    anticoncepcionaisUtilizados: string;
+    realizouGestacoes: boolean;
+    ultimaGestacaoTempoMeses: number;
+    utilizaMedicamentos: boolean;
+    medicamentosUtilizados: string;
+    alergias: boolean;
+    alergiasDesc: string;
+    alteracoesCardiacas: boolean;
+    alteracoesCardiacasDesc: string;
+    pressaoAlta: boolean;
+    pressaoBaixa: boolean;
+    disturbioCirculatorio: boolean;
+    disturbioCirculatorioDesc: string;
+    disturbioHormonal: boolean;
+    disturbioHormonalDesc: string;
+    diabetes: boolean;
+    tipoDiabetes: number;
+    fezCirurgias: boolean;
+    cirurgiasDesc: string;
+}
+
 export interface Consulta {
     id: number;
     paciente: Paciente;
     unidadeSaude: UnidadeSaude;
+    anamnese: Anamnese;
     medico: Medico;
     diagnostico: Doenca;
     data: Date;

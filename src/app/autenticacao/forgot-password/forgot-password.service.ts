@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { GlobalConstants } from 'src/app/common/global-constants';
 
 @Injectable()
 export class ForgotPasswordService {
@@ -7,7 +8,7 @@ export class ForgotPasswordService {
   constructor(private http: HttpClient) { }
 
   resetPassword(email: string) {
-    var url = 'http://192.168.1.21:8000/rest-auth/password/reset/';
+    var url = GlobalConstants.apiBaseUrl + 'rest-auth/password/reset/';
 
     var data = {
       "email": email

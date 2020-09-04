@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { GlobalConstants } from 'src/app/common/global-constants';
 
 @Injectable()
 export class CadastroMedicoService {
@@ -7,7 +8,8 @@ export class CadastroMedicoService {
   constructor(private http: HttpClient) { }
 
   cadastroUsuario(email: string, username: string, password: string, confirmPassword: string) {
-    var url = 'http://192.168.1.21:8000/rest-auth/registration/';
+
+    var url = GlobalConstants.apiBaseUrl + 'rest-auth/registration/';
 
     var data = {
       "username": username,
@@ -20,7 +22,7 @@ export class CadastroMedicoService {
   }
 
   cadastroMedico(usuario_id: number, especializacao_id: number, nome: string, sexo: string, dataNasc: Date, crm: string) {
-    var url = 'http://192.168.1.21:8000/medicos/';
+    var url = GlobalConstants.apiBaseUrl + 'medicos/';
     var data = {
       "usuario_id": usuario_id,
       "especializacao_id": especializacao_id,
@@ -34,12 +36,12 @@ export class CadastroMedicoService {
   }
 
   getUsuarioByEmail(email: string) {
-    var url = 'http://192.168.1.21:8000/users/?search=' + email;
+    var url = GlobalConstants.apiBaseUrl + 'users/?search=' + email;
     return this.http.get(url);
   }
 
   getMedicoByEmail(email: string) {
-    var url = 'http://192.168.1.21:8000/medicos/?search=' + email;
+    var url = GlobalConstants.apiBaseUrl + 'medicos/?search=' + email;
     return this.http.get(url);
   }
 }

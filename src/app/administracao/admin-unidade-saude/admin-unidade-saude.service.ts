@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 
 import { KeyService } from 'src/app/geral/key/key.service';
 
+import { GlobalConstants } from 'src/app/common/global-constants';
+
 @Injectable()
 export class AdminUnidadeSaudeService {
   
@@ -12,26 +14,26 @@ export class AdminUnidadeSaudeService {
   }
 
   getAdminUnidadeSaudeByEmail(email: string) {
-    var url = 'http://192.168.1.21:8000/admins_unidades_saude/?search=' + email;
+    var url = GlobalConstants.apiBaseUrl + 'admins_unidades_saude/?search=' + email;
 
     return this.http.get(url);
   }
 
   getAdminUnidadeSaudeById(id: string) {
-    var url = 'http://192.168.1.21:8000/admins_unidades_saude/' + id;
+    var url = GlobalConstants.apiBaseUrl + 'admins_unidades_saude/' + id + '/';
 
     return this.http.get(url);
   }
 
   getMedicosByUnidadeSaudeId(key: string, id: string) {
-    var url = 'http://192.168.1.21:8000/medicos_unidades_saude_admin/?search=' + id;
+    var url = GlobalConstants.apiBaseUrl + 'medicos_unidades_saude_admin/?search=' + id;
     var options = this.keyService.defineOptions(key);
 
     return this.http.get(url, options);
   }
 
   respostaSolicitacaoMedico(key: string, id: string, medicoId: number, unidadeSaudeId: number, diaPeriodoTrabalho: string, status: string) {
-    var url = 'http://192.168.1.21:8000/medicos_unidades_saude/' + id + '/';
+    var url = GlobalConstants.apiBaseUrl + 'medicos_unidades_saude/' + id + '/';
 
     var data = {
       "medico_id": medicoId,
@@ -46,7 +48,7 @@ export class AdminUnidadeSaudeService {
   }
 
   enviaEmailRespostaMedico(key: string, medicoUnidadeSaudeId: number, status: string) {
-    var url = 'http://192.168.1.21:8000/resposta_solicitacao/';
+    var url = GlobalConstants.apiBaseUrl + 'resposta_solicitacao/';
 
     var data = {
       "medicoUnidadeSaude_id": medicoUnidadeSaudeId,

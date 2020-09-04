@@ -72,6 +72,7 @@ import { FilterdataPipe } from './medico/consulta/filterdata.pipe';
 
 //Filtro de Sintomas
 import { FiltersintomaPipe } from './medico/consulta/consulta-info/filtersintoma.pipe';
+import { AnamneseComponent } from './medico/consulta/anamnese/anamnese.component';
 
 const appRoutes: Routes = [
   //Autenticação
@@ -89,6 +90,7 @@ const appRoutes: Routes = [
   { path: 'medico/unidades-saude/:uid/detail', component: ShowMedicoUnidadeSaudeComponent },
   { path: 'medico/:tipoviewconsulta', component: ShowConsultaComponent },
   { path: 'medico/consulta/:cid/detail', component: ConsultaInfoComponent },
+  { path: 'medico/consulta/:cid/anamnese', component: AnamneseComponent },
   //{ path: 'medico/unidades-saude/:uid/delete', component: DeleteMedicoUnidadeSaudeComponent },
 
   //Administrador de Unidade de Saúde
@@ -131,7 +133,8 @@ const appRoutes: Routes = [
     ShowConsultaComponent,
     FilterdataPipe,
     ConsultaInfoComponent,
-    FiltersintomaPipe
+    FiltersintomaPipe,
+    AnamneseComponent
   ],
   imports: [
     BrowserModule,

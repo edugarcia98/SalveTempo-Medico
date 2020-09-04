@@ -59,9 +59,32 @@
           </option>
         </select>
       </td>
+      <td>
+        <button type="button" id="btn-add-doenca" class="option-btn" style="display: none;"
+         (click)="showPopupDoenca('block')">
+          +
+        </button>
+      </td>
     </tr>
   </table>
 </div><br><br>
+
+<div id="popup-div">
+  <span id="helper"></span>
+  <div style="text-align: left;">
+    <div id="popupCloseButton" (click)="showPopupDoenca('none')">&times;</div>
+    <div>
+      <h2>Nova Doença</h2>
+
+      <label><b>Doença:</b></label><br>
+      <input id="input-doenca" [(ngModel)]="doencaStr" type="text"><br><br>
+
+      <button type="button" class="btn btn-primary" (click)="cadastroDoenca(doencaStr)">
+        CADASTRAR DOENÇA
+      </button>
+    </div>
+  </div>
+</div>
 
 <label><b>Adicionar novos sintomas</b></label><br><br>
 <label><b>Sintoma:&nbsp;</b></label>

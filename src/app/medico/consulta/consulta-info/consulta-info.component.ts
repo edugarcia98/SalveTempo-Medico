@@ -7,6 +7,7 @@ import { KeyService } from 'src/app/geral/key/key.service';
 
 import { ConsultaService } from '../consulta.service';
 import { Consulta, ConsultaSintoma, Prognostico, Sintoma, Doenca } from '../consulta';
+import { $ } from 'protractor';
 
 @Component({
   selector: 'app-consulta-info',
@@ -28,6 +29,8 @@ export class ConsultaInfoComponent implements OnInit{
   novasDoencasOptions: Doenca[];
 
   selectedPrognostico = 0;
+
+  doencaStr: string;
 
   private sintomaFilter: string;
 
@@ -186,10 +189,12 @@ export class ConsultaInfoComponent implements OnInit{
       document.getElementById(htmlId).style.backgroundColor = "#f7f7f7";
     }
     document.getElementById("selection-doenca").style.display = "none";
+    document.getElementById("btn-add-doenca").style.display = "none";
 
     if (prognostico == null) {
       document.getElementById("prog-none").style.backgroundColor = "#c4c4c4";
       document.getElementById("selection-doenca").style.display = "block";
+      document.getElementById("btn-add-doenca").style.display = "block";
       this.selectedPrognostico = 0;
     } else {
       document.getElementById("prog-" + prognostico.id.toString()).style.backgroundColor = prognostico.rgbColor;
@@ -206,5 +211,24 @@ export class ConsultaInfoComponent implements OnInit{
         console.log(this.selectedPrognostico);
       }
     }
+  }
+
+  showPopupDoenca(displayOption: string) {
+    document.getElementById("popup-div").style.display = displayOption;
+    this.doencaStr = '';
+  }
+
+  cadastroDoenca(doenca: string) {
+    this.consultaService.cadastroDoenca(sessionStorage.getItem('key'), doenca).subscribe(
+      (item: Doenca) => {
+        document.getElementById("popup-div").style.display = 'none';
+        this.selectedPrognostico = item.id
+        this.novasDoencasOptions.push(item);
+      },
+      (error: any) => {
+        this.error = error;
+        console.log(this.error);
+      }
+    )
   }
 }

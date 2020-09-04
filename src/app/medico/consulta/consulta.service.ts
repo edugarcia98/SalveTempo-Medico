@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { KeyService } from 'src/app/geral/key/key.service';
 
+import { GlobalConstants } from 'src/app/common/global-constants';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -13,44 +15,55 @@ export class ConsultaService {
   }
 
   getConsultasByMedicoId(key: string, medico_id: string, status: string) {
-    var url = 'http://192.168.1.21:8000/consultas/?medico__id=' + medico_id + '&status=' + status;
+    var url = GlobalConstants.apiBaseUrl + 'consultas/?medico__id=' + medico_id + '&status=' + status;
     var options = this.keyService.defineOptions(key);
 
     return this.http.get(url, options);
   }
 
   getConsultaById(key: string, consulta_id: string) {
-    var url = 'http://192.168.1.21:8000/consultas/' + consulta_id + '/';
+    var url = GlobalConstants.apiBaseUrl + 'consultas/' + consulta_id + '/';
     var options = this.keyService.defineOptions(key);
 
     return this.http.get(url, options);
   }
 
   getSintomasFromConsulta(key: string, consulta_id: string) {
-    var url = 'http://192.168.1.21:8000/consultas-sintomas/?search=' + consulta_id;
+    var url = GlobalConstants.apiBaseUrl + 'consultas-sintomas/?search=' + consulta_id;
     var options = this.keyService.defineOptions(key);
 
     return this.http.get(url, options);
   }
 
   getPrognosticosFromConsulta(key: string, consulta_id: string) {
-    var url = 'http://192.168.1.21:8000/consultas-prognosticos/?search=' + consulta_id;
+    var url = GlobalConstants.apiBaseUrl + 'consultas-prognosticos/?search=' + consulta_id;
     var options = this.keyService.defineOptions(key);
 
     return this.http.get(url, options);
   }
 
   getSintomas(key: string) {
-    var url = 'http://192.168.1.21:8000/sintomas/';
+    var url = GlobalConstants.apiBaseUrl + 'sintomas/';
     var options = this.keyService.defineOptions(key);
 
     return this.http.get(url, options);
   }
 
   getDoencas(key: string) {
-    var url = 'http://192.168.1.21:8000/doencas/';
+    var url = GlobalConstants.apiBaseUrl + 'doencas/';
     var options = this.keyService.defineOptions(key);
 
     return this.http.get(url, options);
+  }
+
+  cadastroDoenca(key: string, doenca: string) {
+    var url = GlobalConstants.apiBaseUrl + 'doencas/'
+    var options = this.keyService.defineOptions(key);
+
+    var data = {
+      "nome": doenca
+    }
+
+    return this.http.post(url, data, options);
   }
 }
