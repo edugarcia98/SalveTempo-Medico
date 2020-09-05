@@ -75,6 +75,7 @@ export interface Consulta {
     //variáveis fora do JSON
     formattedId: string;
     completePeriodo: string;
+    completeStatus: string;
 }
 
 export interface ConsultaSintoma {

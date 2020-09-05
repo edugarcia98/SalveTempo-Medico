@@ -56,14 +56,53 @@ export class ConsultaService {
     return this.http.get(url, options);
   }
 
+  getDoencaById(key: string, doenca_id: string) {
+    var url = GlobalConstants.apiBaseUrl + 'doencas/' + doenca_id + '/';
+    var options = this.keyService.defineOptions(key);
+
+    return this.http.get(url, options);
+  }
+
   cadastroDoenca(key: string, doenca: string) {
-    var url = GlobalConstants.apiBaseUrl + 'doencas/'
+    var url = GlobalConstants.apiBaseUrl + 'doencas/';
     var options = this.keyService.defineOptions(key);
 
     var data = {
       "nome": doenca
-    }
+    };
 
     return this.http.post(url, data, options);
+  }
+
+  async cadastroConsultaSintoma(key: string, consulta_id: number, sintoma_id: number) {
+    var url = GlobalConstants.apiBaseUrl + 'consultas-sintomas/';
+    var options = this.keyService.defineOptions(key);
+
+    var data = {
+      "consulta_id": consulta_id,
+      "sintoma_id": sintoma_id,
+      "possui": 1
+    };
+
+    return await this.http.post(url, data, options).toPromise();
+  }
+
+  salvaResultadoConsulta(key: string, data: any) {
+    var url = GlobalConstants.apiBaseUrl + 'save-prognostico/'
+    var options = this.keyService.defineOptions(key);
+
+    return this.http.post(url, data, options);
+  }
+
+  async changeConsulta(key: string, consulta_id: string, status: string, diagnostico: number) {
+    var url = GlobalConstants.apiBaseUrl + 'consultas/' + consulta_id + '/';
+    var options = this.keyService.defineOptions(key);
+
+    var data = {
+      "status": status,
+      "diagnostico_id": diagnostico == 0 ? null : diagnostico,
+    };
+
+    return await this.http.patch(url, data, options).toPromise();
   }
 }

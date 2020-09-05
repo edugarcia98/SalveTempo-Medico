@@ -31,6 +31,7 @@ export class ShowConsultaComponent implements OnInit {
     if (this.keyService.validaAutorizacao('M')) {
       this.tipoviewconsulta = this.route.snapshot.paramMap.get('tipoviewconsulta');
       this.callGetConsultas('P');
+      this.callGetConsultas('A');
     } else {
       this.router.navigate(['not-authorized']);
     }
@@ -59,6 +60,12 @@ export class ShowConsultaComponent implements OnInit {
                 case 'M': { item.completePeriodo = 'Manhã'; break; }
                 case 'T': { item.completePeriodo = 'Tarde'; break; }
                 case 'N': { item.completePeriodo = 'Noite'; break; }
+              }         
+
+              switch (item.status) {
+                case 'P': { item.completeStatus = 'Pendente'; break }
+                case 'A': { item.completeStatus = 'Aguardando Exames'; break }
+                case 'F': { item.completeStatus = 'Finalizada'; break }
               }
 
               if (this.datas.filter(i => i == item.data).length == 0) {

@@ -203,13 +203,45 @@ export class ConsultaInfoComponent implements OnInit{
   }
 
   proximoPassoConsulta(isFim: boolean) {
-    console.log(this.novosSintomas);
-    if (isFim) {
-      if (this.selectedPrognostico == 0) {
-        console.log("Selecione um possível diagnóstico.")
-      } else {
-        console.log(this.selectedPrognostico);
-      }
+    if (isFim && this.selectedPrognostico == 0) {
+      console.log("Selecione um possível diagnóstico.")
+    } else {
+      var status = isFim ? 'F' : 'A';
+      var diagnostico = isFim ? this.selectedPrognostico : 0;
+
+      this.consultaService.changeConsulta(sessionStorage.getItem('key'), this.id,
+        status, diagnostico).then(
+        (response: Object) => {
+          console.log('Consulta alterada');
+        },
+        (error: any) => {
+          this.error = error;
+          console.log(this.error);
+        }
+      ).then(
+        async () => {
+          if (this.novosSintomas.length > 0) {
+            for (var sintoma of this.novosSintomas) {
+              await this.consultaService.cadastroConsultaSintoma(sessionStorage.getItem('key'), 
+                this.id, sintoma.id).then(
+                () => {
+                  console.log('Novo sintoma inserido');
+                },
+                (error: any) => {
+                  this.error = error;
+                  console.log(this.error);
+                }
+              );
+            }
+          }
+        }
+      ).then(
+        () => {
+          if (isFim) {
+            this.saveResultadosConsulta();
+          }
+        }
+      );
     }
   }
 
@@ -224,6 +256,46 @@ export class ConsultaInfoComponent implements OnInit{
         document.getElementById("popup-div").style.display = 'none';
         this.selectedPrognostico = item.id
         this.novasDoencasOptions.push(item);
+      },
+      (error: any) => {
+        this.error = error;
+        console.log(this.error);
+      }
+    )
+  }
+
+  saveResultadosConsulta() {
+    var progData: any = {};
+
+    this.consultaService.getSintomasFromConsulta(sessionStorage.getItem('key'), 
+      this.id).subscribe(
+      (consultaSintoma: ConsultaSintoma[]) => {
+        for(var i = 0; i < consultaSintoma.length; i++){
+          progData[consultaSintoma[i].sintoma.nomecsv] = 
+          consultaSintoma[i].possui == 1 ? 1 : 0;
+        }
+        
+        this.consultaService.getDoencaById(sessionStorage.getItem('key'),
+          this.selectedPrognostico.toString()).subscribe(
+          (doenca: Doenca) => {
+            progData['prognostico'] = doenca.nome;
+            this.consultaService.salvaResultadoConsulta(sessionStorage.getItem('key'),
+              progData).subscribe(
+              (response: Object) => {
+                console.log(response);
+              },
+              (error: any) => {
+                this.error = error;
+                console.log(this.error);
+              }
+            );
+
+          },
+          (error: any) => {
+            this.error = error;
+            console.log(this.error);
+          }
+        )
       },
       (error: any) => {
         this.error = error;

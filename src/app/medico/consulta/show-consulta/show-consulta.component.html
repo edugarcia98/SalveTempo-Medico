@@ -9,6 +9,7 @@
       <th><b>Código</b></th>
       <th><b>Nome</b></th>
       <th><b>Período</b></th>
+      <th><b>Status</b></th>
     </tr>
     <tr *ngFor="let consulta of consultas | filterdata:data">
       <td>
@@ -19,6 +20,7 @@
       <td>{{ consulta.formattedId }}</td>
       <td>{{ consulta.paciente.nome }}</td>
       <td>{{ consulta.completePeriodo }}</td>
+      <td>{{ consulta.completeStatus }}</td>
     </tr>
   </table><hr><br><br>
 </div>
