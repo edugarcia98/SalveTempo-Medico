@@ -31,6 +31,9 @@ export class ConsultaInfoComponent implements OnInit{
   selectedPrognostico = 0;
 
   doencaStr: string;
+  sintomaStr: string;
+
+  sintomasCriar: string[];
 
   private sintomaFilter: string;
 
@@ -41,6 +44,7 @@ export class ConsultaInfoComponent implements OnInit{
     this.novosSintomasOptions = [];
     this.novosSintomas = [];
     this.novasDoencasOptions = [];
+    this.sintomasCriar = [];
   }
 
   ngOnInit() {
@@ -220,6 +224,14 @@ export class ConsultaInfoComponent implements OnInit{
         }
       ).then(
         async () => {
+          await this.saveNovosSintomasCriados()
+        },
+        (error: any) => {
+          this.error = error;
+          console.log(this.error);
+        }
+      ).then(
+        async () => {
           if (this.novosSintomas.length > 0) {
             for (var sintoma of this.novosSintomas) {
               await this.consultaService.cadastroConsultaSintoma(sessionStorage.getItem('key'), 
@@ -234,6 +246,10 @@ export class ConsultaInfoComponent implements OnInit{
               );
             }
           }
+        },
+        (error: any) => {
+          this.error = error;
+          console.log(this.error);
         }
       ).then(
         () => {
@@ -245,15 +261,16 @@ export class ConsultaInfoComponent implements OnInit{
     }
   }
 
-  showPopupDoenca(displayOption: string) {
-    document.getElementById("popup-div").style.display = displayOption;
+  showPopup(id: string, displayOption: string) {
+    document.getElementById(id).style.display = displayOption;
     this.doencaStr = '';
+    this.sintomaStr = '';
   }
 
   cadastroDoenca(doenca: string) {
     this.consultaService.cadastroDoenca(sessionStorage.getItem('key'), doenca).subscribe(
       (item: Doenca) => {
-        document.getElementById("popup-div").style.display = 'none';
+        document.getElementById("popup-doenca-div").style.display = 'none';
         this.selectedPrognostico = item.id
         this.novasDoencasOptions.push(item);
       },
@@ -262,6 +279,16 @@ export class ConsultaInfoComponent implements OnInit{
         console.log(this.error);
       }
     )
+  }
+
+  cadastroSintoma(sintoma: string) {
+    document.getElementById("popup-sintoma-div").style.display = 'none';
+    this.sintomasCriar.push(sintoma);
+  }
+
+  deleteNovoSintoma(sintoma: string) {
+    var index = this.sintomasCriar.indexOf(sintoma);
+    this.sintomasCriar.splice(index, 1);
   }
 
   saveResultadosConsulta() {
@@ -302,5 +329,21 @@ export class ConsultaInfoComponent implements OnInit{
         console.log(this.error);
       }
     )
+  }
+
+  async saveNovosSintomasCriados() {
+    for (var sintoma of this.sintomasCriar) {
+      await this.consultaService.addNewSintomaToPrognosticos(sessionStorage.getItem('key'),
+        sintoma).then(
+        (sintoma: Sintoma) => {
+          this.novosSintomas.push(sintoma);
+          console.log('Novo sintoma adicionado em PrognosticoData');
+        },
+        (error: any) => {
+          this.error = error;
+          console.log(this.error);
+        }
+      );
+    }
   }
 }

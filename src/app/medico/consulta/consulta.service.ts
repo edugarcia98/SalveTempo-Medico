@@ -105,4 +105,15 @@ export class ConsultaService {
 
     return await this.http.patch(url, data, options).toPromise();
   }
+
+  async addNewSintomaToPrognosticos(key: string, sintoma: string) {
+    var url = GlobalConstants.apiBaseUrl + 'add-sintoma/';
+    var options = this.keyService.defineOptions(key);
+
+    var data = {
+      "nome": sintoma,
+    }
+
+    return await this.http.post(url, data, options).toPromise();
+  }
 }

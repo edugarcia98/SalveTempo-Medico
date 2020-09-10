@@ -61,7 +61,7 @@
       </td>
       <td>
         <button type="button" id="btn-add-doenca" class="option-btn" style="display: none;"
-         (click)="showPopupDoenca('block')">
+         (click)="showPopup('popup-doenca-div', 'block')">
           +
         </button>
       </td>
@@ -69,10 +69,10 @@
   </table>
 </div><br><br>
 
-<div id="popup-div">
-  <span id="helper"></span>
+<div id="popup-doenca-div" class="popup-div">
+  <span class="helper"></span>
   <div style="text-align: left;">
-    <div id="popupCloseButton" (click)="showPopupDoenca('none')">&times;</div>
+    <div id="popupCloseButton" (click)="showPopup('popup-doenca-div', 'none')">&times;</div>
     <div>
       <h2>Nova Doença</h2>
 
@@ -86,17 +86,52 @@
   </div>
 </div>
 
+<div id="popup-sintoma-div" class="popup-div">
+  <span class="helper"></span>
+  <div style="text-align: left;">
+    <div id="popupCloseButton" (click)="showPopup('popup-sintoma-div', 'none')">&times;</div>
+    <div>
+      <h2>Novo Sintoma</h2>
+
+      <label><b>Sintoma:</b></label><br>
+      <input id="input-sintoma" [(ngModel)]="sintomaStr" type="text"><br><br>
+
+      <button type="button" class="btn btn-primary" (click)="cadastroSintoma(sintomaStr)">
+        CADASTRAR SINTOMA
+      </button>
+    </div>
+  </div>
+</div>
+
 <label><b>Adicionar novos sintomas</b></label><br><br>
 <label><b>Sintoma:&nbsp;</b></label>
-<input type="text" [(ngModel)]="sintomaFilter"><br><br>
 
-<div class="scroll-div">
-  <div *ngFor="let item of novosSintomasOptions | filtersintoma:sintomaFilter">
-    <input #checkbox *ngIf="verificaListaNovosSintomas(item.id); else notThere" type="checkbox" (click)="selecionaNovoSintoma(item, checkbox.checked)" checked/>
-    <ng-template #notThere>
-      <input #checkbox type="checkbox" (click)="selecionaNovoSintoma(item, checkbox.checked)"/>
-    </ng-template>
-    {{ item.nome }}
+<input type="text" [(ngModel)]="sintomaFilter">&nbsp;
+<button type="button" style="cursor: pointer;" class="btn btn-primary"
+  (click)="showPopup('popup-sintoma-div', 'block')">
+  +
+</button><br><br>
+
+<div>
+  <div class="scroll-div" style="float: left;">
+    <div *ngFor="let item of novosSintomasOptions | filtersintoma:sintomaFilter">
+      <input #checkbox *ngIf="verificaListaNovosSintomas(item.id); else notThere" type="checkbox" (click)="selecionaNovoSintoma(item, checkbox.checked)" checked/>
+      <ng-template #notThere>
+        <input #checkbox type="checkbox" (click)="selecionaNovoSintoma(item, checkbox.checked)"/>
+      </ng-template>
+      {{ item.nome }}
+    </div>
+  </div>
+
+  <span style="position: absolute; top: 675px; right: 495px;"><b>Sintomas criados</b></span>
+  <div class="scroll-div" style="margin-left: 51%;">
+    <div *ngFor="let sintoma of sintomasCriar">
+      &nbsp;&nbsp;{{ sintoma }} 
+      <button type="button" style="cursor: pointer;" class="btn btn-primary"
+      (click)="deleteNovoSintoma(sintoma)">
+        &times;
+      </button>
+    </div>
   </div>
 </div><br><br>
 

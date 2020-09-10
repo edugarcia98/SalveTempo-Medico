@@ -2,7 +2,7 @@
     border: 1px solid #303030;
     border-radius: 5px;
     height: 400px;
-    width: 650px;
+    width: 49%;
     overflow-y:auto;
 }
 
@@ -17,9 +17,10 @@
 
 .option-btn{
     background-color: #f7f7f7;
+    cursor: pointer;
 }
 
-#popup-div {
+.popup-div {
     background:rgba(0,0,0,.4);
     display:none;
     height:100%;
@@ -30,13 +31,13 @@
     z-index:10000;
 }
 
-#popup-div #helper {
+.popup-div .helper {
     display:inline-block;
     height:100%;
     vertical-align:middle;
 }
 
-#popup-div > div {
+.popup-div > div {
     background-color: #fff;
     box-shadow: 10px 10px 60px #555;
     display: inline-block;
