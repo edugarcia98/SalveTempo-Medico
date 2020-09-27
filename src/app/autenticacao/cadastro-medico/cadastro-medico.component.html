@@ -1,7 +1,68 @@
-<h1>Cadastro de Médico</h1>
+<!DOCTYPE html>
+<html lang="en">
 
-<label><b>Nome:</b></label><br>
-<input #medicoNome type="text"><br><br>
+
+<body>
+  <div class="signup-form">
+    <form method="POST">
+      <h3 class="text-center text-info">Cadastro Médico</h3>
+      <hr>
+      <div class="form-group">
+        <div class="row">
+          <div class="col-xs-6"><input #medicoNome type="text" class="form-control" name="first_name" placeholder="Nome"
+              required="required" style="margin-left:15px; width: 310px;"></div>
+          <div class="col-xs-6"><select [(ngModel)]="selectedSexo" [ngModelOptions]="{standalone: true}"
+              class="custom-select custom-select-sm dropdown-select">
+              <option value="" disabled selected>Sexo</option>
+              <option value="M">Masculino</option>
+              <option value="F">Feminino</option>
+            </select></div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="row">
+          <div class="col-xs-6"><input #medicoDataNasc type="date" class="form-control dateclass " name="datanasc"
+              placeholder="Data Nascimento" required="required" style="margin-left:15px; " onfocus="(this.type='date')"
+              onblur="(this.type='text')">
+          </div>
+          <div class="col-xs-6">
+            <select [(ngModel)]="selectedEspecializacao" [ngModelOptions]="{standalone: true}"
+              class="custom-select custom-select-sm dropdown-select" style="width: 225px; margin-left: 5px;">
+              <option *ngFor="let especializacao of especializacoes" value={{especializacao.id}}>
+                {{especializacao.nome}}
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class=" form-group">
+        <input #medicoCRM type="text" class="form-control" name="crm" placeholder="CRM" required="required">
+      </div>
+      <div class=" form-group">
+        <input #medicoEmail type="email" class="form-control" name="email" placeholder="Email" required="required">
+      </div>
+      <div class="form-group">
+        <input #medicoSenha type="password" class="form-control" name="password" placeholder="Senha"
+          required="required">
+      </div>
+      <div class="form-group">
+        <input #medicoSenhaConfirm type="password" class="form-control" name="confirm_password"
+          placeholder="Confirme sua senha" required="required">
+      </div>
+      <div class="form-group">
+        <button type="button" class="btn btn-primary btn-lg"
+          (click)="addMedico(medicoNome.value, medicoDataNasc.value, medicoCRM.value, medicoEmail.value, medicoSenha.value, medicoSenhaConfirm.value)">Cadastrar</button>
+      </div>
+    </form>
+  </div>
+</body>
+
+</html>
+<!-- <h1>Cadastro de Médico</h1>
+
+  <label><b>Nome:</b></label>
+  <input #medicoNome type="text">
+  
 
 <label><b>Sexo:</b></label><br>
 <select [(ngModel)]="selectedSexo" [ngModelOptions]="{standalone: true}">
@@ -34,4 +95,4 @@
 <button type="button" class="btn btn-primary" 
  (click)="addMedico(medicoNome.value, medicoDataNasc.value, medicoCRM.value, medicoEmail.value, medicoSenha.value, medicoSenhaConfirm.value)">
   CADASTRAR MÉDICO
-</button> 
+</button>  -->

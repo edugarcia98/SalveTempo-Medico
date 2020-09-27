@@ -9,7 +9,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 //Cadastro de Médico
-import { CadastroMedicoComponent } from  './autenticacao/cadastro-medico/cadastro-medico.component';
+import { CadastroMedicoComponent } from './autenticacao/cadastro-medico/cadastro-medico.component';
 import { CadastroMedicoService } from './autenticacao/cadastro-medico/cadastro-medico.service';
 
 //Tela de Confirmação de Cadastro
@@ -74,14 +74,18 @@ import { FilterdataPipe } from './medico/consulta/filterdata.pipe';
 import { FiltersintomaPipe } from './medico/consulta/consulta-info/filtersintoma.pipe';
 import { AnamneseComponent } from './medico/consulta/anamnese/anamnese.component';
 
+
+//NG Bootstrap
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 const appRoutes: Routes = [
   //Autenticação
-  { path: '', component: LoginComponent},
-  { path: 'cadastro', component: CadastroMedicoComponent},
-  { path: 'aguarda-confirmacao', component: ConfirmationScreenComponent},
-  { path: 'redefinir-senha', component: ForgotPasswordComponent},
+  { path: '', component: LoginComponent },
+  { path: 'cadastro', component: CadastroMedicoComponent },
+  { path: 'aguarda-confirmacao', component: ConfirmationScreenComponent },
+  { path: 'redefinir-senha', component: ForgotPasswordComponent },
   { path: 'redefinir-senha-confirmacao', component: ResetConfirmationScreenComponent },
-  
+
   //Médico
   { path: 'medico', component: MedicoPanelComponent },
   { path: 'medico/unidades-saude', component: UnidadesSaudeComponent },
@@ -98,14 +102,14 @@ const appRoutes: Routes = [
   { path: 'administracao/solicitacoes-integracao-medico', component: SolicitacoesIntegracaoComponent },
   { path: 'administracao/solicitacoes-integracao-medico/:mid/detail', component: ShowSolicitacaoIngracaoComponent },
   { path: 'administracao/solicitacoes-integracao-medico/email-enviado', component: MensagemEmailEnviadoComponent },
-  { path: 'administracao/equipe', component: EquipeComponent},
-  { path: 'administracao/medico/:mid/detail', component: ShowMedicoComponent},
+  { path: 'administracao/equipe', component: EquipeComponent },
+  { path: 'administracao/medico/:mid/detail', component: ShowMedicoComponent },
 
   //Tela padrão de confirmação de exclusão
-  { path: ':tipousuario/:item/:id/delete', component: DeleteConfirmationComponent},
+  { path: ':tipousuario/:item/:id/delete', component: DeleteConfirmationComponent },
 
   //Não autorizado
-  { path: 'not-authorized', component: NotAuthorizedComponent}
+  { path: 'not-authorized', component: NotAuthorizedComponent }
 ];
 
 @NgModule({
@@ -141,9 +145,10 @@ const appRoutes: Routes = [
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    NgbModule.forRoot(),
     RouterModule.forRoot(
       appRoutes,
-      { enableTracing: true}
+      { enableTracing: true }
     )
   ],
   providers: [
