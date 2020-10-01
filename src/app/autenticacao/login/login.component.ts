@@ -47,7 +47,7 @@ export class LoginComponent implements OnInit {
               var medicoId = medico[0]['id'];
               sessionStorage.setItem('id', medicoId);
 
-              this.menuVisibilityService.controlMenuVisibility('medico', 'block');
+              this.menuVisibilityService.controlMenuVisibility('medico', 'flex');
 
               this.router.navigate(['medico']);
             },
@@ -63,7 +63,7 @@ export class LoginComponent implements OnInit {
               var adminId = admin[0]['id'];
               sessionStorage.setItem('id', adminId);
 
-              this.menuVisibilityService.controlMenuVisibility('admin', 'block');
+              this.menuVisibilityService.controlMenuVisibility('admin', 'flex');
 
               this.router.navigate(['administracao']);
             },
