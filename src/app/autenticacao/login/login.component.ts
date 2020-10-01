@@ -22,10 +22,10 @@ export class LoginComponent implements OnInit {
   selectedTipoUsuario = 'M';
 
   constructor(private loginService: LoginService,
-              private cadastroMedicoService: CadastroMedicoService,
-              private adminUnidadeSaudeService: AdminUnidadeSaudeService,
-              private menuVisibilityService: MenuVisibilityService,
-              private router: Router) {
+    private cadastroMedicoService: CadastroMedicoService,
+    private adminUnidadeSaudeService: AdminUnidadeSaudeService,
+    private menuVisibilityService: MenuVisibilityService,
+    private router: Router) {
 
   }
 
@@ -46,7 +46,7 @@ export class LoginComponent implements OnInit {
             (medico: Observable<Object>) => {
               var medicoId = medico[0]['id'];
               sessionStorage.setItem('id', medicoId);
-              
+
               this.menuVisibilityService.controlMenuVisibility('medico', 'block');
 
               this.router.navigate(['medico']);
@@ -62,7 +62,7 @@ export class LoginComponent implements OnInit {
             (admin: Observable<Object>) => {
               var adminId = admin[0]['id'];
               sessionStorage.setItem('id', adminId);
-              
+
               this.menuVisibilityService.controlMenuVisibility('admin', 'block');
 
               this.router.navigate(['administracao']);
@@ -74,7 +74,7 @@ export class LoginComponent implements OnInit {
             }
           )
         }
-      
+
       },
       (error: any) => {
         this.error = error;
@@ -88,7 +88,7 @@ export class LoginComponent implements OnInit {
 
   changeTipoUsuario() {
     if (this.selectedTipoUsuario == 'M') {
-      document.getElementById('cad-medico').style.display = "block";
+      document.getElementById('cad-medico').style.display = "inline";
     } else {
       document.getElementById('cad-medico').style.display = "none";
     }
