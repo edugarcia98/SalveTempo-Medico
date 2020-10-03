@@ -54,7 +54,7 @@ export class ConsultaInfoComponent implements OnInit{
       this.consultaService.getConsultaById(sessionStorage.getItem('key'), this.id).subscribe(
         (item: Consulta) => {
           this.consulta = item;
-          
+
           this.consultaService.getSintomasFromConsulta(sessionStorage.getItem('key'), this.id).subscribe(
             (items: ConsultaSintoma[]) => {
               this.sintomas = items;
@@ -344,6 +344,18 @@ export class ConsultaInfoComponent implements OnInit{
           console.log(this.error);
         }
       );
+    }
+  }
+
+  goToAnamnese(id: number) {
+    this.router.navigate([`medico/consulta/${id}/anamnese`]);
+  }
+
+  goToConsultas(status: string) {
+    if (status == 'P' || status == 'A') {
+      this.router.navigate([`medico/agenda-consultas`]);
+    } else if (status == 'F') {
+      this.router.navigate([`medico/historico-consultas`]);
     }
   }
 }

@@ -25,35 +25,67 @@ export interface Doenca {
 
 export interface Anamnese {
     id: number;
+
     peso: number;
     altura: number;
+
     fuma: boolean;
+    fumaStr: string;
     qtdCigarrosDia: number;
+
     bebe: boolean;
+    bebeStr: string;
     freqBebeDiasSemana: number;
+
     qualidadeAlimentacaoIngestaoAgua: number;
+    qualidadeAlimentacaoIngestaoAguaStr: string;
+
     praticaAtividadeFisica: boolean;
+    praticaAtividadeFisicaStr: string;
     tipoAtividadeFisica: string;
     freqAtividadeFisicaDiasSemana: number;
+    
     utilizaAnticoncepcional: boolean;
+    utilizaAnticoncepcionalStr: string;
     anticoncepcionaisUtilizados: string;
+
     realizouGestacoes: boolean;
+    realizouGestacoesStr: string;
     ultimaGestacaoTempoMeses: number;
+    
     utilizaMedicamentos: boolean;
+    utilizaMedicamentosStr: string;
     medicamentosUtilizados: string;
+
     alergias: boolean;
+    alergiasStr: string;
     alergiasDesc: string;
+
     alteracoesCardiacas: boolean;
+    alteracoesCardiacasStr: string;
     alteracoesCardiacasDesc: string;
+
     pressaoAlta: boolean;
+    pressaoAltaStr: string;
+
     pressaoBaixa: boolean;
+    pressaoBaixaStr: string;
+
     disturbioCirculatorio: boolean;
+    disturbioCirculatorioStr: string;
     disturbioCirculatorioDesc: string;
+
     disturbioHormonal: boolean;
+    disturbioHormonalStr: string;
     disturbioHormonalDesc: string;
+
     diabetes: boolean;
+    diabetesStr: string;
     tipoDiabetes: number;
+    tipoDiabetesStr: string;
+    
     fezCirurgias: boolean;
+    fezCirurgiasStr: string;
     cirurgiasDesc: string;
 }
 

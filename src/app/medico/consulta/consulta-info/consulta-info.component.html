@@ -4,13 +4,17 @@
 {{ consulta?.paciente.nome }}<br>
 
 <label><b>Unidade de Saúde:</b></label>
-{{ consulta?.unidadeSaude.nome }}<br><br>
+{{ consulta?.unidadeSaude.nome }}<br>
 
 <label><b>Data:</b></label>
-{{ consulta?.data | date: 'dd/MM/yyyy' }}<br><br><br>
+{{ consulta?.data | date: 'dd/MM/yyyy' }}<br>
 
-<label><b>Observação:</b></label>
-{{ consulta?.observacao }}<br><br><br>
+<button type="button" class="btn btn-primary" (click)="goToAnamnese(id)">
+  Anamnese
+</button><br><br>
+
+<label><b>Observação:</b></label><br>
+<textarea rows="4" cols="50" readonly>{{ consulta?.observacao }}</textarea><br><br>
 
 <div>
   <label><b>Sintomas</b></label><br><br>
@@ -25,48 +29,56 @@
     </tr>
   </table><br>
 
-  <label><b>Prognósticos</b></label><br><br>
-  <table>
-    <tr>
-      <th><b>Doença</b></th>
-      <th><b>Percentual</b></th>
-    </tr>
-    <tr *ngFor="let prognostico of prognosticos">
-      <td>
-        <button type="button" id="prog-{{ prognostico?.id }}" class="option-btn" (click)="definePrognostico(prognostico)">
-          {{ prognostico?.doenca.nome }}
-        </button>
-      </td>
-      <td>
-        <div class="percentual-div"
-          [style.width.px]="prognostico.percentual * 2.5"
-          [style.background-color]="prognostico.rgbColor"
-          >&nbsp;</div>
-        <div class="text-div">&nbsp;{{ prognostico?.percentual }}%</div>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <button type="button" id="prog-none" class="option-btn" (click)="definePrognostico(null)">
-          Nenhuma das opções
-        </button>
-      </td>
-      <td>
-        <select id="selection-doenca" [(ngModel)]="selectedPrognostico" [ngModelOptions]="{standalone: true}"
-          style="display: none;">
-          <option *ngFor="let doenca of novasDoencasOptions" value={{doenca.id}}>
-            {{ doenca.nome }}
-          </option>
-        </select>
-      </td>
-      <td>
-        <button type="button" id="btn-add-doenca" class="option-btn" style="display: none;"
-         (click)="showPopup('popup-doenca-div', 'block')">
-          +
-        </button>
-      </td>
-    </tr>
-  </table>
+  <div *ngIf="consulta?.status === 'P' || consulta?.status === 'A';">
+    <label><b>Prognósticos</b></label><br><br>
+    <table>
+      <tr>
+        <th><b>Doença</b></th>
+        <th><b>Percentual</b></th>
+      </tr>
+      <tr *ngFor="let prognostico of prognosticos">
+        <td>
+          <button type="button" id="prog-{{ prognostico?.id }}" class="option-btn" (click)="definePrognostico(prognostico)">
+            {{ prognostico?.doenca.nome }}
+          </button>
+        </td>
+        <td>
+          <div class="percentual-div"
+            [style.width.px]="prognostico.percentual * 2.5"
+            [style.background-color]="prognostico.rgbColor"
+            >&nbsp;</div>
+          <div class="text-div">&nbsp;{{ prognostico?.percentual }}%</div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <button type="button" id="prog-none" class="option-btn" (click)="definePrognostico(null)">
+            Nenhuma das opções
+          </button>
+        </td>
+        <td>
+          <select id="selection-doenca" [(ngModel)]="selectedPrognostico" [ngModelOptions]="{standalone: true}"
+            style="display: none;">
+            <option *ngFor="let doenca of novasDoencasOptions" value={{doenca.id}}>
+              {{ doenca.nome }}
+            </option>
+          </select>
+        </td>
+        <td>
+          <button type="button" id="btn-add-doenca" class="option-btn" style="display: none;"
+          (click)="showPopup('popup-doenca-div', 'block')">
+            +
+          </button>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <div *ngIf="consulta?.status === 'F';">
+    <label><b>Diagnóstico:</b></label>
+    {{ consulta?.diagnostico.nome }}<br>
+  </div>
+
 </div><br><br>
 
 <div id="popup-doenca-div" class="popup-div">
@@ -103,43 +115,51 @@
   </div>
 </div>
 
-<label><b>Adicionar novos sintomas</b></label><br><br>
-<label><b>Sintoma:&nbsp;</b></label>
+<div *ngIf="consulta?.status === 'P' || consulta?.status === 'A';">
+  <label><b>Adicionar novos sintomas</b></label><br><br>
+  <label><b>Sintoma:&nbsp;</b></label>
 
-<input type="text" [(ngModel)]="sintomaFilter">&nbsp;
-<button type="button" style="cursor: pointer;" class="btn btn-primary"
-  (click)="showPopup('popup-sintoma-div', 'block')">
-  +
-</button><br><br>
+  <input type="text" [(ngModel)]="sintomaFilter">&nbsp;
+  <button type="button" style="cursor: pointer;" class="btn btn-primary"
+    (click)="showPopup('popup-sintoma-div', 'block')">
+    +
+  </button><br><br>
 
-<div>
-  <div class="scroll-div" style="float: left;">
-    <div *ngFor="let item of novosSintomasOptions | filtersintoma:sintomaFilter">
-      <input #checkbox *ngIf="verificaListaNovosSintomas(item.id); else notThere" type="checkbox" (click)="selecionaNovoSintoma(item, checkbox.checked)" checked/>
-      <ng-template #notThere>
-        <input #checkbox type="checkbox" (click)="selecionaNovoSintoma(item, checkbox.checked)"/>
-      </ng-template>
-      {{ item.nome }}
+  <div>
+    <div class="scroll-div" style="float: left;">
+      <div *ngFor="let item of novosSintomasOptions | filtersintoma:sintomaFilter">
+        <input #checkbox *ngIf="verificaListaNovosSintomas(item.id); else notThere" type="checkbox" (click)="selecionaNovoSintoma(item, checkbox.checked)" checked/>
+        <ng-template #notThere>
+          <input #checkbox type="checkbox" (click)="selecionaNovoSintoma(item, checkbox.checked)"/>
+        </ng-template>
+        {{ item.nome }}
+      </div>
     </div>
-  </div>
 
-  <span style="position: absolute; top: 675px; right: 495px;"><b>Sintomas criados</b></span>
-  <div class="scroll-div" style="margin-left: 51%;">
-    <div *ngFor="let sintoma of sintomasCriar">
-      &nbsp;&nbsp;{{ sintoma }} 
-      <button type="button" style="cursor: pointer;" class="btn btn-primary"
-      (click)="deleteNovoSintoma(sintoma)">
-        &times;
-      </button>
+    <span style="position: absolute; top: 675px; right: 495px;"><b>Sintomas criados</b></span>
+    <div class="scroll-div" style="margin-left: 51%;">
+      <div *ngFor="let sintoma of sintomasCriar">
+        &nbsp;&nbsp;{{ sintoma }} 
+        <button type="button" style="cursor: pointer;" class="btn btn-primary"
+        (click)="deleteNovoSintoma(sintoma)">
+          &times;
+        </button>
+      </div>
     </div>
-  </div>
-</div><br><br>
+  </div><br><br>
+
+</div>
 
 <div style="display: inline;">
-  <button type="button" class="btn btn-primary" (click)="proximoPassoConsulta(false)">
+  <button type="button" class="btn btn-primary" (click)="goToConsultas(consulta.status)">
+    VOLTAR
+  </button>&nbsp;&nbsp;
+  <button type="button" class="btn btn-primary" (click)="proximoPassoConsulta(false)"
+    *ngIf="consulta?.status === 'P' || consulta?.status === 'A';">
     ENCAMINHAR PARA EXAME
   </button>&nbsp;&nbsp;
-  <button type="button" class="btn btn-primary" (click)="proximoPassoConsulta(true)">
+  <button type="button" class="btn btn-primary" (click)="proximoPassoConsulta(true)"
+    *ngIf="consulta?.status === 'P' || consulta?.status === 'A';">
     FINALIZAR CONSULTA
   </button>
 </div>

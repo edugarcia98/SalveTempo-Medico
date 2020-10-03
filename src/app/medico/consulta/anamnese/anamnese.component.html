@@ -1,3 +1,126 @@
-<p>
-  anamnese works!
-</p>
+<h2>Anamnese</h2>
+
+<label><b>Paciente:</b></label>
+{{ consulta?.paciente.nome }}<br>
+
+<button type="button" class="btn btn-primary" (click)="goToConsulta(id)">
+  Consulta
+</button><br><br>
+
+<label><b>Peso:</b></label>
+{{ anamnese?.peso }} kg<br>
+
+<label><b>Altura:</b></label>
+{{ anamnese?.altura }} m<br><br>
+
+<label><b>Fuma:</b></label>
+{{ anamnese?.fumaStr }}<br>
+
+<div *ngIf="anamnese?.fuma;">
+  <label><b>Quantidade de cigarros (dia):</b></label>
+  {{ anamnese?.qtdCigarrosDia }}<br>
+</div><br>
+
+<label><b>Bebe:</b></label>
+{{ anamnese?.bebeStr }}<br>
+
+<div *ngIf="anamnese?.bebe;">
+  <label><b>Frequência que bebe (dias da semana):</b></label>
+  {{ anamnese?.freqBebeDiasSemana }}<br>
+</div><br>
+
+<label><b>Qualidade de Alimentação e Ingestão de Água:</b></label>
+{{ anamnese?.qualidadeAlimentacaoIngestaoAguaStr }}<br><br>
+
+<label><b>Pratica atividades físicas:</b></label>
+{{ anamnese?.praticaAtividadeFisicaStr }}<br>
+
+<div *ngIf="anamnese?.praticaAtividadeFisica;">
+  <label><b>Atividades Físicas:</b></label><br>
+  <textarea rows="4" cols="50" readonly>{{ anamnese?.tipoAtividadeFisica }}</textarea><br>
+
+  <label><b>Frequência que pratica atividades físicas (dias da semana):</b></label>
+  {{ anamnese?.freqAtividadeFisicaDiasSemana }}<br>
+</div><br>
+
+<label><b>Utiliza anticoncepcionais:</b></label>
+{{ anamnese?.utilizaAnticoncepcionalStr }}<br>
+
+<div *ngIf="anamnese?.utilizaAnticoncepcional;">
+  <label><b>Anticoncepcionais utilizados:</b></label><br>
+  <textarea rows="4" cols="50" readonly>{{ anamnese?.anticoncepcionaisUtilizados }}</textarea><br>
+</div><br>
+
+<label><b>Realizou gestações:</b></label>
+{{ anamnese?.realizouGestacoesStr }}<br>
+
+<div *ngIf="anamnese?.realizouGestacoes;">
+  <label><b>Última gestação (meses):</b></label>
+  {{ anamnese?.ultimaGestacaoTempoMeses }}<br>
+</div><br>
+
+<label><b>Utiliza medicamentos:</b></label>
+{{ anamnese?.utilizaMedicamentosStr }}<br>
+
+<div *ngIf="anamnese?.utilizaMedicamentos;">
+  <label><b>Medicamentos utilizados:</b></label><br>
+  <textarea rows="4" cols="50" readonly>{{ anamnese?.medicamentosUtilizados }}</textarea><br>
+</div><br>
+
+<label><b>Possui alergias:</b></label>
+{{ anamnese?.alergiasStr }}<br>
+
+<div *ngIf="anamnese?.alergias;">
+  <label><b>Alergias:</b></label><br>
+  <textarea rows="4" cols="50" readonly>{{ anamnese?.alergiasDesc }}</textarea><br>
+</div><br>
+
+<label><b>Possui alterações cardíacas:</b></label>
+{{ anamnese?.alteracoesCardiacasStr }}<br>
+
+<div *ngIf="anamnese?.alteracoesCardiacas;">
+  <label><b>Alterações cardíacas:</b></label><br>
+  <textarea rows="4" cols="50" readonly>{{ anamnese?.alteracoesCardiacasDesc }}</textarea><br>
+</div><br>
+
+<label><b>Possui pressão alta:</b></label>
+{{ anamnese?.pressaoAltaStr }}<br>
+
+<label><b>Possui pressão baixa:</b></label>
+{{ anamnese?.pressaoBaixaStr }}<br><br>
+
+<label><b>Possui distúrbios circulatórios:</b></label>
+{{ anamnese?.disturbioCirculatorioStr }}<br>
+
+<div *ngIf="anamnese?.disturbioCirculatorio;">
+  <label><b>Distúrbios circulatórios:</b></label><br>
+  <textarea rows="4" cols="50" readonly>{{ anamnese?.disturbioCirculatorioDesc }}</textarea><br>
+</div><br>
+
+<label><b>Possui distúrbios hormonais:</b></label>
+{{ anamnese?.disturbioHormonalStr }}<br>
+
+<div *ngIf="anamnese?.disturbioHormonal;">
+  <label><b>Distúrbios hormonais:</b></label><br>
+  <textarea rows="4" cols="50" readonly>{{ anamnese?.disturbioHormonalDesc }}</textarea><br>
+</div><br>
+
+<label><b>Possui diabetes:</b></label>
+{{ anamnese?.diabetesStr }}<br>
+
+<div *ngIf="anamnese?.diabetes;">
+  <label><b>Tipo de diabetes:</b></label>
+  {{ anamnese?.tipoDiabetesStr }}<br>
+</div><br>
+
+<label><b>Realizou cirurgias:</b></label>
+{{ anamnese?.fezCirurgiasStr }}<br>
+
+<div *ngIf="anamnese?.fezCirurgias;">
+  <label><b>Distúrbios hormonais:</b></label><br>
+  <textarea rows="4" cols="50" readonly>{{ anamnese?.cirurgiasDesc }}</textarea><br>
+</div><br>
+
+<button type="button" class="btn btn-primary" (click)="goToConsultas(consulta.status)">
+  VOLTAR
+</button>

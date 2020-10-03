@@ -30,8 +30,12 @@ export class ShowConsultaComponent implements OnInit {
   ngOnInit() {
     if (this.keyService.validaAutorizacao('M')) {
       this.tipoviewconsulta = this.route.snapshot.paramMap.get('tipoviewconsulta');
-      this.callGetConsultas('P');
-      this.callGetConsultas('A');
+      if (this.tipoviewconsulta == 'agenda-consultas') {
+        this.callGetConsultas('P');
+        this.callGetConsultas('A');
+      } else if (this.tipoviewconsulta == 'historico-consultas') {
+        this.callGetConsultas('F');
+      }
     } else {
       this.router.navigate(['not-authorized']);
     }
@@ -46,46 +50,45 @@ export class ShowConsultaComponent implements OnInit {
   }
 
   callGetConsultas(status: string) {
-    if (this.tipoviewconsulta == 'agenda-consultas') {
-      this.consultaService.getConsultasByMedicoId(sessionStorage.getItem('key'),
-      sessionStorage.getItem('id'), status).subscribe(
-        (items: Consulta[]) => {
-          this.consultas = items;
-          
-          items.forEach(
-            (item: Consulta) => {
-              item.formattedId = item.id.toString().padStart(4, '0');
+    this.consultaService.getConsultasByMedicoId(sessionStorage.getItem('key'),
+    sessionStorage.getItem('id'), status).subscribe(
+      (items: Consulta[]) => {
+        this.consultas = items;
+        console.log(this.consultas);
+        
+        items.forEach(
+          (item: Consulta) => {
+            item.formattedId = item.id.toString().padStart(4, '0');
 
-              switch (item.periodo) {
-                case 'M': { item.completePeriodo = 'Manhã'; break; }
-                case 'T': { item.completePeriodo = 'Tarde'; break; }
-                case 'N': { item.completePeriodo = 'Noite'; break; }
-              }         
+            switch (item.periodo) {
+              case 'M': { item.completePeriodo = 'Manhã'; break; }
+              case 'T': { item.completePeriodo = 'Tarde'; break; }
+              case 'N': { item.completePeriodo = 'Noite'; break; }
+            }         
 
-              switch (item.status) {
-                case 'P': { item.completeStatus = 'Pendente'; break }
-                case 'A': { item.completeStatus = 'Aguardando Exames'; break }
-                case 'F': { item.completeStatus = 'Finalizada'; break }
-              }
-
-              if (this.datas.filter(i => i == item.data).length == 0) {
-                this.datas.push(item.data);
-              }
+            switch (item.status) {
+              case 'P': { item.completeStatus = 'Pendente'; break }
+              case 'A': { item.completeStatus = 'Aguardando Exames'; break }
+              case 'F': { item.completeStatus = 'Finalizada'; break }
             }
-          );
-          
-          this.datas.sort(
-            (a: Date, b: Date) => {
-              return +new Date(a) - +new Date(b);
-            }
-          );
 
-        },
-        (error: any) => {
-          this.error = error;
-          console.log(this.error);
-        }
-      )
-    }
+            if (this.datas.filter(i => i == item.data).length == 0) {
+              this.datas.push(item.data);
+            }
+          }
+        );
+        
+        this.datas.sort(
+          (a: Date, b: Date) => {
+            return +new Date(a) - +new Date(b);
+          }
+        );
+
+      },
+      (error: any) => {
+        this.error = error;
+        console.log(this.error);
+      }
+    )
   }
 }
