@@ -7,6 +7,7 @@ export interface Medico {
     especializacao: Especializacao;
     nome: string;
     sexo: string;
+    sexoStr: string;
     dataNasc: Date;
     crm: string;
 }

@@ -6,6 +6,7 @@
     {{estado.nome}} ({{estado.sigla}})
   </option>
 </select><br><br>
+<!--Verificar o datalist-->
 
 <label><b>Cidade:</b></label><br>
 <select [(ngModel)]="selectedCidade" [ngModelOptions]="{standalone: true}" (change)="loadUnidadeSaude()">

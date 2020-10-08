@@ -28,6 +28,7 @@
           <div class="col-xs-6">
             <select [(ngModel)]="selectedEspecializacao" [ngModelOptions]="{standalone: true}"
               class="custom-select custom-select-sm dropdown-select" style="width: 225px; margin-left: 5px;">
+              <option value=0 disabled selected>Especialização</option>
               <option *ngFor="let especializacao of especializacoes" value={{especializacao.id}}>
                 {{especializacao.nome}}
               </option>

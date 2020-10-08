@@ -31,6 +31,7 @@ import { ResetConfirmationScreenComponent } from './autenticacao/reset-confirmat
 
 //Painel do Médico
 import { MedicoPanelComponent } from './medico/medico-panel/medico-panel.component';
+import { PerfilComponent } from './medico/perfil/perfil.component';
 import { MedicoService } from './medico/medico-panel/medico.service';
 
 //Unidades de Saúde
@@ -74,7 +75,6 @@ import { FilterdataPipe } from './medico/consulta/filterdata.pipe';
 import { FiltersintomaPipe } from './medico/consulta/consulta-info/filtersintoma.pipe';
 import { AnamneseComponent } from './medico/consulta/anamnese/anamnese.component';
 
-
 //NG Bootstrap
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
@@ -88,6 +88,7 @@ const appRoutes: Routes = [
 
   //Médico
   { path: 'medico', component: MedicoPanelComponent },
+  { path: 'medico/perfil', component: PerfilComponent },
   { path: 'medico/unidades-saude', component: UnidadesSaudeComponent },
   { path: 'medico/unidades-saude/cadastrar', component: AddMedicoUnidadeSaudeComponent },
   { path: 'medico/unidades-saude/aguarde-confirmacao', component: ConfirmMedicoUnidadeSaudeComponent },
@@ -138,7 +139,8 @@ const appRoutes: Routes = [
     FilterdataPipe,
     ConsultaInfoComponent,
     FiltersintomaPipe,
-    AnamneseComponent
+    AnamneseComponent,
+    PerfilComponent
   ],
   imports: [
     BrowserModule,
