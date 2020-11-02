@@ -1,4 +1,28 @@
-<h2>Bem-vindo {{ medico?.nome }}</h2>
+<body>
+    <div class="cabecalho">
+        <div class="row" id="rowmedic">
+            <div class="circle"> <img src="./assets/photo-medico.jpeg"></div>
+            <div class="mediconome">
+                <h2 class="pt-5" style="color: yellow;">Bem-vindo {{ medico?.nome }}</h2>
+                <div class="row" id="rowcrm">
+                    <h5 class="text-left" style="margin-left: 16px;">{{medico?.especializacao.nome}}</h5>
+                    <h5 class="text-left" style="margin-left: 20px;">CRM: {{medico?.crm}}</h5>
+                </div>
+            </div>
+        </div>
+    </div>
 
-<a href="medico/unidades-saude">Unidades de Saúde</a><br>
-<a href="medico/agenda-consultas">Agenda de Consultas</a>
+    <div class="btn-toolbar-lg mx-auto" id="buttonbox">
+        <div class="btn-group" role="group" aria-label="CadastroHorario">
+            <button type="button" id="cadhor" class="btn btn-secondary btn-image active" href="medico/unidades-saude">
+                <h5>Cadastro de Horário</h5>
+            </button>
+        </div>
+        <div class="btn-group" role="group" aria-label="AgendaMedica">
+            <button type="button" id="agendamedica" class="btn btn-secondary btn-image" href="medico/agenda-consultas">
+                <h5>Agenda Médica</h5>
+            </button>
+        </div>
+    </div>
+
+</body>
