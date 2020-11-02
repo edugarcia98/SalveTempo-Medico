@@ -41,4 +41,15 @@ export class MedicoPanelComponent implements OnInit {
     
   }
 
+  goToUnidadesSaude() {
+    this.router.navigate(['medico/unidades-saude']);
+  }
+
+  goToAgendaConsultas() {
+    this.router.navigate(['medico/agenda-consultas']);
+  }
+
+  goToHistoricoConsultas() {
+    this.router.navigate(['medico/historico-consultas']);
+  }
 }

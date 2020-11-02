@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Router } from '@angular/router';
-import { MenuVisibilityService } from 'src/app/geral/menu-visibility/menu-visibility.service';
+;
 
 @Component({
   selector: 'app-reset-confirmation-screen',
@@ -10,12 +10,13 @@ import { MenuVisibilityService } from 'src/app/geral/menu-visibility/menu-visibi
 })
 export class ResetConfirmationScreenComponent implements OnInit {
 
-  constructor(private menuVisibilityService: MenuVisibilityService,
-              private router: Router) { }
+  constructor(
+    //private menuVisibilityService: MenuVisibilityService,
+    private router: Router) { }
 
   ngOnInit() {
     sessionStorage.clear();
-    this.menuVisibilityService.controlMenuVisibility('medico;admin', 'none');
+    //this.menuVisibilityService.controlMenuVisibility('medico;admin', 'none');
   }
 
   goToLogin() {

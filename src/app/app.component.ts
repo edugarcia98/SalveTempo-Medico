@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 
 import { LoginService } from './autenticacao/login/login.service';
 import { KeyService } from './geral/key/key.service';
-import { MenuVisibilityService } from './geral/menu-visibility/menu-visibility.service';
 
 @Component({
   selector: 'app-root',
@@ -17,17 +16,17 @@ export class AppComponent implements OnInit {
 
   constructor(private keyService: KeyService,
               private loginService: LoginService,
-              private menuVisibilityService: MenuVisibilityService,
+              //private menuVisibilityService: MenuVisibilityService,
               private router: Router) {
 
   }
 
   ngOnInit() {
-    if (this.keyService.validaAutorizacao('M')) {
-      this.menuVisibilityService.controlMenuVisibility('medico', 'flex');
-    } else if (this.keyService.validaAutorizacao('A')) {
-      this.menuVisibilityService.controlMenuVisibility('admin', 'flex');
-    }
+    //if (this.keyService.validaAutorizacao('M')) {
+    //  this.menuVisibilityService.controlMenuVisibility('medico', 'flex');
+    //} else if (this.keyService.validaAutorizacao('A')) {
+    //  this.menuVisibilityService.controlMenuVisibility('admin', 'flex');
+    //}
   }
 
   sair() {

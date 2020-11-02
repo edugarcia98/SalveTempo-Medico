@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ForgotPasswordService } from './forgot-password.service';
 
 import { Router } from '@angular/router';
-import { MenuVisibilityService } from 'src/app/geral/menu-visibility/menu-visibility.service';
+
 
 @Component({
   selector: 'app-forgot-password',
@@ -11,18 +11,18 @@ import { MenuVisibilityService } from 'src/app/geral/menu-visibility/menu-visibi
   styleUrls: ['./forgot-password.component.css']
 })
 export class ForgotPasswordComponent implements OnInit {
-
+  //private menuVisibilityService: MenuVisibilityService,
   error: any;
 
   constructor(private forgotPasswordService: ForgotPasswordService,
-              private menuVisibilityService: MenuVisibilityService,
-              private router: Router) {
+
+    private router: Router) {
 
   }
 
   ngOnInit() {
     sessionStorage.clear();
-    this.menuVisibilityService.controlMenuVisibility('medico;admin', 'none');
+    //this.menuVisibilityService.controlMenuVisibility('medico;admin', 'none');
   }
 
   resetPassword(medicoEmail: string) {

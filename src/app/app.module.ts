@@ -61,7 +61,7 @@ import { DeleteConfirmationComponent } from './geral/delete-confirmation/delete-
 import { NotAuthorizedComponent } from './geral/not-authorized/not-authorized.component';
 
 //Controle de visibilidade do menu
-import { MenuVisibilityService } from './geral/menu-visibility/menu-visibility.service';
+// import { MenuVisibilityService } from './geral/menu-visibility/menu-visibility.service';
 
 //Exibição de consultas
 import { ShowConsultaComponent } from './medico/consulta/show-consulta/show-consulta.component';
@@ -162,7 +162,7 @@ const appRoutes: Routes = [
     UnidadeSaudeService,
     AdminUnidadeSaudeService,
     KeyService,
-    MenuVisibilityService,
+    // MenuVisibilityService,
     ConsultaService
   ],
   bootstrap: [AppComponent]

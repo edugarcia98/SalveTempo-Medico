@@ -8,7 +8,7 @@ import { Especializacao } from 'src/app/medico/especializacao/especializacao';
 import { User } from './user';
 
 import { Router } from '@angular/router';
-import { MenuVisibilityService } from 'src/app/geral/menu-visibility/menu-visibility.service';
+
 
 @Component({
   selector: 'app-cadastro-medico',
@@ -24,15 +24,15 @@ export class CadastroMedicoComponent implements OnInit {
   usuarioCadastrado: User[];
 
   constructor(private cadastroMedicoService: CadastroMedicoService,
-              private especializacaoService: EspecializacaoService,
-              private menuVisibilityService: MenuVisibilityService,
-              private router: Router) {
+    private especializacaoService: EspecializacaoService,
+    // private menuVisibilityService: MenuVisibilityService,
+    private router: Router) {
 
   }
 
   ngOnInit() {
     sessionStorage.clear();
-    this.menuVisibilityService.controlMenuVisibility('medico;admin', 'none');
+    // this.menuVisibilityService.controlMenuVisibility('medico;admin', 'none');
 
     this.especializacaoService.getEspecializacoes().subscribe(
       (items: Especializacao[]) => {
@@ -49,15 +49,15 @@ export class CadastroMedicoComponent implements OnInit {
           (items: User[]) => {
             this.usuarioCadastrado = items;
             this.cadastroMedicoService.cadastroMedico(this.usuarioCadastrado[0].id, this.selectedEspecializacao,
-            medicoNome, this.selectedSexo, medicoDataNasc, medicoCRM).subscribe(
-              () => {
-                this.router.navigate(['aguarda-confirmacao']);
-              },
-              (error: any) => {
-                this.error = error;
-                console.log(this.error);
-              }
-            );
+              medicoNome, this.selectedSexo, medicoDataNasc, medicoCRM).subscribe(
+                () => {
+                  this.router.navigate(['aguarda-confirmacao']);
+                },
+                (error: any) => {
+                  this.error = error;
+                  console.log(this.error);
+                }
+              );
           },
           (error: any) => {
             this.error = error;
@@ -70,7 +70,7 @@ export class CadastroMedicoComponent implements OnInit {
         console.log(this.error);
       }
     );
-    
+
     //location.reload();
   }
 
