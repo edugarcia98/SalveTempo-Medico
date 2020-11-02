@@ -56,6 +56,15 @@
           <a id="cad-medico" href="/">Volte para tela inicial</a>
       </div>
 
+      <div *ngIf="error_found" class="alert alert-danger">
+        <b>Erros:</b><br>
+        <div *ngFor="let erro of error | keyvalue">
+          <div *ngFor="let err of erro.value.content">
+            <b>{{ erro.value.desc }}: </b> {{ err }}
+          </div>
+        </div>
+      </div>
+
     </form>
   </div>
 </body>
