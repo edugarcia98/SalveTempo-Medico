@@ -52,8 +52,7 @@ export class LoginComponent implements OnInit {
               this.router.navigate(['medico']);
             },
             (error: any) => {
-              this.error = error;
-              console.log(this.error);
+              this.error = "Médico não encontrado.";
               sessionStorage.clear();
             }
           )
@@ -68,8 +67,7 @@ export class LoginComponent implements OnInit {
               this.router.navigate(['administracao']);
             },
             (error: any) => {
-              this.error = error;
-              console.log(this.error);
+              this.error = "Administrador de unidade de saúde não encontrado."
               sessionStorage.clear();
             }
           )
@@ -77,13 +75,12 @@ export class LoginComponent implements OnInit {
 
       },
       (error: any) => {
-        this.error = error;
-        console.log(this.error);
+        if (email == '' && senha == '') { this.error = "E-mail e senha não podem ser vazios." }
+        else if (email == '') { this.error = "E-mail não pode ser vazio." }
+        else if (senha == '') { this.error = "Senha não pode ser vazia." }
+        else { this.error = "Credenciais incorretas ou e-mail não confirmado." }
       }
     );
-
-    //Adicionar o tipo de usuário na sessão, para se validar no component, impedindo assim que 
-    //um usário acesse onde não pode
   }
 
   changeTipoUsuario() {
