@@ -1,8 +1,27 @@
-<h2>Bem-vindo {{ admin?.nome }}</h2>
+<body>
+    <div class="cabecalho">
+        <div class="row" id="row-admin">
+            <div class="circle"> <img src="./assets/admin.png"></div>
+            <div class="admin-nome">
+                <h2 class="pt-5" style="color: #17a2b8;">Bem-vindo {{ admin?.nome }}</h2>
+                <div class="row" id="rowcrm">
+                    <h5 class="text-left" style="margin-left: 20px; color: black">Responsável por: {{ admin?.unidadeSaudeResponsavel.nome }}</h5>
+                </div>
+            </div>
+        </div>
+    </div>
 
-<label><b>Responsável por: </b></label>
-{{ admin?.unidadeSaudeResponsavel.nome }}
-<br><br>
+    <div class="btn-toolbar-lg mx-auto" id="buttonbox">
+        <div class="btn-group" role="group" aria-label="Equipe">
+            <button type="button" id="equipe" class="btn btn-secondary btn-image active" (click)="goToEquipe()">
+                <h5>Equipe</h5>
+            </button>
+        </div>
+        <div class="btn-group" role="group" aria-label="SolicitacoesIntegracao">
+            <button type="button" id="solicitacoes-integracao" class="btn btn-secondary btn-image" (click)="goToSolicitacoesIntegracao()">
+                <h5>Solicitações de Integração</h5>
+            </button>
+        </div>
+    </div>
 
-<a href="administracao/equipe">Equipe</a><br>
-<a href="administracao/solicitacoes-integracao-medico">Solicitações de Integração</a>
+</body>

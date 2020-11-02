@@ -39,4 +39,11 @@ export class AdminUnidadeSaudeComponent implements OnInit {
     }
   }
 
+  goToEquipe() {
+    this.router.navigate(['administracao/equipe']);
+  }
+
+  goToSolicitacoesIntegracao() {
+    this.router.navigate(['administracao/solicitacoes-integracao-medico']);
+  }
 }

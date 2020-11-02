@@ -65,8 +65,8 @@ body {
     margin-right: 10px;
     width: 300px;
     height: 150px;
-    background-color: yellow;
-    border-color: yellow;
+    background-color: #f5dd29;
+    border-color: #f5dd29;
     font-size: large;
     box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.05);
 }
