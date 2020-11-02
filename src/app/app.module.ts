@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes, Route } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { NgxSpinnerModule } from "ngx-spinner";
 
 //App
 import { AppRoutingModule } from './app-routing.module';
@@ -146,6 +147,7 @@ const appRoutes: Routes = [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    NgxSpinnerModule,
     FormsModule,
     NgbModule.forRoot(),
     RouterModule.forRoot(

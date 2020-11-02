@@ -35,6 +35,8 @@ export class LoginComponent implements OnInit {
   }
 
   login(email: string, senha: string) {
+    this.error = "";
+    
     this.loginService.login(email, senha).subscribe(
       (object: Observable<Object>) => {
         var key = object['key'];
@@ -75,10 +77,10 @@ export class LoginComponent implements OnInit {
 
       },
       (error: any) => {
-        if (email == '' && senha == '') { this.error = "E-mail e senha não podem ser vazios." }
-        else if (email == '') { this.error = "E-mail não pode ser vazio." }
-        else if (senha == '') { this.error = "Senha não pode ser vazia." }
-        else { this.error = "Credenciais incorretas ou e-mail não confirmado." }
+        if (email == '' && senha == '') { this.error = "E-mail e senha não podem ser vazios."; }
+        else if (email == '') { this.error = "E-mail não pode ser vazio."; }
+        else if (senha == '') { this.error = "Senha não pode ser vazia."; }
+        else { this.error = "Credenciais incorretas ou e-mail não confirmado."; }
       }
     );
   }

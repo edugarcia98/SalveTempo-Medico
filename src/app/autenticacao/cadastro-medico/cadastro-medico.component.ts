@@ -9,6 +9,8 @@ import { User } from './user';
 
 import { Router } from '@angular/router';
 
+import { NgxSpinnerService } from "ngx-spinner";
+
 
 @Component({
   selector: 'app-cadastro-medico',
@@ -27,7 +29,10 @@ export class CadastroMedicoComponent implements OnInit {
   constructor(private cadastroMedicoService: CadastroMedicoService,
     private especializacaoService: EspecializacaoService,
     // private menuVisibilityService: MenuVisibilityService,
-    private router: Router) {
+    private router: Router,
+    private spinnerService: NgxSpinnerService
+    ) {
+
   }
 
   ngOnInit() {
@@ -52,6 +57,8 @@ export class CadastroMedicoComponent implements OnInit {
       "non_field_errors": {"desc": "Outros", "content": []}
     };
 
+    this.spinnerService.show();
+
     this.cadastroMedicoService.cadastroUsuario(medicoEmail, medicoNome, medicoSenha, medicoSenhaConfirm).subscribe(
       () => {
         this.cadastroMedicoService.getUsuarioByEmail(medicoEmail).subscribe(
@@ -63,18 +70,21 @@ export class CadastroMedicoComponent implements OnInit {
                   this.router.navigate(['aguarda-confirmacao']);
                 },
                 (error: any) => {
-                  this.error = error;
-                  console.log(this.error);
+                  this.spinnerService.hide();
+                  this.error_found = true;
+                  this.error["non_field_errors"]["content"].push("Não foi possível finalizar o cadastro do médico.");
                 }
               );
           },
           (error: any) => {
+            this.spinnerService.hide();
             this.error_found = true;
-            this.error["non_field_errors"]["content"].push("Usuário não encontrado");
+            this.error["non_field_errors"]["content"].push("Usuário não encontrado.");
           }
         );
       },
       (error: any) => {
+        this.spinnerService.hide();
         this.error_found = true;
         this.errorHandler(error);
       }
