@@ -38,7 +38,7 @@ export class ForgotPasswordComponent implements OnInit {
         this.spinnerService.hide();
         
         if (medicoEmail == "") { this.error = "E-mail não pode ser vazio."; }
-        else { this.error = "Formato de e-mail inválido."; }
+        else { this.error = error.error.email; }
       }
     );
   }

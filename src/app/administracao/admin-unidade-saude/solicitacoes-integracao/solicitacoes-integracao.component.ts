@@ -9,6 +9,8 @@ import { MedicoUnidadeSaude } from 'src/app/medico/unidades-saude/medico-unidade
 
 import { KeyService } from 'src/app/geral/key/key.service';
 
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
+
 @Component({
   selector: 'app-solicitacoes-integracao',
   templateUrl: './solicitacoes-integracao.component.html',
@@ -19,6 +21,8 @@ export class SolicitacoesIntegracaoComponent implements OnInit {
   error: any;
   admin: AdminUnidadeSaude;
   medicosUnidadeSaude: MedicoUnidadeSaude[]
+
+  faSearch = faSearch;
 
   constructor(private adminUnidadeSaudeService: AdminUnidadeSaudeService,
               private keyService: KeyService,

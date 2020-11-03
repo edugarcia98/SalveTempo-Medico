@@ -1,0 +1,19 @@
+body {
+    position: relative;
+    background-color: #fcfcfc;
+    height: 100vh;
+}
+
+.btn-admin {
+    background-color: #f5dd29;
+    color: black;
+}
+
+.btn-admin:hover {
+    background-color: #e6c60d;
+}
+
+.table th, td {
+    border-top: 1px solid #fcfcfc;
+    border-bottom: 1px solid #242424;
+}

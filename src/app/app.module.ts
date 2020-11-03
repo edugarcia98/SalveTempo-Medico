@@ -5,6 +5,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { NgxSpinnerModule } from "ngx-spinner";
 
+//Font Awesome
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
+//Bootstrap
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 //App
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -145,10 +152,13 @@ const appRoutes: Routes = [
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
     NgxSpinnerModule,
     FormsModule,
+    FontAwesomeModule,
+    BsDropdownModule.forRoot(),
     NgbModule.forRoot(),
     RouterModule.forRoot(
       appRoutes,
