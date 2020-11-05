@@ -9,6 +9,8 @@ import { ConsultaService } from '../consulta.service';
 import { Consulta, ConsultaSintoma, Prognostico, Sintoma, Doenca } from '../consulta';
 import { $ } from 'protractor';
 
+import { faSearch, faTimes } from '@fortawesome/free-solid-svg-icons';
+
 @Component({
   selector: 'app-consulta-info',
   templateUrl: './consulta-info.component.html',
@@ -34,6 +36,9 @@ export class ConsultaInfoComponent implements OnInit{
   sintomaStr: string;
 
   sintomasCriar: string[];
+
+  faSearch = faSearch;
+  faTimes = faTimes;
 
   private sintomaFilter: string;
 
@@ -190,18 +195,27 @@ export class ConsultaInfoComponent implements OnInit{
   definePrognostico(prognostico: Prognostico) {
     for(var i = 0; i < document.getElementsByClassName("option-btn").length; i++) {
       var htmlId = document.getElementsByClassName("option-btn").item(i).id;
-      document.getElementById(htmlId).style.backgroundColor = "#f7f7f7";
+      document.getElementById(htmlId).style.backgroundColor = "#6c757d";
+      document.getElementById(htmlId).style.color = "#fff";
+      document.getElementById(htmlId).style.boxShadow = "0 0 0 0rem rgba(0, 0, 0, 0)"
     }
     document.getElementById("selection-doenca").style.display = "none";
     document.getElementById("btn-add-doenca").style.display = "none";
+    document.getElementById("title-add-doenca").style.display = "none"
 
     if (prognostico == null) {
       document.getElementById("prog-none").style.backgroundColor = "#c4c4c4";
+      document.getElementById("prog-none").style.color = "black";
+      document.getElementById("prog-none").style.boxShadow = "0 0 0 0.2rem rgba(130,138,145,.5)"
+
       document.getElementById("selection-doenca").style.display = "block";
       document.getElementById("btn-add-doenca").style.display = "block";
+      document.getElementById("title-add-doenca").style.display = "block"
       this.selectedPrognostico = 0;
     } else {
       document.getElementById("prog-" + prognostico.id.toString()).style.backgroundColor = prognostico.rgbColor;
+      document.getElementById("prog-" + prognostico.id.toString()).style.color = "black";
+      document.getElementById("prog-" + prognostico.id.toString()).style.boxShadow = "0 0 0 0.2rem " + prognostico.rgbColor.replace('rgb', 'rgba').replace(')', ', .3)');
       this.selectedPrognostico = prognostico.doenca.id;
     }
   }

@@ -4,6 +4,7 @@ import { RouterModule, Routes, Route } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { NgxSpinnerModule } from "ngx-spinner";
+import { NgCircleProgressModule } from "ng-circle-progress";
 
 //Font Awesome
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -160,6 +161,7 @@ const appRoutes: Routes = [
     FontAwesomeModule,
     BsDropdownModule.forRoot(),
     NgbModule.forRoot(),
+    NgCircleProgressModule.forRoot(),
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: true }
