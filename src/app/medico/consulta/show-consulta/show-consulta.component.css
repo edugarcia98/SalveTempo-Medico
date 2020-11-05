@@ -1,0 +1,54 @@
+#dateid {
+    background-color: yellow;
+    border-color: yellow;
+    height: 40px;
+    vertical-align: center;
+    border-radius: 5px;
+    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.05);
+}
+
+.row {
+    height: 65px;
+}
+
+.container-fluid {
+    width: 850px;
+}
+
+.table {
+    margin-top: 25px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.btn {
+    background-color: #17a2b8;
+    border: none;
+}
+
+#housebutton {
+    width: 50px;
+    height: 50px;
+    margin-top: 20px;
+    margin-left: 30px;
+}
+
+.cabecalho {
+    background-color: #17a2b8;
+    height: 180px;
+    max-width: 100%;
+    color: #FFFFFF;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.05);
+}
+
+.cabecalho .name {
+    margin-left: 30px;
+}
+
+body {
+    position: relative;
+    background-color: #EAEAEA;
+    height: 100vh;
+}

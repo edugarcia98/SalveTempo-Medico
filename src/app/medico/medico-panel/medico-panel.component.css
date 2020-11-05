@@ -56,7 +56,11 @@ body {
 .btn-toolbar-lg {
     margin: 0 auto;
     width: 50%;
-    margin-top: 25px;
+    margin-top: 15px;
+}
+
+.btn-toolbar-lg .btn-group {
+    margin-top: 10px;
 }
 
 .btn-toolbar-lg .btn-group .btn {

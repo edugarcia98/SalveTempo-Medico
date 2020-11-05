@@ -21,9 +21,9 @@ export class ShowConsultaComponent implements OnInit {
   datas: Date[];
 
   constructor(private keyService: KeyService,
-              private consultaService: ConsultaService,
-              private route: ActivatedRoute,
-              private router: Router) {
+    private consultaService: ConsultaService,
+    private route: ActivatedRoute,
+    private router: Router) {
     this.datas = [];
   }
 
@@ -49,46 +49,51 @@ export class ShowConsultaComponent implements OnInit {
     this.router.navigate([`medico/consulta/${id}/anamnese`]);
   }
 
+  goToHomeMedico() {
+    this.router.navigate(['medico']);
+  }
+
+
   callGetConsultas(status: string) {
     this.consultaService.getConsultasByMedicoId(sessionStorage.getItem('key'),
-    sessionStorage.getItem('id'), status).subscribe(
-      (items: Consulta[]) => {
-        this.consultas = items;
-        console.log(this.consultas);
-        
-        items.forEach(
-          (item: Consulta) => {
-            item.formattedId = item.id.toString().padStart(4, '0');
+      sessionStorage.getItem('id'), status).subscribe(
+        (items: Consulta[]) => {
+          this.consultas = items;
+          console.log(this.consultas);
 
-            switch (item.periodo) {
-              case 'M': { item.completePeriodo = 'Manhã'; break; }
-              case 'T': { item.completePeriodo = 'Tarde'; break; }
-              case 'N': { item.completePeriodo = 'Noite'; break; }
-            }         
+          items.forEach(
+            (item: Consulta) => {
+              item.formattedId = item.id.toString().padStart(4, '0');
 
-            switch (item.status) {
-              case 'P': { item.completeStatus = 'Pendente'; break }
-              case 'A': { item.completeStatus = 'Aguardando Exames'; break }
-              case 'F': { item.completeStatus = 'Finalizada'; break }
+              switch (item.periodo) {
+                case 'M': { item.completePeriodo = 'Manhã'; break; }
+                case 'T': { item.completePeriodo = 'Tarde'; break; }
+                case 'N': { item.completePeriodo = 'Noite'; break; }
+              }
+
+              switch (item.status) {
+                case 'P': { item.completeStatus = 'Pendente'; break }
+                case 'A': { item.completeStatus = 'Aguardando Exames'; break }
+                case 'F': { item.completeStatus = 'Finalizada'; break }
+              }
+
+              if (this.datas.filter(i => i == item.data).length == 0) {
+                this.datas.push(item.data);
+              }
             }
+          );
 
-            if (this.datas.filter(i => i == item.data).length == 0) {
-              this.datas.push(item.data);
+          this.datas.sort(
+            (a: Date, b: Date) => {
+              return +new Date(a) - +new Date(b);
             }
-          }
-        );
-        
-        this.datas.sort(
-          (a: Date, b: Date) => {
-            return +new Date(a) - +new Date(b);
-          }
-        );
+          );
 
-      },
-      (error: any) => {
-        this.error = error;
-        console.log(this.error);
-      }
-    )
+        },
+        (error: any) => {
+          this.error = error;
+          console.log(this.error);
+        }
+      )
   }
 }
