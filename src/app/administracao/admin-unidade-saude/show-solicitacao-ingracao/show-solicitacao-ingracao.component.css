@@ -1,0 +1,17 @@
+body {
+    position: relative;
+    background-color: #fcfcfc;
+    height: 100vh;
+}
+
+.header-admin {
+    background-color: #fdfae5;
+}
+
+.card-admin {
+    background-color: #17a2b8;
+}
+
+.card-admin h4 {
+    color: #fafafa;
+}
