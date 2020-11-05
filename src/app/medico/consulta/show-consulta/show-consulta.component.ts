@@ -25,6 +25,7 @@ export class ShowConsultaComponent implements OnInit {
               private route: ActivatedRoute,
               private router: Router) {
     this.datas = [];
+    this.consultas = [];
   }
 
   ngOnInit() {
@@ -53,8 +54,6 @@ export class ShowConsultaComponent implements OnInit {
     this.consultaService.getConsultasByMedicoId(sessionStorage.getItem('key'),
     sessionStorage.getItem('id'), status).subscribe(
       (items: Consulta[]) => {
-        this.consultas = items;
-        console.log(this.consultas);
         
         items.forEach(
           (item: Consulta) => {
@@ -75,6 +74,7 @@ export class ShowConsultaComponent implements OnInit {
             if (this.datas.filter(i => i == item.data).length == 0) {
               this.datas.push(item.data);
             }
+            this.consultas.push(item);
           }
         );
         

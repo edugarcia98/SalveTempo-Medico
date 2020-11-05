@@ -7,9 +7,10 @@ import { KeyService } from 'src/app/geral/key/key.service';
 
 import { ConsultaService } from '../consulta.service';
 import { Consulta, ConsultaSintoma, Prognostico, Sintoma, Doenca } from '../consulta';
-import { $ } from 'protractor';
 
 import { faSearch, faTimes } from '@fortawesome/free-solid-svg-icons';
+
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-consulta-info',
@@ -45,7 +46,8 @@ export class ConsultaInfoComponent implements OnInit{
   constructor(private keyService: KeyService,
               private consultaService: ConsultaService,
               private route: ActivatedRoute,
-              private router: Router) { 
+              private router: Router,
+              private spinnerService: NgxSpinnerService) { 
     this.novosSintomasOptions = [];
     this.novosSintomas = [];
     this.novasDoencasOptions = [];
@@ -221,8 +223,10 @@ export class ConsultaInfoComponent implements OnInit{
   }
 
   proximoPassoConsulta(isFim: boolean) {
+    this.spinnerService.show();
+
     if (isFim && this.selectedPrognostico == 0) {
-      console.log("Selecione um possível diagnóstico.")
+      alert("Selecione um possível diagnóstico.");
     } else {
       var status = isFim ? 'F' : 'A';
       var diagnostico = isFim ? this.selectedPrognostico : 0;
@@ -233,6 +237,7 @@ export class ConsultaInfoComponent implements OnInit{
           console.log('Consulta alterada');
         },
         (error: any) => {
+          this.spinnerService.hide();
           this.error = error;
           console.log(this.error);
         }
@@ -241,6 +246,7 @@ export class ConsultaInfoComponent implements OnInit{
           await this.saveNovosSintomasCriados()
         },
         (error: any) => {
+          this.spinnerService.hide();
           this.error = error;
           console.log(this.error);
         }
@@ -254,6 +260,7 @@ export class ConsultaInfoComponent implements OnInit{
                   console.log('Novo sintoma inserido');
                 },
                 (error: any) => {
+                  this.spinnerService.hide();
                   this.error = error;
                   console.log(this.error);
                 }
@@ -262,6 +269,7 @@ export class ConsultaInfoComponent implements OnInit{
           }
         },
         (error: any) => {
+          this.spinnerService.hide();
           this.error = error;
           console.log(this.error);
         }
@@ -272,6 +280,7 @@ export class ConsultaInfoComponent implements OnInit{
           }
         }
       );
+      this.goToConsultas("P");
     }
   }
 
@@ -326,6 +335,7 @@ export class ConsultaInfoComponent implements OnInit{
                 console.log(response);
               },
               (error: any) => {
+                this.spinnerService.hide();
                 this.error = error;
                 console.log(this.error);
               }
@@ -333,12 +343,14 @@ export class ConsultaInfoComponent implements OnInit{
 
           },
           (error: any) => {
+            this.spinnerService.hide();
             this.error = error;
             console.log(this.error);
           }
         )
       },
       (error: any) => {
+        this.spinnerService.hide();
         this.error = error;
         console.log(this.error);
       }
@@ -354,6 +366,7 @@ export class ConsultaInfoComponent implements OnInit{
           console.log('Novo sintoma adicionado em PrognosticoData');
         },
         (error: any) => {
+          this.spinnerService.hide()
           this.error = error;
           console.log(this.error);
         }
