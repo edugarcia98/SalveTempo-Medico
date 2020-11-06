@@ -33,12 +33,14 @@ export class DeleteConfirmationComponent implements OnInit {
     if (this.item == 'medico'){
       if (this.keyService.validaAutorizacao('A')) {
         this.id = this.keyService.getUrlId('id', this.route);
+        document.getElementById("delete-body").style.backgroundColor = "#f5dd29";
       } else {
         this.router.navigate(['not-authorized']);
       }
     } else if (this.item == 'unidade-saude') {
       if (this.keyService.validaAutorizacao('M')) {
         this.id = this.keyService.getUrlId('id', this.route);
+        document.getElementById("delete-body").style.backgroundColor = "#17a2b8";
       } else {
         this.router.navigate(['not-authorized']);
       }

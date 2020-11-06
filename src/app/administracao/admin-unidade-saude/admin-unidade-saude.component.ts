@@ -6,6 +6,7 @@ import { AdminUnidadeSaudeService } from './admin-unidade-saude.service';
 import { AdminUnidadeSaude } from './admin-unidade-saude';
 
 import { KeyService } from 'src/app/geral/key/key.service';
+import { LoginService } from 'src/app/autenticacao/login/login.service';
 
 @Component({
   selector: 'app-admin-unidade-saude',
@@ -19,6 +20,7 @@ export class AdminUnidadeSaudeComponent implements OnInit {
 
   constructor(private adminUnidadeSaudeService: AdminUnidadeSaudeService,
               private keyService: KeyService,
+              private loginService: LoginService,
               private router: Router) { 
 
   }
@@ -37,6 +39,18 @@ export class AdminUnidadeSaudeComponent implements OnInit {
     } else {
       this.router.navigate(['not-authorized']);
     }
+  }
+
+  sair() {
+    this.loginService.logout(sessionStorage.getItem('key')).subscribe(
+      () => {
+        this.router.navigate(['']);
+      },
+      (error: any) => {
+        this.error = error;
+        console.log(this.error);
+      }
+    )
   }
 
   goToEquipe() {

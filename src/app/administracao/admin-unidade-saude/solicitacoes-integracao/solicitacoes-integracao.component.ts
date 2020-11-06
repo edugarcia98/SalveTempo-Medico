@@ -65,4 +65,8 @@ export class SolicitacoesIntegracaoComponent implements OnInit {
   goToInfo(id: number) {
     this.router.navigate([`administracao/solicitacoes-integracao-medico/${id}/detail`])
   }
+
+  goToHomeAdmin() {
+    this.router.navigate(['administracao']);
+  }
 }

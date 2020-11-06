@@ -61,4 +61,8 @@ export class EquipeComponent implements OnInit {
       this.router.navigate(['not-authorized']);
     }
   }
+
+  goToHomeAdmin() {
+    this.router.navigate(['administracao']);
+  }
 }

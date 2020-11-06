@@ -90,4 +90,8 @@ export class ShowSolicitacaoIngracaoComponent implements OnInit {
       }
     )
   }
+
+  goToSolicitacoesIntegracao() {
+    this.router.navigate(['administracao/solicitacoes-integracao-medico']);
+  }
 }

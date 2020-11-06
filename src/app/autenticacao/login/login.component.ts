@@ -46,12 +46,17 @@ export class LoginComponent implements OnInit {
         if (this.selectedTipoUsuario == 'M') {
           this.cadastroMedicoService.getMedicoByEmail(email).subscribe(
             (medico: Observable<Object>) => {
-              var medicoId = medico[0]['id'];
-              sessionStorage.setItem('id', medicoId);
+              if (medico['length'] > 0) {
+                var medicoId = medico[0]['id'];
+                sessionStorage.setItem('id', medicoId);
 
-              //this.menuVisibilityService.controlMenuVisibility('medico', 'flex');
+                //this.menuVisibilityService.controlMenuVisibility('medico', 'flex');
 
-              this.router.navigate(['medico']);
+                this.router.navigate(['medico']);
+              } else {
+                this.error = "Médico não encontrado.";
+                sessionStorage.clear();
+              }
             },
             (error: any) => {
               this.error = "Médico não encontrado.";
@@ -61,12 +66,17 @@ export class LoginComponent implements OnInit {
         } else if (this.selectedTipoUsuario == 'A') {
           this.adminUnidadeSaudeService.getAdminUnidadeSaudeByEmail(email).subscribe(
             (admin: Observable<Object>) => {
-              var adminId = admin[0]['id'];
-              sessionStorage.setItem('id', adminId);
+              if (admin['length'] > 0) {
+                var adminId = admin[0]['id'];
+                sessionStorage.setItem('id', adminId);
 
-              //this.menuVisibilityService.controlMenuVisibility('admin', 'flex');
+                //this.menuVisibilityService.controlMenuVisibility('admin', 'flex');
 
-              this.router.navigate(['administracao']);
+                this.router.navigate(['administracao']);
+              } else {
+                this.error = "Administrador de unidade de saúde não encontrado."
+                sessionStorage.clear();
+              }
             },
             (error: any) => {
               this.error = "Administrador de unidade de saúde não encontrado."

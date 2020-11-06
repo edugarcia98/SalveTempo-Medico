@@ -57,4 +57,8 @@ export class ShowMedicoComponent implements OnInit {
     }
   }
 
+  goToEquipe() {
+    this.router.navigate(['administracao/equipe']);
+  }
+
 }

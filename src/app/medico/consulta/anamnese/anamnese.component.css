@@ -1,5 +1,5 @@
 .cabecalho {
-    background-color: yellow;
+    background-color: #f5dd29;
     height: 180px;
     max-width: 100%;
     color: #FFFFFF;
@@ -35,7 +35,7 @@
 }
 
 .btn {
-    background-color: yellow;
+    background-color: #f5dd29;
     border: none;
     color: black;
     text-align: center;

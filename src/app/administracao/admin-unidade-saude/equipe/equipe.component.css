@@ -17,3 +17,24 @@ body {
     border-top: 1px solid #fcfcfc;
     border-bottom: 1px solid #242424;
 }
+
+.cabecalho {
+    background-color: #f5dd29;
+    height: 180px;
+    max-width: 100%;
+    color: #FFFFFF;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.05);
+}
+
+.cabecalho .name {
+    margin-left: 30px;
+}
+
+#housebutton {
+    width: 50px;
+    height: 50px;
+    margin-top: 20px;
+    margin-left: 30px;
+}
