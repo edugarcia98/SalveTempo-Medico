@@ -58,6 +58,7 @@ export class ShowConsultaComponent implements OnInit {
   callGetConsultas(status: string) {
     this.consultaService.getConsultasByMedicoId(sessionStorage.getItem('key'),
 <<<<<<< HEAD
+<<<<<<< HEAD
       sessionStorage.getItem('id'), status).subscribe(
         (items: Consulta[]) => {
           this.consultas = items;
@@ -83,6 +84,8 @@ export class ShowConsultaComponent implements OnInit {
                 this.datas.push(item.data);
               }
 =======
+=======
+>>>>>>> b6cc4d7935a7449f98162d6bddec70abff51d322
     sessionStorage.getItem('id'), status).subscribe(
       (items: Consulta[]) => {
         
@@ -100,14 +103,16 @@ export class ShowConsultaComponent implements OnInit {
               case 'P': { item.completeStatus = 'Pendente'; break }
               case 'A': { item.completeStatus = 'Aguardando Exames'; break }
               case 'F': { item.completeStatus = 'Finalizada'; break }
+<<<<<<< HEAD
 >>>>>>> 22937fda7160722172185a1f7ae26160a99ec891
+=======
+>>>>>>> b6cc4d7935a7449f98162d6bddec70abff51d322
             }
-          );
 
-          this.datas.sort(
-            (a: Date, b: Date) => {
-              return +new Date(a) - +new Date(b);
+            if (this.datas.filter(i => i == item.data).length == 0) {
+              this.datas.push(item.data);
             }
+<<<<<<< HEAD
 <<<<<<< HEAD
           );
 
@@ -118,6 +123,8 @@ export class ShowConsultaComponent implements OnInit {
         }
       )
 =======
+=======
+>>>>>>> b6cc4d7935a7449f98162d6bddec70abff51d322
             this.consultas.push(item);
           }
         );
@@ -134,6 +141,9 @@ export class ShowConsultaComponent implements OnInit {
         console.log(this.error);
       }
     )
+<<<<<<< HEAD
 >>>>>>> 22937fda7160722172185a1f7ae26160a99ec891
+=======
+>>>>>>> b6cc4d7935a7449f98162d6bddec70abff51d322
   }
 }
