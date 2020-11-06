@@ -1,3 +1,40 @@
+body {
+    position: relative;
+    background-color: #fcfcfc;
+    height: 100vh;
+}
+
+.header-admin {
+    background-color: #fdfae5;
+}
+
+.card-admin {
+    background-color: #17a2b8;
+}
+
+.card-admin h4 {
+    color: #fafafa;
+}
+
+.btn-admin {
+    background-color: #f5dd29;
+    color: black;
+}
+
+.btn-admin:hover {
+    background-color: #e6c60d;
+}
+
+.table th, td {
+    border-top: 1px solid #fcfcfc;
+    border-bottom: 1px solid #242424;
+}
+
+.option-btn{
+
+}
+
+
 .scroll-div{
     border: 1px solid #303030;
     border-radius: 5px;
@@ -15,10 +52,7 @@
     float: right;
 }
 
-.option-btn{
-    background-color: #f7f7f7;
-    cursor: pointer;
-}
+
 
 .popup-div {
     background:rgba(0,0,0,.4);
@@ -64,8 +98,8 @@
     right: -20px;
     font-size: 25px;
     line-height: 30px;
-    width: 30px;
-    height: 30px;
+    width: 38px;
+    height: 36px;
     text-align: center;
 }
 

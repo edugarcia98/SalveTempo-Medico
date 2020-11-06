@@ -7,7 +7,10 @@ import { KeyService } from 'src/app/geral/key/key.service';
 
 import { ConsultaService } from '../consulta.service';
 import { Consulta, ConsultaSintoma, Prognostico, Sintoma, Doenca } from '../consulta';
-import { $ } from 'protractor';
+
+import { faSearch, faTimes } from '@fortawesome/free-solid-svg-icons';
+
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-consulta-info',
@@ -35,12 +38,16 @@ export class ConsultaInfoComponent implements OnInit{
 
   sintomasCriar: string[];
 
+  faSearch = faSearch;
+  faTimes = faTimes;
+
   private sintomaFilter: string;
 
   constructor(private keyService: KeyService,
               private consultaService: ConsultaService,
               private route: ActivatedRoute,
-              private router: Router) { 
+              private router: Router,
+              private spinnerService: NgxSpinnerService) { 
     this.novosSintomasOptions = [];
     this.novosSintomas = [];
     this.novasDoencasOptions = [];
@@ -190,25 +197,36 @@ export class ConsultaInfoComponent implements OnInit{
   definePrognostico(prognostico: Prognostico) {
     for(var i = 0; i < document.getElementsByClassName("option-btn").length; i++) {
       var htmlId = document.getElementsByClassName("option-btn").item(i).id;
-      document.getElementById(htmlId).style.backgroundColor = "#f7f7f7";
+      document.getElementById(htmlId).style.backgroundColor = "#6c757d";
+      document.getElementById(htmlId).style.color = "#fff";
+      document.getElementById(htmlId).style.boxShadow = "0 0 0 0rem rgba(0, 0, 0, 0)"
     }
     document.getElementById("selection-doenca").style.display = "none";
     document.getElementById("btn-add-doenca").style.display = "none";
+    document.getElementById("title-add-doenca").style.display = "none"
 
     if (prognostico == null) {
       document.getElementById("prog-none").style.backgroundColor = "#c4c4c4";
+      document.getElementById("prog-none").style.color = "black";
+      document.getElementById("prog-none").style.boxShadow = "0 0 0 0.2rem rgba(130,138,145,.5)"
+
       document.getElementById("selection-doenca").style.display = "block";
       document.getElementById("btn-add-doenca").style.display = "block";
+      document.getElementById("title-add-doenca").style.display = "block"
       this.selectedPrognostico = 0;
     } else {
       document.getElementById("prog-" + prognostico.id.toString()).style.backgroundColor = prognostico.rgbColor;
+      document.getElementById("prog-" + prognostico.id.toString()).style.color = "black";
+      document.getElementById("prog-" + prognostico.id.toString()).style.boxShadow = "0 0 0 0.2rem " + prognostico.rgbColor.replace('rgb', 'rgba').replace(')', ', .3)');
       this.selectedPrognostico = prognostico.doenca.id;
     }
   }
 
   proximoPassoConsulta(isFim: boolean) {
+    this.spinnerService.show();
+
     if (isFim && this.selectedPrognostico == 0) {
-      console.log("Selecione um possível diagnóstico.")
+      alert("Selecione um possível diagnóstico.");
     } else {
       var status = isFim ? 'F' : 'A';
       var diagnostico = isFim ? this.selectedPrognostico : 0;
@@ -219,6 +237,7 @@ export class ConsultaInfoComponent implements OnInit{
           console.log('Consulta alterada');
         },
         (error: any) => {
+          this.spinnerService.hide();
           this.error = error;
           console.log(this.error);
         }
@@ -227,6 +246,7 @@ export class ConsultaInfoComponent implements OnInit{
           await this.saveNovosSintomasCriados()
         },
         (error: any) => {
+          this.spinnerService.hide();
           this.error = error;
           console.log(this.error);
         }
@@ -240,6 +260,7 @@ export class ConsultaInfoComponent implements OnInit{
                   console.log('Novo sintoma inserido');
                 },
                 (error: any) => {
+                  this.spinnerService.hide();
                   this.error = error;
                   console.log(this.error);
                 }
@@ -248,6 +269,7 @@ export class ConsultaInfoComponent implements OnInit{
           }
         },
         (error: any) => {
+          this.spinnerService.hide();
           this.error = error;
           console.log(this.error);
         }
@@ -258,6 +280,7 @@ export class ConsultaInfoComponent implements OnInit{
           }
         }
       );
+      this.goToConsultas("P");
     }
   }
 
@@ -312,6 +335,7 @@ export class ConsultaInfoComponent implements OnInit{
                 console.log(response);
               },
               (error: any) => {
+                this.spinnerService.hide();
                 this.error = error;
                 console.log(this.error);
               }
@@ -319,12 +343,14 @@ export class ConsultaInfoComponent implements OnInit{
 
           },
           (error: any) => {
+            this.spinnerService.hide();
             this.error = error;
             console.log(this.error);
           }
         )
       },
       (error: any) => {
+        this.spinnerService.hide();
         this.error = error;
         console.log(this.error);
       }
@@ -340,6 +366,7 @@ export class ConsultaInfoComponent implements OnInit{
           console.log('Novo sintoma adicionado em PrognosticoData');
         },
         (error: any) => {
+          this.spinnerService.hide()
           this.error = error;
           console.log(this.error);
         }

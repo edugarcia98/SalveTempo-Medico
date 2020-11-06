@@ -3,7 +3,7 @@
         <div class="row" id="rowmedic">
             <div class="circle"> <img src="./assets/photo-medico.jpeg"></div>
             <div class="mediconome">
-                <h2 class="pt-5" style="color: yellow;">Bem-vindo {{ medico?.nome }}</h2>
+                <h2 class="pt-5" style="color: #f5dd29;">Bem-vindo {{ medico?.nome }}</h2>
                 <div class="row" id="rowcrm">
                     <h5 class="text-left" style="margin-left: 16px;">{{medico?.especializacao.nome}}</h5>
                     <h5 class="text-left" style="margin-left: 20px;">CRM: {{medico?.crm}}</h5>
@@ -15,7 +15,7 @@
     <div class="btn-toolbar-lg mx-auto" id="buttonbox">
         <div class="btn-group" role="group" aria-label="CadastroHorario">
             <button type="button" id="cadhor" class="btn btn-secondary btn-image active" (click)="goToUnidadesSaude()">
-                <h5>Cadastro de Horário</h5>
+                <h5>Unidades de Saúde</h5>
             </button>
         </div>
         <div class="btn-group" role="group" aria-label="AgendaMedica">

@@ -15,6 +15,8 @@ import { KeyService } from 'src/app/geral/key/key.service';
 
 import { AdminUnidadeSaude } from '../admin-unidade-saude';
 
+import { NgxSpinnerService } from "ngx-spinner";
+
 @Component({
   selector: 'app-show-solicitacao-ingracao',
   templateUrl: './show-solicitacao-ingracao.component.html',
@@ -34,7 +36,8 @@ export class ShowSolicitacaoIngracaoComponent implements OnInit {
               private adminUnidadeSaudeService: AdminUnidadeSaudeService,
               private keyService: KeyService,
               private route: ActivatedRoute,
-              private router: Router) {
+              private router: Router,
+              private spinnerService: NgxSpinnerService) {
                 
   }
 
@@ -62,6 +65,8 @@ export class ShowSolicitacaoIngracaoComponent implements OnInit {
   }
 
   respostaSolicitacao(status: string) {
+    this.spinnerService.show();
+
     this.adminUnidadeSaudeService.respostaSolicitacaoMedico(sessionStorage.getItem('key'),
     this.id, this.medicoUnidadeSaude.medico.id, this.medicoUnidadeSaude.unidadeSaude.id,
     this.medicoUnidadeSaude.diaPeriodoTrabalho, status).subscribe(
@@ -72,12 +77,14 @@ export class ShowSolicitacaoIngracaoComponent implements OnInit {
             this.router.navigate(['administracao/solicitacoes-integracao-medico/email-enviado']);
           },
           (error: any) => {
+            this.spinnerService.hide();
             this.error = error;
             console.log(this.error);
           }
         )
       },
       (error: any) => {
+        this.spinnerService.hide();
         this.error = error;
         console.log(this.error);
       }

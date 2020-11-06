@@ -9,6 +9,8 @@ import { MedicoUnidadeSaude } from 'src/app/medico/unidades-saude/medico-unidade
 
 import { KeyService } from 'src/app/geral/key/key.service';
 
+import { faBars } from '@fortawesome/free-solid-svg-icons';
+
 @Component({
   selector: 'app-equipe',
   templateUrl: './equipe.component.html',
@@ -19,6 +21,8 @@ export class EquipeComponent implements OnInit {
   error: any;
   admin: AdminUnidadeSaude;
   medicosUnidadeSaude: MedicoUnidadeSaude[];
+
+  faBars = faBars;
 
   constructor(private adminUnidadeSaudeService: AdminUnidadeSaudeService,
               private keyService: KeyService,
@@ -56,13 +60,5 @@ export class EquipeComponent implements OnInit {
     } else {
       this.router.navigate(['not-authorized']);
     }
-  }
-
-  goToInfo(id: number) {
-    this.router.navigate([`administracao/medico/${id}/detail`])
-  }
-
-  goToDelete(id: number) {
-    this.router.navigate([`administracao/medico/${id}/delete`])
   }
 }

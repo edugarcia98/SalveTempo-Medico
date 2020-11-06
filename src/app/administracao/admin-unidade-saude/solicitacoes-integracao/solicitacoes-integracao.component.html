@@ -1,9 +1,26 @@
-<h2>Solicitações de Integração</h2>
+<body>
+  <br><h2 style="text-align: center;">Solicitações de Integração</h2>
 
-<br><br>
-<div *ngFor="let item of medicosUnidadeSaude">
-  <button type="button" class="btn btn-primary" (click)="goToInfo(item.id)">
-    Informações
-  </button>&nbsp;
-  {{ item.medico.nome }}
-</div>
+  <div class="container pt-5">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col"></th>
+          <th scope="col">Médico</th>
+          <th scope="col">Especialização</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of medicosUnidadeSaude">
+          <td>
+            <button class="btn btn-secondary btn-admin" role="button" placement="top" ngbTooltip="Informações" (click)="goToInfo(item.id)">
+              <fa-icon [icon]="faSearch"></fa-icon>
+            </button>
+          </td>
+          <td>{{ item.medico.nome }}</td>
+          <td>{{ item.medico.especializacao.nome }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</body>

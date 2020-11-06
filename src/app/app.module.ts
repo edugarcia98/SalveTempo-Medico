@@ -3,6 +3,15 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes, Route } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { NgxSpinnerModule } from "ngx-spinner";
+import { NgCircleProgressModule } from "ng-circle-progress";
+
+//Font Awesome
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
+//Bootstrap
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 //App
 import { AppRoutingModule } from './app-routing.module';
@@ -144,10 +153,15 @@ const appRoutes: Routes = [
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
+    NgxSpinnerModule,
     FormsModule,
+    FontAwesomeModule,
+    BsDropdownModule.forRoot(),
     NgbModule.forRoot(),
+    NgCircleProgressModule.forRoot(),
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: true }

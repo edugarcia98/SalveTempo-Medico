@@ -4,6 +4,7 @@ import { ForgotPasswordService } from './forgot-password.service';
 
 import { Router } from '@angular/router';
 
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-forgot-password',
@@ -11,12 +12,12 @@ import { Router } from '@angular/router';
   styleUrls: ['./forgot-password.component.css']
 })
 export class ForgotPasswordComponent implements OnInit {
-  //private menuVisibilityService: MenuVisibilityService,
   error: any;
 
   constructor(private forgotPasswordService: ForgotPasswordService,
-
-    private router: Router) {
+    //private menuVisibilityService: MenuVisibilityService,
+    private router: Router,
+    private spinnerService: NgxSpinnerService) {
 
   }
 
@@ -26,13 +27,18 @@ export class ForgotPasswordComponent implements OnInit {
   }
 
   resetPassword(medicoEmail: string) {
+    this.error = "";
+    this.spinnerService.show();
+
     this.forgotPasswordService.resetPassword(medicoEmail).subscribe(
       () => {
         this.router.navigate(['redefinir-senha-confirmacao']);
       },
       (error: any) => {
-        this.error = error;
-        console.log(this.error);
+        this.spinnerService.hide();
+        
+        if (medicoEmail == "") { this.error = "E-mail não pode ser vazio."; }
+        else { this.error = error.error.email; }
       }
     );
   }

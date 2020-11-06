@@ -117,6 +117,9 @@ export class UnidadeSaudeService {
           var periodos = sep[1].split(';').join(', ');
           periodos += '.';
           periodos = periodos.replace(', .', '');
+          periodos = periodos.replace('manha', 'Manhã');
+          periodos = periodos.replace('tarde', 'Tarde');
+          periodos = periodos.replace('noite', 'Noite');
           item.periodos = periodos;
           
           items.push(item);
