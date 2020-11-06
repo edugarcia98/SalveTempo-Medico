@@ -1,124 +1,182 @@
-<h2>Anamnese</h2>
+<div class="cabecalho">
+    <div class="row" id="rowmedic">
+        <div class="name">
+            <h2 class="pt-5" style="color: #17a2b8;">Anamnese</h2>
+            <h4 class="pt-5" style="color: black; margin-top: -60px;">Paciente: {{ consulta?.paciente.nome }}</h4>
+            <div class="row" id="rowcrm">
+                <button (click)="goToConsultas(consulta.status)" id="housebutton" type="button" class="btn">
+          <div class="row">
+            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-left-circle-fill" fill="currentColor"
+              xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd"
+                d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-4.5.5a.5.5 0 0 0 0-1H5.707l2.147-2.146a.5.5 0 1 0-.708-.708l-3 3a.5.5 0 0 0 0 .708l3 3a.5.5 0 0 0 .708-.708L5.707 8.5H11.5z" />
+            </svg>
+            <h6 style="margin-left: 10px;">Voltar</h6>
+          </div>
+        </button>
+                <button type="button" class="btn" id="consultabutton" (click)="goToConsulta(id)">
+          <h6 style="margin-left: 10px;">Consulta</h6>
+        </button>
+            </div>
+        </div>
+    </div>
+</div>
 
-<label><b>Paciente:</b></label>
-{{ consulta?.paciente.nome }}<br>
 
-<button type="button" class="btn btn-primary" (click)="goToConsulta(id)">
-  Consulta
-</button><br><br>
 
-<label><b>Peso:</b></label>
-{{ anamnese?.peso }} kg<br>
+<div class="form-group">
+    <div class="row">
+        <div class="col-xs-6">
+            <label>
+        <b>Paciente:</b>{{ consulta?.paciente.nome }}
+      </label>
+        </div>
+        <div class="col-xs-6">
+            <label><b>Peso:</b>{{ anamnese?.peso }} kg</label>
+        </div>
+        <div class="col-xs-6">
+            <label>
+        <b>Altura:</b>{{ anamnese?.altura }} m
+      </label>
+        </div>
+        <div class="col-xs-6">
+            <label><b>Fuma:</b>{{ anamnese?.fumaStr }}</label>
+        </div>
+        <div class="col-xs-6">
+            <div class="col-xs-6">
+                <label><b>Bebe:</b>{{ anamnese?.bebeStr }}</label>
+            </div>
+        </div>
+    </div>
+    <div class="row" *ngIf="anamnese?.fuma || anamnese?.bebe;">
+        <div class="col-xs-6">
+            <div *ngIf="anamnese?.fuma;">
+                <label><b>Quantidade de cigarros (dia):</b>{{ anamnese?.qtdCigarrosDia }}</label>
+            </div>
+        </div>
+        <div class="col-xs-6">
+            <div class="col-xs-6">
+                <div *ngIf="anamnese?.bebe;">
+                    <label><b>Frequência que bebe (dias da semana):</b>{{ anamnese?.freqBebeDiasSemana }}</label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-6">
+            <label><b>Qualidade de Alimentação e Ingestão de
+          Água:</b>{{ anamnese?.qualidadeAlimentacaoIngestaoAguaStr }}</label>
+        </div>
+        <div class="col-xs-6">
+            <label><b>Pratica atividades físicas:</b></label> {{ anamnese?.praticaAtividadeFisicaStr }}<br>
+        </div>
+    </div>
+    <div class="row" *ngIf="anamnese?.praticaAtividadeFisica;">
+        <div class="col-xs-6">
+            <label><b>Atividades Físicas:</b><textarea rows="4" cols="50"
+          readonly>{{ anamnese?.tipoAtividadeFisica }}</textarea></label>
+        </div>
+        <div class="col-xs-6">
+            <label><b>Frequência que pratica atividades físicas (dias da
+          semana):</b>{{ anamnese?.freqAtividadeFisicaDiasSemana }}</label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-6">
+            <label><b>Utiliza anticoncepcionais:</b>{{ anamnese?.utilizaAnticoncepcionalStr }}</label>
+        </div>
+        <div class="col-xs-6" *ngIf="anamnese?.utilizaAnticoncepcional;">
+            <label><b>Anticoncepcionais utilizados:</b><textarea rows="4" cols="50"
+          readonly>{{ anamnese?.anticoncepcionaisUtilizados }}</textarea></label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-6">
+            <label><b>Pratica atividades físicas:</b>{{ anamnese?.praticaAtividadeFisicaStr }}</label>
+        </div>
+        <div class="col-xs-6" *ngIf="anamnese?.praticaAtividadeFisica;">
+            <label><b>Atividades Físicas:</b><textarea rows="4" cols="50"
+          readonly>{{ anamnese?.tipoAtividadeFisica }}</textarea></label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-6">
+            <label><b>Realizou gestações:</b>{{ anamnese?.realizouGestacoesStr }}</label>
+        </div>
+        <div class="col-xs-6">
+            <div *ngIf="anamnese?.realizouGestacoes;">
+                <label><b>Última gestação (meses):</b>{{ anamnese?.ultimaGestacaoTempoMeses }}</label>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-6">
+            <label><b>Utiliza medicamentos:</b>{{ anamnese?.utilizaMedicamentosStr }}</label>
+        </div>
+        <div class="col-xs-6">
+            <div *ngIf="anamnese?.utilizaMedicamentos;">
+                <label><b>Medicamentos utilizados:</b><textarea rows="4" cols="50"
+            readonly>{{ anamnese?.medicamentosUtilizados }}</textarea></label>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-6">
+            <label><b>Possui alergias:</b>{{ anamnese?.alergiasStr }}</label>
+        </div>
+        <div class="col-xs-6">
+            <div *ngIf="anamnese?.alergias;">
+                <label><b>Alergias:</b><textarea rows="4" cols="50" readonly>{{ anamnese?.alergiasDesc }}</textarea></label>
 
-<label><b>Altura:</b></label>
-{{ anamnese?.altura }} m<br><br>
+            </div>
+        </div>
+    </div>
 
-<label><b>Fuma:</b></label>
-{{ anamnese?.fumaStr }}<br>
 
-<div *ngIf="anamnese?.fuma;">
-  <label><b>Quantidade de cigarros (dia):</b></label>
-  {{ anamnese?.qtdCigarrosDia }}<br>
-</div><br>
+</div>
 
-<label><b>Bebe:</b></label>
-{{ anamnese?.bebeStr }}<br>
 
-<div *ngIf="anamnese?.bebe;">
-  <label><b>Frequência que bebe (dias da semana):</b></label>
-  {{ anamnese?.freqBebeDiasSemana }}<br>
-</div><br>
 
-<label><b>Qualidade de Alimentação e Ingestão de Água:</b></label>
-{{ anamnese?.qualidadeAlimentacaoIngestaoAguaStr }}<br><br>
 
-<label><b>Pratica atividades físicas:</b></label>
-{{ anamnese?.praticaAtividadeFisicaStr }}<br>
 
-<div *ngIf="anamnese?.praticaAtividadeFisica;">
-  <label><b>Atividades Físicas:</b></label><br>
-  <textarea rows="4" cols="50" readonly>{{ anamnese?.tipoAtividadeFisica }}</textarea><br>
 
-  <label><b>Frequência que pratica atividades físicas (dias da semana):</b></label>
-  {{ anamnese?.freqAtividadeFisicaDiasSemana }}<br>
-</div><br>
 
-<label><b>Utiliza anticoncepcionais:</b></label>
-{{ anamnese?.utilizaAnticoncepcionalStr }}<br>
-
-<div *ngIf="anamnese?.utilizaAnticoncepcional;">
-  <label><b>Anticoncepcionais utilizados:</b></label><br>
-  <textarea rows="4" cols="50" readonly>{{ anamnese?.anticoncepcionaisUtilizados }}</textarea><br>
-</div><br>
-
-<label><b>Realizou gestações:</b></label>
-{{ anamnese?.realizouGestacoesStr }}<br>
-
-<div *ngIf="anamnese?.realizouGestacoes;">
-  <label><b>Última gestação (meses):</b></label>
-  {{ anamnese?.ultimaGestacaoTempoMeses }}<br>
-</div><br>
-
-<label><b>Utiliza medicamentos:</b></label>
-{{ anamnese?.utilizaMedicamentosStr }}<br>
-
-<div *ngIf="anamnese?.utilizaMedicamentos;">
-  <label><b>Medicamentos utilizados:</b></label><br>
-  <textarea rows="4" cols="50" readonly>{{ anamnese?.medicamentosUtilizados }}</textarea><br>
-</div><br>
-
-<label><b>Possui alergias:</b></label>
-{{ anamnese?.alergiasStr }}<br>
-
-<div *ngIf="anamnese?.alergias;">
-  <label><b>Alergias:</b></label><br>
-  <textarea rows="4" cols="50" readonly>{{ anamnese?.alergiasDesc }}</textarea><br>
-</div><br>
-
-<label><b>Possui alterações cardíacas:</b></label>
-{{ anamnese?.alteracoesCardiacasStr }}<br>
+<label><b>Possui alterações cardíacas:</b></label> {{ anamnese?.alteracoesCardiacasStr }}<br>
 
 <div *ngIf="anamnese?.alteracoesCardiacas;">
-  <label><b>Alterações cardíacas:</b></label><br>
-  <textarea rows="4" cols="50" readonly>{{ anamnese?.alteracoesCardiacasDesc }}</textarea><br>
+    <label><b>Alterações cardíacas:</b></label><br>
+    <textarea rows="4" cols="50" readonly>{{ anamnese?.alteracoesCardiacasDesc }}</textarea><br>
 </div><br>
 
-<label><b>Possui pressão alta:</b></label>
-{{ anamnese?.pressaoAltaStr }}<br>
+<label><b>Possui pressão alta:</b></label> {{ anamnese?.pressaoAltaStr }}<br>
 
-<label><b>Possui pressão baixa:</b></label>
-{{ anamnese?.pressaoBaixaStr }}<br><br>
+<label><b>Possui pressão baixa:</b></label> {{ anamnese?.pressaoBaixaStr }}<br><br>
 
-<label><b>Possui distúrbios circulatórios:</b></label>
-{{ anamnese?.disturbioCirculatorioStr }}<br>
+<label><b>Possui distúrbios circulatórios:</b></label> {{ anamnese?.disturbioCirculatorioStr }}<br>
 
 <div *ngIf="anamnese?.disturbioCirculatorio;">
-  <label><b>Distúrbios circulatórios:</b></label><br>
-  <textarea rows="4" cols="50" readonly>{{ anamnese?.disturbioCirculatorioDesc }}</textarea><br>
+    <label><b>Distúrbios circulatórios:</b></label><br>
+    <textarea rows="4" cols="50" readonly>{{ anamnese?.disturbioCirculatorioDesc }}</textarea><br>
 </div><br>
 
-<label><b>Possui distúrbios hormonais:</b></label>
-{{ anamnese?.disturbioHormonalStr }}<br>
+<label><b>Possui distúrbios hormonais:</b></label> {{ anamnese?.disturbioHormonalStr }}<br>
 
 <div *ngIf="anamnese?.disturbioHormonal;">
-  <label><b>Distúrbios hormonais:</b></label><br>
-  <textarea rows="4" cols="50" readonly>{{ anamnese?.disturbioHormonalDesc }}</textarea><br>
+    <label><b>Distúrbios hormonais:</b></label><br>
+    <textarea rows="4" cols="50" readonly>{{ anamnese?.disturbioHormonalDesc }}</textarea><br>
 </div><br>
 
-<label><b>Possui diabetes:</b></label>
-{{ anamnese?.diabetesStr }}<br>
+<label><b>Possui diabetes:</b></label> {{ anamnese?.diabetesStr }}<br>
 
 <div *ngIf="anamnese?.diabetes;">
-  <label><b>Tipo de diabetes:</b></label>
-  {{ anamnese?.tipoDiabetesStr }}<br>
+    <label><b>Tipo de diabetes:</b></label> {{ anamnese?.tipoDiabetesStr }}<br>
 </div><br>
 
-<label><b>Realizou cirurgias:</b></label>
-{{ anamnese?.fezCirurgiasStr }}<br>
+<label><b>Realizou cirurgias:</b></label> {{ anamnese?.fezCirurgiasStr }}<br>
 
 <div *ngIf="anamnese?.fezCirurgias;">
-  <label><b>Distúrbios hormonais:</b></label><br>
-  <textarea rows="4" cols="50" readonly>{{ anamnese?.cirurgiasDesc }}</textarea><br>
+    <label><b>Distúrbios hormonais:</b></label><br>
+    <textarea rows="4" cols="50" readonly>{{ anamnese?.cirurgiasDesc }}</textarea><br>
 </div><br>
 
 <button type="button" class="btn btn-primary" (click)="goToConsultas(consulta.status)">

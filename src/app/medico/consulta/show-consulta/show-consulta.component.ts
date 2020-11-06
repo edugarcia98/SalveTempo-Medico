@@ -21,9 +21,9 @@ export class ShowConsultaComponent implements OnInit {
   datas: Date[];
 
   constructor(private keyService: KeyService,
-              private consultaService: ConsultaService,
-              private route: ActivatedRoute,
-              private router: Router) {
+    private consultaService: ConsultaService,
+    private route: ActivatedRoute,
+    private router: Router) {
     this.datas = [];
     this.consultas = [];
   }
@@ -49,6 +49,11 @@ export class ShowConsultaComponent implements OnInit {
   goToAnamnese(id: number) {
     this.router.navigate([`medico/consulta/${id}/anamnese`]);
   }
+
+  goToHomeMedico() {
+    this.router.navigate(['medico']);
+  }
+
 
   callGetConsultas(status: string) {
     this.consultaService.getConsultasByMedicoId(sessionStorage.getItem('key'),
