@@ -7,6 +7,9 @@ import { KeyService } from 'src/app/geral/key/key.service';
 import { ConsultaService } from '../consulta.service';
 import { Consulta } from '../consulta';
 
+import {  faNotesMedical,faSearch } from '@fortawesome/free-solid-svg-icons';
+
+
 @Component({
   selector: 'app-show-consulta',
   templateUrl: './show-consulta.component.html',
@@ -19,6 +22,11 @@ export class ShowConsultaComponent implements OnInit {
   error: any;
   consultas: Consulta[];
   datas: Date[];
+  faNotesMedical =faNotesMedical;
+  faSearch=faSearch;
+  
+
+
 
   constructor(private keyService: KeyService,
     private consultaService: ConsultaService,
@@ -57,8 +65,6 @@ export class ShowConsultaComponent implements OnInit {
 
   callGetConsultas(status: string) {
     this.consultaService.getConsultasByMedicoId(sessionStorage.getItem('key'),
-<<<<<<< HEAD
-<<<<<<< HEAD
       sessionStorage.getItem('id'), status).subscribe(
         (items: Consulta[]) => {
           this.consultas = items;
@@ -83,37 +89,13 @@ export class ShowConsultaComponent implements OnInit {
               if (this.datas.filter(i => i == item.data).length == 0) {
                 this.datas.push(item.data);
               }
-=======
-=======
->>>>>>> b6cc4d7935a7449f98162d6bddec70abff51d322
-    sessionStorage.getItem('id'), status).subscribe(
-      (items: Consulta[]) => {
-        
-        items.forEach(
-          (item: Consulta) => {
-            item.formattedId = item.id.toString().padStart(4, '0');
-
-            switch (item.periodo) {
-              case 'M': { item.completePeriodo = 'Manhã'; break; }
-              case 'T': { item.completePeriodo = 'Tarde'; break; }
-              case 'N': { item.completePeriodo = 'Noite'; break; }
-            }         
-
-            switch (item.status) {
-              case 'P': { item.completeStatus = 'Pendente'; break }
-              case 'A': { item.completeStatus = 'Aguardando Exames'; break }
-              case 'F': { item.completeStatus = 'Finalizada'; break }
-<<<<<<< HEAD
->>>>>>> 22937fda7160722172185a1f7ae26160a99ec891
-=======
->>>>>>> b6cc4d7935a7449f98162d6bddec70abff51d322
             }
+          );
 
-            if (this.datas.filter(i => i == item.data).length == 0) {
-              this.datas.push(item.data);
+          this.datas.sort(
+            (a: Date, b: Date) => {
+              return +new Date(a) - +new Date(b);
             }
-<<<<<<< HEAD
-<<<<<<< HEAD
           );
 
         },
@@ -122,28 +104,5 @@ export class ShowConsultaComponent implements OnInit {
           console.log(this.error);
         }
       )
-=======
-=======
->>>>>>> b6cc4d7935a7449f98162d6bddec70abff51d322
-            this.consultas.push(item);
-          }
-        );
-        
-        this.datas.sort(
-          (a: Date, b: Date) => {
-            return +new Date(a) - +new Date(b);
-          }
-        );
-
-      },
-      (error: any) => {
-        this.error = error;
-        console.log(this.error);
-      }
-    )
-<<<<<<< HEAD
->>>>>>> 22937fda7160722172185a1f7ae26160a99ec891
-=======
->>>>>>> b6cc4d7935a7449f98162d6bddec70abff51d322
   }
 }

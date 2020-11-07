@@ -1,283 +1,280 @@
 <body>
-  <div class="container pt-5">
-      <h2>Consulta</h2><br>
+    <div class="container pt-5">
+        <h2>Consulta</h2><br>
 
-      <div class="row">
+        <div class="row">
 
-        <div class="col">
-          <div class="card card-admin">
-            <div class="card-body">
-              <h4 class="card-title">Informações Gerais</h4>
-            </div>
-            <div class="card-body">
-              <div class="card" style="width: 100%; bottom: 15px;">
-                <div class="card-header header-admin">
-                  <b>Paciente: </b>
-                </div>
-                <ul class="list-group list-group-flush">
-                  <li class="list-group-item">{{ consulta?.paciente.nome }}</li>
-                </ul>
-                <div class="card-header header-admin">
-                  <b>Unidade de Saúde: </b>
-                </div>
-                <ul class="list-group list-group-flush">
-                  <li class="list-group-item">{{ consulta?.unidadeSaude.nome }}</li>
-                </ul>
-                <div class="card-header header-admin">
-                  <b>Data: </b>
-                </div>
-                <ul class="list-group list-group-flush">
-                  <li class="list-group-item">{{ consulta?.data | date: 'dd/MM/yyyy' }}</li>
-                </ul>
-                <div class="card-header header-admin">
-                  <b>Observação: </b>
-                </div>
-                <ul class="list-group list-group-flush">
-                  <li class="list-group-item">
-                    <p>
-                      {{ consulta?.observacao }}
-                    </p>
-                  </li>
-                </ul>
-                <div class="card-header header-admin">
-                  <b>Anamnese: </b>
-                </div>
-                <ul class="list-group list-group-flush">
-                  <li class="list-group-item">
-                  <button type="button" class="btn btn-secondary btn-admin" placement="top" ngbTooltip="Informações" (click)="goToAnamnese(id)">
-                    <fa-icon [icon]="faSearch"></fa-icon>
-                  </button>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col">
-          <div class="card card-admin">
-            <div class="card-body">
-              <h4 class="card-title">Sintomas</h4>
-            </div>
-            <div class="card-body">
-              <div class="card" style="width: 100%; bottom: 15px;">
-                <div class="container">
-                  <table class="table">
-                    <thead>
-                      <tr>
-                        <th scope="col">Sintoma</th>
-                        <th scope="col">Possui</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr *ngFor="let sintoma of sintomas">
-                        <td>{{ sintoma?.sintoma.nome }}</td>
-                        <td>{{ sintoma?.possuiDescription }}</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-      
-      <br>
-
-      <div class="row" *ngIf="consulta?.status === 'P' || consulta?.status === 'A';">
-
-        <div class="col">
-          <div class="card card-admin">
-            <div class="card-body">
-              <h4 class="card-title">Prognósticos</h4>
-            </div>
-            <div class="card-body">
-              <div class="card" style="width: 100%; bottom: 15px;">
-                <table class="table">
-                  <thead>
-                    <tr>
-                      <th *ngFor="let prognostico of prognosticos" style="border-bottom: 1px solid #fff;"></th>
-                      <th style="border-bottom: 1px solid #fff;"></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td *ngFor="let prognostico of prognosticos" scope="col" style="border-bottom: 1px solid #fff; text-align: center;">
-                        <circle-progress
-                          [percent]="prognostico.percentual"
-                          [radius]="60"
-                          [outerStrokeWidth]="4"
-                          [innerStrokeWidth]="2"
-                          [outerStrokeColor]="prognostico.rgbColor"
-                          [innerStrokeColor]="'#ababab'"
-                          [animation]="true"
-                          [animationDuration]="300"
-                          [showSubtitle]="false"
-                        ></circle-progress><br>
-                        <button type="button" id="prog-{{ prognostico?.id }}" class="btn btn-secondary option-btn" (click)="definePrognostico(prognostico)">
-                          {{ prognostico?.doenca.nome }}
-                        </button>
-                      </td>
-                      <td style="border-bottom: 1px solid #fff;">
-                        <button style="position: relative; top: 137px;" type="button" id="prog-none" class="btn btn-secondary option-btn" (click)="definePrognostico(null)">
-                          Nenhuma das opções
-                        </button>
-                        <br><br>
-                        
-                        <h5 id="title-add-doenca" style="display: none; margin-top: -35px;">Doença:</h5>
-
-                        <div class="input-group">
-                          <select id="selection-doenca" [(ngModel)]="selectedPrognostico" [ngModelOptions]="{standalone: true}"
-                            style="display: none;">
-                            <option *ngFor="let doenca of novasDoencasOptions" value={{doenca.id}}>
-                              {{ doenca.nome }}
-                            </option>
-                          </select>&nbsp;&nbsp;
-                          <button type="button" id="btn-add-doenca" class="btn btn-secondary option-btn" style="display: none;" (click)="showPopup('popup-doenca-div', 'block')">
-                            +
-                          </button>
+            <div class="col">
+                <div class="card card-admin">
+                    <div class="card-body">
+                        <h4 class="card-title">Informações Gerais</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="card" style="width: 100%; bottom: 15px;">
+                            <div class="card-header header-admin">
+                                <b>Paciente: </b>
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">{{ consulta?.paciente.nome }}</li>
+                            </ul>
+                            <div class="card-header header-admin">
+                                <b>Unidade de Saúde: </b>
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">{{ consulta?.unidadeSaude.nome }}</li>
+                            </ul>
+                            <div class="card-header header-admin">
+                                <b>Data: </b>
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">{{ consulta?.data | date: 'dd/MM/yyyy' }}</li>
+                            </ul>
+                            <div class="card-header header-admin">
+                                <b>Observação: </b>
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">
+                                    <p>
+                                        {{ consulta?.observacao }}
+                                    </p>
+                                </li>
+                            </ul>
+                            <div class="card-header header-admin">
+                                <b>Anamnese: </b>
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">
+                                    <button type="button" class="btn btn-secondary btn-admin" placement="top" ngbTooltip="Informações" (click)="goToAnamnese(id)">
+                                        <fa-icon [icon]="faSearch"></fa-icon>
+                                    </button>
+                                </li>
+                            </ul>
                         </div>
-
-                      </td>
-                    </tr>
-                  </tbody>
-                </table> 
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-      <div class="row" *ngIf="consulta?.status === 'F';">
-
-        <div class="col">
-          <div class="card card-admin">
-            <div class="card-body">
-              <h4 class="card-title">Diagnóstico</h4>
-            </div>
-            <div class="card-body">
-              <div class="card" style="width: 100%; height: 50px; bottom: 15px;">
-                <h4 style="color: black; text-align: center; margin-top: 8px;">{{ consulta?.diagnostico.nome | uppercase }}</h4>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-      <br>
-
-      <div class="row" *ngIf="consulta?.status === 'P' || consulta?.status === 'A';">
-
-        <div class="col">
-          <div class="card card-admin">
-            <div class="card-body">
-              <h4 class="card-title">Adicionar novos sintomas</h4>
-            </div>
-            <div class="card-body">
-              <div class="card" style="width: 100%; bottom: 15px; height: 500px; overflow-y:auto; overflow-x: hidden;">
-                <h5 class="ml-3 mt-3">Sintoma:</h5>
-                <div class="input-group ml-3 mb-3">
-                  <input type="text" [(ngModel)]="sintomaFilter">&nbsp;&nbsp;
-                  <button type="button" class="btn btn-secondary"
-                    (click)="showPopup('popup-sintoma-div', 'block')">
-                    +
-                  </button>
+                    </div>
                 </div>
-
-                <ul class="list-group list-group-flush">
-                  <li class="list-group-item" *ngFor="let item of novosSintomasOptions | filtersintoma:sintomaFilter">
-                    <input #checkbox *ngIf="verificaListaNovosSintomas(item.id); else notThere" type="checkbox" (click)="selecionaNovoSintoma(item, checkbox.checked)" checked/>
-                    <ng-template #notThere>
-                      <input #checkbox type="checkbox" (click)="selecionaNovoSintoma(item, checkbox.checked)"/>
-                    </ng-template>
-                    {{ item.nome }}
-                  </li>
-                </ul>
-              </div>
             </div>
-          </div>
+
+            <div class="col">
+                <div class="card card-admin">
+                    <div class="card-body">
+                        <h4 class="card-title">Sintomas</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="card" style="width: 100%; bottom: 15px;">
+                            <div class="container">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Sintoma</th>
+                                            <th scope="col">Possui</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let sintoma of sintomas">
+                                            <td>{{ sintoma?.sintoma.nome }}</td>
+                                            <td>{{ sintoma?.possuiDescription }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
 
-        <div class="col">
-          <div class="card card-admin">
-            <div class="card-body">
-              <h4 class="card-title">Sintomas criados</h4>
+        <br>
+
+        <div class="row" *ngIf="consulta?.status === 'P' || consulta?.status === 'A';">
+
+            <div class="col">
+                <div class="card card-admin">
+                    <div class="card-body">
+                        <div class="row">
+                            <h4 class="card-title" style="margin-left: 25px;">Prognósticos</h4>
+                            <button style="margin-left: 500px;" type="button" id="prog-none" class="btn btn-secondary option-btn card-title" (click)="definePrognostico(null)">
+                                Nenhuma das opções
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="card" style="width: 100%; bottom: 15px;">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th *ngFor="let prognostico of prognosticos" style="border-bottom: 1px solid #fff;"></th>
+                                        <th style="border-bottom: 1px solid #fff;"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td *ngFor="let prognostico of prognosticos" scope="col" style="border-bottom: 1px solid #fff; text-align: center;">
+                                            <circle-progress [percent]="prognostico.percentual" [radius]="60" [outerStrokeWidth]="4" [innerStrokeWidth]="2" [outerStrokeColor]="prognostico.rgbColor" [innerStrokeColor]="'#ababab'" [animation]="true" [animationDuration]="300" [showSubtitle]="false">
+                                            </circle-progress><br>
+                                            <button type="button" id="prog-{{ prognostico?.id }}" class="btn btn-secondary option-btn" (click)="definePrognostico(prognostico)">
+                                                {{ prognostico?.doenca.nome }}
+                                            </button>
+                                        </td>
+                                        <td style="border-bottom: 1px solid #fff;">
+
+
+
+                                            <h5 id="title-add-doenca" style="display: none; margin-top: -35px;">Doença:
+                                            </h5>
+
+                                            <div class="input-group">
+                                                <select id="selection-doenca" [(ngModel)]="selectedPrognostico" [ngModelOptions]="{standalone: true}" style="display: none;">
+                                                    <option *ngFor="let doenca of novasDoencasOptions"
+                                                        value={{doenca.id}}>
+                                                        {{ doenca.nome }}
+                                                    </option>
+                                                </select>&nbsp;&nbsp;
+                                                <button type="button" id="btn-add-doenca" class="btn btn-secondary option-btn" style="display: none;" (click)="showPopup('popup-doenca-div', 'block')">
+                                                    +
+                                                </button>
+                                            </div>
+
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="card-body">
-              <div class="card" style="width: 100%; bottom: 15px; max-height: 500px; overflow-y:auto; overflow-x: hidden;">
-                <ul class="list-group list-group-flush">
-                  <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let sintoma of sintomasCriar">
-                    {{ sintoma }}
-                    <button type="button" class="btn btn-secondary" (click)="deleteNovoSintoma(sintoma)">
-                      <fa-icon [icon]="faTimes"></fa-icon>
-                    </button>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
+
         </div>
 
-      </div>
+        <div class="row" *ngIf="consulta?.status === 'F';">
 
-      <br>
+            <div class="col">
+                <div class="card card-admin">
+                    <div class="card-body">
+                        <h4 class="card-title">Diagnóstico</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="card" style="width: 100%; height: 50px; bottom: 15px;">
+                            <h4 style="color: black; text-align: center; margin-top: 8px;">
+                                {{ consulta?.diagnostico.nome | uppercase }}</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-      <div class="text-center">
-        <div class="btn-group" role="group">
-          <button type="button" class="btn btn-dark" (click)="goToConsultas(consulta.status)">
-            VOLTAR
-          </button>
-          <button type="button" class="btn btn-secondary" (click)="proximoPassoConsulta(false)"
-            *ngIf="consulta?.status === 'P' || consulta?.status === 'A';">
-            ENCAMINHAR PARA EXAME
-          </button>
-          <button type="button" class="btn btn-success" (click)="proximoPassoConsulta(true)"
-            *ngIf="consulta?.status === 'P' || consulta?.status === 'A';">
-            FINALIZAR CONSULTA
-          </button>
         </div>
-      </div>
-      
-      <br><br>
 
-  </div>
+        <br>
+
+        <div class="row" *ngIf="consulta?.status === 'P' || consulta?.status === 'A';">
+
+            <div class="col">
+                <div class="card card-admin">
+                    <div class="card-body">
+                        <h4 class="card-title">Adicionar novos sintomas</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="card" style="width: 100%; bottom: 15px; height: 500px; overflow-y:auto; overflow-x: hidden;">
+                            <h5 class="ml-3 mt-3">Sintoma:</h5>
+                            <div class="input-group ml-3 mb-3">
+                                <input type="text" [(ngModel)]="sintomaFilter">&nbsp;&nbsp;
+                                <button type="button" class="btn btn-secondary" (click)="showPopup('popup-sintoma-div', 'block')">
+                                    +
+                                </button>
+                            </div>
+
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item" *ngFor="let item of novosSintomasOptions | filtersintoma:sintomaFilter">
+                                    <input #checkbox *ngIf="verificaListaNovosSintomas(item.id); else notThere" type="checkbox" (click)="selecionaNovoSintoma(item, checkbox.checked)" checked />
+                                    <ng-template #notThere>
+                                        <input #checkbox type="checkbox" (click)="selecionaNovoSintoma(item, checkbox.checked)" />
+                                    </ng-template>
+                                    {{ item.nome }}
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card card-admin">
+                    <div class="card-body">
+                        <h4 class="card-title">Sintomas criados</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="card" style="width: 100%; bottom: 15px; max-height: 500px; overflow-y:auto; overflow-x: hidden;">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let sintoma of sintomasCriar">
+                                    {{ sintoma }}
+                                    <button type="button" class="btn btn-secondary" (click)="deleteNovoSintoma(sintoma)">
+                                        <fa-icon [icon]="faTimes"></fa-icon>
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <br>
+
+        <div class="text-center">
+            <div class="btn-group" role="group">
+                <button type="button" class="btn btn-dark" (click)="goToConsultas(consulta.status)">
+                    VOLTAR
+                </button>
+                <button type="button" class="btn btn-secondary" (click)="proximoPassoConsulta(false)" *ngIf="consulta?.status === 'P' || consulta?.status === 'A';">
+                    ENCAMINHAR PARA EXAME
+                </button>
+                <button type="button" class="btn btn-success" (click)="proximoPassoConsulta(true)" *ngIf="consulta?.status === 'P' || consulta?.status === 'A';">
+                    FINALIZAR CONSULTA
+                </button>
+            </div>
+        </div>
+
+        <br><br>
+
+    </div>
 </body>
 
 
 <div id="popup-doenca-div" class="popup-div">
-  <span class="helper"></span>
-  <div style="text-align: left;">
-    <div id="popupCloseButton" (click)="showPopup('popup-doenca-div', 'none')"><fa-icon [icon]="faTimes"></fa-icon></div>
-    <div>
-      <h2>Nova Doença</h2>
+    <span class="helper"></span>
+    <div style="text-align: left;">
+        <div id="popupCloseButton" (click)="showPopup('popup-doenca-div', 'none')">
+            <fa-icon [icon]="faTimes"></fa-icon>
+        </div>
+        <div>
+            <h2>Nova Doença</h2>
 
-      <label><b>Doença:</b></label><br>
-      <input id="input-doenca" [(ngModel)]="doencaStr" type="text"><br><br>
+            <label><b>Doença:</b></label><br>
+            <input id="input-doenca" [(ngModel)]="doencaStr" type="text"><br><br>
 
-      <button type="button" class="btn btn-secondary" (click)="cadastroDoenca(doencaStr)">
-        CADASTRAR DOENÇA
-      </button>
+            <button type="button" class="btn btn-secondary" (click)="cadastroDoenca(doencaStr)">
+                CADASTRAR DOENÇA
+            </button>
+        </div>
     </div>
-  </div>
 </div>
 
 <div id="popup-sintoma-div" class="popup-div">
-  <span class="helper"></span>
-  <div style="text-align: left;">
-    <div id="popupCloseButton" (click)="showPopup('popup-sintoma-div', 'none')"><fa-icon [icon]="faTimes"></fa-icon></div>
-    <div>
-      <h2>Novo Sintoma</h2>
+    <span class="helper"></span>
+    <div style="text-align: left;">
+        <div id="popupCloseButton" (click)="showPopup('popup-sintoma-div', 'none')">
+            <fa-icon [icon]="faTimes"></fa-icon>
+        </div>
+        <div>
+            <h2>Novo Sintoma</h2>
 
-      <label><b>Sintoma:</b></label><br>
-      <input id="input-sintoma" [(ngModel)]="sintomaStr" type="text"><br><br>
+            <label><b>Sintoma:</b></label><br>
+            <input id="input-sintoma" [(ngModel)]="sintomaStr" type="text"><br><br>
 
-      <button type="button" class="btn btn-secondary" (click)="cadastroSintoma(sintomaStr)">
-        CADASTRAR SINTOMA
-      </button>
+            <button type="button" class="btn btn-secondary" (click)="cadastroSintoma(sintomaStr)">
+                CADASTRAR SINTOMA
+            </button>
+        </div>
     </div>
-  </div>
 </div>

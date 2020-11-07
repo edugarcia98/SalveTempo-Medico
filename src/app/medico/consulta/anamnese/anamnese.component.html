@@ -1,184 +1,285 @@
-<div class="cabecalho">
-    <div class="row" id="rowmedic">
-        <div class="name">
-            <h2 class="pt-5" style="color: #17a2b8;">Anamnese</h2>
-            <h4 class="pt-5" style="color: black; margin-top: -60px;">Paciente: {{ consulta?.paciente.nome }}</h4>
-            <div class="row" id="rowcrm">
-                <button (click)="goToConsultas(consulta.status)" id="housebutton" type="button" class="btn">
-          <div class="row">
-            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-left-circle-fill" fill="currentColor"
-              xmlns="http://www.w3.org/2000/svg">
-              <path fill-rule="evenodd"
-                d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-4.5.5a.5.5 0 0 0 0-1H5.707l2.147-2.146a.5.5 0 1 0-.708-.708l-3 3a.5.5 0 0 0 0 .708l3 3a.5.5 0 0 0 .708-.708L5.707 8.5H11.5z" />
-            </svg>
-            <h6 style="margin-left: 10px;">Voltar</h6>
-          </div>
-        </button>
-                <button type="button" class="btn" id="consultabutton" (click)="goToConsulta(id)">
-          <h6 style="margin-left: 10px;">Consulta</h6>
-        </button>
+<div class="card card-anamnese">
+    <div class="card-body">
+        <h2 class="card-title pt-5" style="color:  rgb(23, 163, 184)">Anamnese</h2>
+        <h4 class="card-title" style="color: black">Paciente: {{ consulta?.paciente.nome }}</h4>
+        <div class="card-title">
+            <div class="row" style="text-align: center;">
+                <button (click)="goToConsultas(consulta.status)" id="housebutton" type="button" class="btn" placement="top" ngbTooltip="Voltar">
+                    <fa-icon [icon]="faArrowLeft"></fa-icon>
+                </button>
+                <button type="button" class="btn" id="consultabutton" (click)="goToConsulta(id)" placement="top" ngbTooltip="Consulta">
+                    <fa-icon [icon]="faFileMedicalAlt"></fa-icon>
+                </button>
             </div>
         </div>
+
+
+
     </div>
-</div>
+    <div class="card-body">
 
+        <div class="container-fluid">
+            <form>
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col-xs-6">
+                            <label>
+                                <b>Paciente:</b>&nbsp;{{ consulta?.paciente.nome }}
+                            </label>
+                        </div>
+                        <div class="col-xs-6">
+                            <label><b>Peso:</b>&nbsp;{{ anamnese?.peso }} kg</label>
+                        </div>
+                        <div class="col-xs-6">
+                            <label>
+                                <b>Altura:</b>&nbsp;{{ anamnese?.altura }} m
+                            </label>
+                        </div>
+                        <div class="col-xs-6">
+                            <label><b>Fuma:</b>&nbsp;{{ anamnese?.fumaStr }}</label>
+                        </div>
+                        <div class="col-xs-6">
 
+                            <label><b>Bebe:</b>&nbsp;{{ anamnese?.bebeStr }}</label>
 
-<div class="form-group">
-    <div class="row">
-        <div class="col-xs-6">
-            <label>
-        <b>Paciente:</b>{{ consulta?.paciente.nome }}
-      </label>
-        </div>
-        <div class="col-xs-6">
-            <label><b>Peso:</b>{{ anamnese?.peso }} kg</label>
-        </div>
-        <div class="col-xs-6">
-            <label>
-        <b>Altura:</b>{{ anamnese?.altura }} m
-      </label>
-        </div>
-        <div class="col-xs-6">
-            <label><b>Fuma:</b>{{ anamnese?.fumaStr }}</label>
-        </div>
-        <div class="col-xs-6">
-            <div class="col-xs-6">
-                <label><b>Bebe:</b>{{ anamnese?.bebeStr }}</label>
-            </div>
-        </div>
-    </div>
-    <div class="row" *ngIf="anamnese?.fuma || anamnese?.bebe;">
-        <div class="col-xs-6">
-            <div *ngIf="anamnese?.fuma;">
-                <label><b>Quantidade de cigarros (dia):</b>{{ anamnese?.qtdCigarrosDia }}</label>
-            </div>
-        </div>
-        <div class="col-xs-6">
-            <div class="col-xs-6">
-                <div *ngIf="anamnese?.bebe;">
-                    <label><b>Frequência que bebe (dias da semana):</b>{{ anamnese?.freqBebeDiasSemana }}</label>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-xs-6">
-            <label><b>Qualidade de Alimentação e Ingestão de
-          Água:</b>{{ anamnese?.qualidadeAlimentacaoIngestaoAguaStr }}</label>
-        </div>
-        <div class="col-xs-6">
-            <label><b>Pratica atividades físicas:</b></label> {{ anamnese?.praticaAtividadeFisicaStr }}<br>
-        </div>
-    </div>
-    <div class="row" *ngIf="anamnese?.praticaAtividadeFisica;">
-        <div class="col-xs-6">
-            <label><b>Atividades Físicas:</b><textarea rows="4" cols="50"
-          readonly>{{ anamnese?.tipoAtividadeFisica }}</textarea></label>
-        </div>
-        <div class="col-xs-6">
-            <label><b>Frequência que pratica atividades físicas (dias da
-          semana):</b>{{ anamnese?.freqAtividadeFisicaDiasSemana }}</label>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-xs-6">
-            <label><b>Utiliza anticoncepcionais:</b>{{ anamnese?.utilizaAnticoncepcionalStr }}</label>
-        </div>
-        <div class="col-xs-6" *ngIf="anamnese?.utilizaAnticoncepcional;">
-            <label><b>Anticoncepcionais utilizados:</b><textarea rows="4" cols="50"
-          readonly>{{ anamnese?.anticoncepcionaisUtilizados }}</textarea></label>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-xs-6">
-            <label><b>Pratica atividades físicas:</b>{{ anamnese?.praticaAtividadeFisicaStr }}</label>
-        </div>
-        <div class="col-xs-6" *ngIf="anamnese?.praticaAtividadeFisica;">
-            <label><b>Atividades Físicas:</b><textarea rows="4" cols="50"
-          readonly>{{ anamnese?.tipoAtividadeFisica }}</textarea></label>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-xs-6">
-            <label><b>Realizou gestações:</b>{{ anamnese?.realizouGestacoesStr }}</label>
-        </div>
-        <div class="col-xs-6">
-            <div *ngIf="anamnese?.realizouGestacoes;">
-                <label><b>Última gestação (meses):</b>{{ anamnese?.ultimaGestacaoTempoMeses }}</label>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-xs-6">
-            <label><b>Utiliza medicamentos:</b>{{ anamnese?.utilizaMedicamentosStr }}</label>
-        </div>
-        <div class="col-xs-6">
-            <div *ngIf="anamnese?.utilizaMedicamentos;">
-                <label><b>Medicamentos utilizados:</b><textarea rows="4" cols="50"
-            readonly>{{ anamnese?.medicamentosUtilizados }}</textarea></label>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-xs-6">
-            <label><b>Possui alergias:</b>{{ anamnese?.alergiasStr }}</label>
-        </div>
-        <div class="col-xs-6">
-            <div *ngIf="anamnese?.alergias;">
-                <label><b>Alergias:</b><textarea rows="4" cols="50" readonly>{{ anamnese?.alergiasDesc }}</textarea></label>
+                <div class="row" *ngIf="anamnese?.fuma || anamnese?.bebe; else noCigarroBebida">
+                    <div class="form-group">
+                        <div class="col-xs-6">
+                            <div *ngIf="anamnese?.fuma;">
+                                <label><b>Quantidade de cigarros (dia):</b>&nbsp;{{ anamnese?.qtdCigarrosDia }}</label>
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <div *ngIf="anamnese?.bebe;">
+                                <label><b>Frequência que bebe (dias da
+                                        semana):</b>&nbsp;{{ anamnese?.freqBebeDiasSemana }}</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <ng-template #noCigarroBebida>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <label><b>Quantidade de cigarros (dia):</b>&nbsp;Não faz o uso</label>
+                            </div>
+                            <div class="col-xs-6">
+                                <label><b>Frequência que bebe (dias da semana):</b>&nbsp;Não faz o uso</label>
+                            </div>
+                        </div>
+                    </div>
+                </ng-template>
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col-xs-6">
+                            <label><b>Qualidade de Alimentação e Ingestão de
+                                    Água:</b>&nbsp;{{ anamnese?.qualidadeAlimentacaoIngestaoAguaStr }}</label>
+                        </div>
+                        <div class="col-xs-6">
+                            <label><b>Pratica atividades
+                                    físicas:</b>&nbsp;{{ anamnese?.praticaAtividadeFisicaStr }}</label>
+                        </div>
+                    </div>
+                </div>
 
-            </div>
-        </div>
-    </div>
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col-xs-6" *ngIf="anamnese?.praticaAtividadeFisica; else noFisica1">
+                            <label><b>Atividades Físicas:</b>&nbsp;<textarea rows="4" cols="50"
+                                    readonly>{{ anamnese?.tipoAtividadeFisica }}</textarea></label>
+                        </div>
+                        <div class="col-xs-6" *ngIf="anamnese?.praticaAtividadeFisica; else noFisica2">
+                            <label><b>Frequência que pratica atividades físicas (dias da
+                                    semana):</b>&nbsp;{{ anamnese?.freqAtividadeFisicaDiasSemana }}</label>
+                        </div>
+                        <ng-template #noFisica1>
+                            <div class="col-xs-6">
+                                <label><b>Atividades Físicas:</b>&nbsp;Não há</label>
+                            </div>
+                        </ng-template>
+                        <ng-template #noFisica2>
+                            <div class="col-xs-6">
+                                <label><b>Frequência que pratica atividades físicas (dias da
+                                        semana):</b>&nbsp;Não há</label>
+                            </div>
+                        </ng-template>
+                    </div>
+                </div>
 
 
+
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col-xs-6">
+                            <label><b>Utiliza
+                                    anticoncepcionais:</b>&nbsp;{{ anamnese?.utilizaAnticoncepcionalStr }}</label>
+                        </div>
+                        <div class="col-xs-6" *ngIf="anamnese?.utilizaAnticoncepcional; else noAnticoncepcional">
+                            <label><b>Anticoncepcionais utilizados:</b>&nbsp;<textarea rows="4" cols="50"
+                                    readonly>{{ anamnese?.anticoncepcionaisUtilizados }}</textarea></label>
+                        </div>
+                        <div class="col-xs-6">
+                            <label><b>Anticoncepcionais utilizados:</b>&nbsp;Não há</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col-xs-6">
+                            <label><b>Realizou gestações:</b>&nbsp;{{ anamnese?.realizouGestacoesStr }}</label>
+                        </div>
+                        <div class="col-xs-6" *ngIf="anamnese?.realizouGestacoes; else noGestacao">
+
+                            <label><b>Última gestação (meses):</b>&nbsp;{{ anamnese?.ultimaGestacaoTempoMeses }}</label>
+                        </div>
+                        <ng-template #noGestacao>
+                            <div class="col-xs-6">
+                                <label><b>Última gestação (meses):</b>&nbsp;Não há</label>
+                            </div>
+                        </ng-template>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col-xs-6">
+                            <label><b>Utiliza medicamentos:</b>&nbsp;{{ anamnese?.utilizaMedicamentosStr }}</label>
+                        </div>
+                        <div class="col-xs-6" *ngIf="anamnese?.utilizaMedicamentos; else noMedicamentos">
+                            <label><b>Medicamentos utilizados:</b>&nbsp;<textarea rows="4" cols="50"
+                                    readonly>{{ anamnese?.medicamentosUtilizados }}</textarea></label>
+                        </div>
+                        <ng-template #noMedicamentos>
+                            <div class="col-xs-6">
+                                <label><b>Medicamentos utilizados:</b>&nbsp;Não há</label>
+                            </div>
+                        </ng-template>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col-xs-6">
+                            <label><b>Possui alergias:</b>&nbsp;{{ anamnese?.alergiasStr }}</label>
+                        </div>
+                        <div class="col-xs-6" *ngIf="anamnese?.alergias; else noAlergia">
+                            <label><b>Alergias:</b>&nbsp;<textarea rows="4" cols="50"
+                                    readonly>{{ anamnese?.alergiasDesc }}</textarea></label>
+                        </div>
+                        <ng-template #noAlergia>
+                            <div class="col-xs-6">
+                                <label><b>Alergias:</b>&nbsp;Não há</label>
+                            </div>
+                        </ng-template>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col-xs-6">
+                            <label><b>Possui alterações
+                                    cardíacas:</b>&nbsp;{{ anamnese?.alteracoesCardiacasStr }}</label>
+                        </div>
+                        <div class="col-xs-6" *ngIf="anamnese?.alteracoesCardiacas; else noAlteracaoCardiaca">
+                            <label><b>Alterações cardíacas:</b>&nbsp;<textarea rows="4" cols="50"
+                                    readonly>{{ anamnese?.alteracoesCardiacasDesc }}</textarea></label>
+                        </div>
+                        <ng-template #noAlteracaoCardiaca>
+                            <div class="col-xs-6">
+                                <label><b>Alterações cardíacas:</b>&nbsp;Não há</label>
+                            </div>
+                        </ng-template>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col-xs-6">
+                            <label><b>Possui pressão alta:</b>&nbsp;{{ anamnese?.pressaoAltaStr }}</label>
+                        </div>
+                        <div class="col-xs-6">
+                            <label><b>Possui pressão baixa:</b>&nbsp;{{ anamnese?.pressaoBaixaStr }}</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col-xs-6">
+                            <label><b>Possui distúrbios
+                                    circulatórios:</b>&nbsp;{{ anamnese?.disturbioCirculatorioStr }}</label>
+                        </div>
+                        <div class="col-xs-6">
+                            <div *ngIf="anamnese?.disturbioCirculatorio; else noDisturbioCardiaco">
+                                <label><b>Distúrbios circulatórios:</b>&nbsp;<textarea rows="4" cols="50"
+                                        readonly>{{ anamnese?.disturbioCirculatorioDesc }}</textarea></label>
+                            </div>
+                        </div>
+                        <ng-template #noDisturbioCardiaco>
+                            <div class="col-xs-6">
+                                <label><b>Distúrbios circulatórios:</b>&nbsp;Não há</label>
+                            </div>
+                        </ng-template>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col-xs-6">
+                            <label><b>Possui distúrbios hormonais:</b>&nbsp;{{ anamnese?.disturbioHormonalStr }}</label>
+                        </div>
+                        <div class="col-xs-6" *ngIf="anamnese?.disturbioHormonal; else noDisturbioHormonal">
+                            <label><b>Distúrbios hormonais:</b>&nbsp;<textarea rows="4" cols="50"
+                                    readonly>{{ anamnese?.disturbioHormonalDesc }}</textarea></label>
+                        </div>
+                        <ng-template #noDisturbioHormonal>
+                            <div class="col-xs-6">
+                                <label><b>Distúrbios hormonais:</b>&nbsp;Não há</label>
+                            </div>
+                        </ng-template>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col-xs-6">
+                            <label><b>Possui diabetes:</b>&nbsp;{{ anamnese?.diabetesStr }}</label>
+                        </div>
+                        <div class="col-xs-6" *ngIf="anamnese?.diabetes; else noDiabetes">
+
+                            <label><b>Tipo de diabetes:</b>&nbsp;{{ anamnese?.tipoDiabetesStr }}</label>
+
+                        </div>
+                        <ng-template #noDiabetes>
+                            <div class="col-xs-6">
+                                <label><b>Tipo de diabetes:</b>&nbsp;Não há</label>
+                            </div>
+                        </ng-template>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col-xs-6">
+                            <label><b>Realizou cirurgias:</b>&nbsp;{{ anamnese?.fezCirurgiasStr }}</label>
+                        </div>
+                        <div class="col-xs-6" *ngIf="anamnese?.fezCirurgias; else noFezCirurgias">
+                            <label><b>Distúrbios hormonais:</b>&nbsp;<textarea rows="4" cols="50"
+                                    readonly>{{ anamnese?.cirurgiasDesc }}</textarea></label>
+                        </div>
+                        <ng-template #noFezCirurgias>
+                            <div class="col-xs-6">
+                                <label><b>Distúrbios hormonais:</b>&nbsp;Não há</label>
+                            </div>
+                        </ng-template>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
 </div>
-
-
-
-
-
-
-
-<label><b>Possui alterações cardíacas:</b></label> {{ anamnese?.alteracoesCardiacasStr }}<br>
-
-<div *ngIf="anamnese?.alteracoesCardiacas;">
-    <label><b>Alterações cardíacas:</b></label><br>
-    <textarea rows="4" cols="50" readonly>{{ anamnese?.alteracoesCardiacasDesc }}</textarea><br>
-</div><br>
-
-<label><b>Possui pressão alta:</b></label> {{ anamnese?.pressaoAltaStr }}<br>
-
-<label><b>Possui pressão baixa:</b></label> {{ anamnese?.pressaoBaixaStr }}<br><br>
-
-<label><b>Possui distúrbios circulatórios:</b></label> {{ anamnese?.disturbioCirculatorioStr }}<br>
-
-<div *ngIf="anamnese?.disturbioCirculatorio;">
-    <label><b>Distúrbios circulatórios:</b></label><br>
-    <textarea rows="4" cols="50" readonly>{{ anamnese?.disturbioCirculatorioDesc }}</textarea><br>
-</div><br>
-
-<label><b>Possui distúrbios hormonais:</b></label> {{ anamnese?.disturbioHormonalStr }}<br>
-
-<div *ngIf="anamnese?.disturbioHormonal;">
-    <label><b>Distúrbios hormonais:</b></label><br>
-    <textarea rows="4" cols="50" readonly>{{ anamnese?.disturbioHormonalDesc }}</textarea><br>
-</div><br>
-
-<label><b>Possui diabetes:</b></label> {{ anamnese?.diabetesStr }}<br>
-
-<div *ngIf="anamnese?.diabetes;">
-    <label><b>Tipo de diabetes:</b></label> {{ anamnese?.tipoDiabetesStr }}<br>
-</div><br>
-
-<label><b>Realizou cirurgias:</b></label> {{ anamnese?.fezCirurgiasStr }}<br>
-
-<div *ngIf="anamnese?.fezCirurgias;">
-    <label><b>Distúrbios hormonais:</b></label><br>
-    <textarea rows="4" cols="50" readonly>{{ anamnese?.cirurgiasDesc }}</textarea><br>
-</div><br>
-
-<button type="button" class="btn btn-primary" (click)="goToConsultas(consulta.status)">
-  VOLTAR
-</button>

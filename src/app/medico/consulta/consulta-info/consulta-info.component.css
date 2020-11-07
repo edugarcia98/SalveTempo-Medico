@@ -10,6 +10,7 @@ body {
 
 .card-admin {
     background-color: #17a2b8;
+    border-radius: 10px;
 }
 
 .card-admin h4 {
@@ -25,53 +26,49 @@ body {
     background-color: #e6c60d;
 }
 
-.table th, td {
+.table th,
+td {
     border-top: 1px solid #fcfcfc;
     border-bottom: 1px solid #242424;
 }
 
-.option-btn{
+.option-btn {}
 
-}
-
-
-.scroll-div{
+.scroll-div {
     border: 1px solid #303030;
     border-radius: 5px;
     height: 400px;
     width: 49%;
-    overflow-y:auto;
+    overflow-y: auto;
 }
 
-.percentual-div{
+.percentual-div {
     background-color: #303030;
     float: left;
 }
 
-.text-div{
+.text-div {
     float: right;
 }
 
-
-
 .popup-div {
-    background:rgba(0,0,0,.4);
-    display:none;
-    height:100%;
-    position:fixed;
-    text-align:center;
-    top:0;
-    width:100%;
-    z-index:10000;
+    background: rgba(0, 0, 0, .4);
+    display: none;
+    height: 100%;
+    position: fixed;
+    text-align: center;
+    top: 0;
+    width: 100%;
+    z-index: 10000;
 }
 
 .popup-div .helper {
-    display:inline-block;
-    height:100%;
-    vertical-align:middle;
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
 }
 
-.popup-div > div {
+.popup-div>div {
     background-color: #fff;
     box-shadow: 10px 10px 60px #555;
     display: inline-block;

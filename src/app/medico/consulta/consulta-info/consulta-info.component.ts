@@ -17,7 +17,7 @@ import { NgxSpinnerService } from "ngx-spinner";
   templateUrl: './consulta-info.component.html',
   styleUrls: ['./consulta-info.component.css']
 })
-export class ConsultaInfoComponent implements OnInit{
+export class ConsultaInfoComponent implements OnInit {
 
   public id;
   error: any;
@@ -44,10 +44,10 @@ export class ConsultaInfoComponent implements OnInit{
   private sintomaFilter: string;
 
   constructor(private keyService: KeyService,
-              private consultaService: ConsultaService,
-              private route: ActivatedRoute,
-              private router: Router,
-              private spinnerService: NgxSpinnerService) { 
+    private consultaService: ConsultaService,
+    private route: ActivatedRoute,
+    private router: Router,
+    private spinnerService: NgxSpinnerService) {
     this.novosSintomasOptions = [];
     this.novosSintomas = [];
     this.novasDoencasOptions = [];
@@ -57,7 +57,7 @@ export class ConsultaInfoComponent implements OnInit{
   ngOnInit() {
     if (this.keyService.validaAutorizacao('M')) {
       this.id = this.keyService.getUrlId('cid', this.route);
-      
+
       this.consultaService.getConsultaById(sessionStorage.getItem('key'), this.id).subscribe(
         (item: Consulta) => {
           this.consulta = item;
@@ -65,7 +65,7 @@ export class ConsultaInfoComponent implements OnInit{
           this.consultaService.getSintomasFromConsulta(sessionStorage.getItem('key'), this.id).subscribe(
             (items: ConsultaSintoma[]) => {
               this.sintomas = items;
-              
+
               items.forEach(
                 (item: ConsultaSintoma) => {
                   switch (item.possui) {
@@ -79,7 +79,7 @@ export class ConsultaInfoComponent implements OnInit{
                   console.log(this.error);
                 }
               );
-              
+
               this.consultaService.getSintomas(sessionStorage.getItem('key')).subscribe(
                 (items: Sintoma[]) => {
                   items.forEach(
@@ -90,7 +90,7 @@ export class ConsultaInfoComponent implements OnInit{
                     },
                     (error: any) => {
                       this.error = error.
-                      console.log(this.error);
+                        console.log(this.error);
                     }
                   );
                 },
@@ -106,11 +106,11 @@ export class ConsultaInfoComponent implements OnInit{
               console.log(this.error);
             }
           );
-          
+
           this.consultaService.getPrognosticosFromConsulta(sessionStorage.getItem('key'), this.id).subscribe(
             (items: Prognostico[]) => {
               this.prognosticos = items;
-              
+
               items.forEach(
                 (item: Prognostico) => {
                   item.rgbColor = this.defineRGBColor(item.percentual);
@@ -155,7 +155,7 @@ export class ConsultaInfoComponent implements OnInit{
   }
 
   verificaListaNovosSintomas(id: number) {
-    if(this.novosSintomas.filter(i => i.id == id).length > 0){
+    if (this.novosSintomas.filter(i => i.id == id).length > 0) {
       return true;
     } else {
       return false;
@@ -195,7 +195,7 @@ export class ConsultaInfoComponent implements OnInit{
   }
 
   definePrognostico(prognostico: Prognostico) {
-    for(var i = 0; i < document.getElementsByClassName("option-btn").length; i++) {
+    for (var i = 0; i < document.getElementsByClassName("option-btn").length; i++) {
       var htmlId = document.getElementsByClassName("option-btn").item(i).id;
       document.getElementById(htmlId).style.backgroundColor = "#6c757d";
       document.getElementById(htmlId).style.color = "#fff";
@@ -233,53 +233,53 @@ export class ConsultaInfoComponent implements OnInit{
 
       this.consultaService.changeConsulta(sessionStorage.getItem('key'), this.id,
         status, diagnostico).then(
-        (response: Object) => {
-          console.log('Consulta alterada');
-        },
-        (error: any) => {
-          this.spinnerService.hide();
-          this.error = error;
-          console.log(this.error);
-        }
-      ).then(
-        async () => {
-          await this.saveNovosSintomasCriados()
-        },
-        (error: any) => {
-          this.spinnerService.hide();
-          this.error = error;
-          console.log(this.error);
-        }
-      ).then(
-        async () => {
-          if (this.novosSintomas.length > 0) {
-            for (var sintoma of this.novosSintomas) {
-              await this.consultaService.cadastroConsultaSintoma(sessionStorage.getItem('key'), 
-                this.id, sintoma.id).then(
-                () => {
-                  console.log('Novo sintoma inserido');
-                },
-                (error: any) => {
-                  this.spinnerService.hide();
-                  this.error = error;
-                  console.log(this.error);
-                }
-              );
+          (response: Object) => {
+            console.log('Consulta alterada');
+          },
+          (error: any) => {
+            this.spinnerService.hide();
+            this.error = error;
+            console.log(this.error);
+          }
+        ).then(
+          async () => {
+            await this.saveNovosSintomasCriados()
+          },
+          (error: any) => {
+            this.spinnerService.hide();
+            this.error = error;
+            console.log(this.error);
+          }
+        ).then(
+          async () => {
+            if (this.novosSintomas.length > 0) {
+              for (var sintoma of this.novosSintomas) {
+                await this.consultaService.cadastroConsultaSintoma(sessionStorage.getItem('key'),
+                  this.id, sintoma.id).then(
+                    () => {
+                      console.log('Novo sintoma inserido');
+                    },
+                    (error: any) => {
+                      this.spinnerService.hide();
+                      this.error = error;
+                      console.log(this.error);
+                    }
+                  );
+              }
+            }
+          },
+          (error: any) => {
+            this.spinnerService.hide();
+            this.error = error;
+            console.log(this.error);
+          }
+        ).then(
+          () => {
+            if (isFim) {
+              this.saveResultadosConsulta();
             }
           }
-        },
-        (error: any) => {
-          this.spinnerService.hide();
-          this.error = error;
-          console.log(this.error);
-        }
-      ).then(
-        () => {
-          if (isFim) {
-            this.saveResultadosConsulta();
-          }
-        }
-      );
+        );
       this.goToConsultas("P");
     }
   }
@@ -317,60 +317,60 @@ export class ConsultaInfoComponent implements OnInit{
   saveResultadosConsulta() {
     var progData: any = {};
 
-    this.consultaService.getSintomasFromConsulta(sessionStorage.getItem('key'), 
+    this.consultaService.getSintomasFromConsulta(sessionStorage.getItem('key'),
       this.id).subscribe(
-      (consultaSintoma: ConsultaSintoma[]) => {
-        for(var i = 0; i < consultaSintoma.length; i++){
-          progData[consultaSintoma[i].sintoma.nomecsv] = 
-          consultaSintoma[i].possui == 1 ? 1 : 0;
-        }
-        
-        this.consultaService.getDoencaById(sessionStorage.getItem('key'),
-          this.selectedPrognostico.toString()).subscribe(
-          (doenca: Doenca) => {
-            progData['prognostico'] = doenca.nome;
-            this.consultaService.salvaResultadoConsulta(sessionStorage.getItem('key'),
-              progData).subscribe(
-              (response: Object) => {
-                console.log(response);
+        (consultaSintoma: ConsultaSintoma[]) => {
+          for (var i = 0; i < consultaSintoma.length; i++) {
+            progData[consultaSintoma[i].sintoma.nomecsv] =
+              consultaSintoma[i].possui == 1 ? 1 : 0;
+          }
+
+          this.consultaService.getDoencaById(sessionStorage.getItem('key'),
+            this.selectedPrognostico.toString()).subscribe(
+              (doenca: Doenca) => {
+                progData['prognostico'] = doenca.nome;
+                this.consultaService.salvaResultadoConsulta(sessionStorage.getItem('key'),
+                  progData).subscribe(
+                    (response: Object) => {
+                      console.log(response);
+                    },
+                    (error: any) => {
+                      this.spinnerService.hide();
+                      this.error = error;
+                      console.log(this.error);
+                    }
+                  );
+
               },
               (error: any) => {
                 this.spinnerService.hide();
                 this.error = error;
                 console.log(this.error);
               }
-            );
-
-          },
-          (error: any) => {
-            this.spinnerService.hide();
-            this.error = error;
-            console.log(this.error);
-          }
-        )
-      },
-      (error: any) => {
-        this.spinnerService.hide();
-        this.error = error;
-        console.log(this.error);
-      }
-    )
+            )
+        },
+        (error: any) => {
+          this.spinnerService.hide();
+          this.error = error;
+          console.log(this.error);
+        }
+      )
   }
 
   async saveNovosSintomasCriados() {
     for (var sintoma of this.sintomasCriar) {
       await this.consultaService.addNewSintomaToPrognosticos(sessionStorage.getItem('key'),
         sintoma).then(
-        (sintoma: Sintoma) => {
-          this.novosSintomas.push(sintoma);
-          console.log('Novo sintoma adicionado em PrognosticoData');
-        },
-        (error: any) => {
-          this.spinnerService.hide()
-          this.error = error;
-          console.log(this.error);
-        }
-      );
+          (sintoma: Sintoma) => {
+            this.novosSintomas.push(sintoma);
+            console.log('Novo sintoma adicionado em PrognosticoData');
+          },
+          (error: any) => {
+            this.spinnerService.hide()
+            this.error = error;
+            console.log(this.error);
+          }
+        );
     }
   }
 

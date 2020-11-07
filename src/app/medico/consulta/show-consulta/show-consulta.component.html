@@ -1,11 +1,11 @@
 <div class="cabecalho">
-  <div class="row" id="rowmedic">
-    <div class="name">
-      <h2 class="pt-5" style="color: yellow;" *ngIf="tipoviewconsulta==='agenda-consultas';">Agenda de Consultas</h2>
-      <h2 class="pt-5" style="color: yellow;" *ngIf="tipoviewconsulta==='historico-consultas';">Histórico de Consultas
-      </h2>
-      <div class="row" id="rowcrm">
-        <button (click)="goToHomeMedico()" id="housebutton" type="button" class="btn btn-primary px-3"><svg width="1em"
+    <div class="row" id="rowmedic">
+        <div class="name">
+            <h2 class="pt-5" style="color: yellow;" *ngIf="tipoviewconsulta==='agenda-consultas';">Agenda de Consultas</h2>
+            <h2 class="pt-5" style="color: yellow;" *ngIf="tipoviewconsulta==='historico-consultas';">Histórico de Consultas
+            </h2>
+            <div class="row" id="rowcrm">
+                <button (click)="goToHomeMedico()" id="housebutton" type="button" class="btn btn-primary px-3"><svg width="1em"
             height="1em" viewBox="0 0 16 16" class="bi bi-house-door-fill" fill="currentColor"
             xmlns="http://www.w3.org/2000/svg">
             <path
@@ -14,44 +14,48 @@
           </svg>
 
         </button>
-      </div>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 
 
 
 
 <div class="container-fluid" style="margin-top: 25px;">
-  <div *ngFor="let data of datas">
-    <div class="container-fluid" id="dateid">
-      <h4>{{ data| date: 'dd/MM/yyyy' }}</h4>
+    <div *ngFor="let data of datas">
+        <div class="container-fluid" id="dateid">
+            <h4>{{ data| date: 'dd/MM/yyyy' }}</h4>
+        </div>
+
+        <table class="table table-striped text-center">
+            <thead>
+                <tr>
+
+
+                    <th style="border-top: none;"><b>Código</b></th>
+                    <th style="border-top: none;"><b>Nome</b></th>
+                    <th style="border-top: none;"><b>Período</b></th>
+                    <th *ngIf="tipoviewconsulta==='agenda-consultas';" style="border-top: none;"><b>Status</b></th>
+                    <th style="border-top: none;"></th>
+
+                </tr>
+            </thead>
+            <tr *ngFor="let consulta of consultas | filterdata:data">
+                <td>{{ consulta.formattedId }}</td>
+                <td>{{ consulta.paciente.nome }}</td>
+                <td>{{ consulta.completePeriodo }}</td>
+                <td *ngIf="tipoviewconsulta==='agenda-consultas';">{{ consulta.completeStatus }}</td>
+                <td>
+                    <button type="button" class="btn btn-secondary" style="color: blanchedalmond;" (click)="goToAnamnese(consulta.id)" placement="top" ngbTooltip="Anamnese">
+            <fa-icon [icon]="faNotesMedical"></fa-icon>
+          </button>
+                    <button type="button" class="btn btn-secondary" style="margin-left: 10px;" (click)="goToDetails(consulta.id)" placement="top" ngbTooltip="Informações">
+            <fa-icon [icon]="faSearch" ></fa-icon>
+          </button>
+                </td>
+            </tr>
+        </table>
+        <hr><br><br>
     </div>
-
-    <table class="table table-striped text-center">
-      <thead>
-        <tr>
-
-
-          <th style="border-top: none;"><b>Código</b></th>
-          <th style="border-top: none;"><b>Nome</b></th>
-          <th style="border-top: none;"><b>Período</b></th>
-          <th *ngIf="tipoviewconsulta==='agenda-consultas';" style="border-top: none;"><b>Status</b></th>
-          <th style="border-top: none;"></th>
-
-        </tr>
-      </thead>
-      <tr *ngFor="let consulta of consultas | filterdata:data">
-        <td>{{ consulta.formattedId }}</td>
-        <td>{{ consulta.paciente.nome }}</td>
-        <td>{{ consulta.completePeriodo }}</td>
-        <td *ngIf="tipoviewconsulta==='agenda-consultas';">{{ consulta.completeStatus }}</td>
-        <td>
-          <button type="button" class="btn btn-primary" (click)="goToAnamnese(consulta.id)">Anamnese</button> &nbsp;
-          <button type="button" class="btn btn-primary" (click)="goToDetails(consulta.id)">Informações</button>
-        </td>
-      </tr>
-    </table>
-    <hr><br><br>
-  </div>
 </div>
