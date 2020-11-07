@@ -6,6 +6,7 @@ import { MedicoService } from './medico.service';
 import { Medico } from './medico';
 
 import { KeyService } from 'src/app/geral/key/key.service';
+import { LoginService } from 'src/app/autenticacao/login/login.service';
 
 @Component({
   selector: 'app-medico-panel',
@@ -19,6 +20,7 @@ export class MedicoPanelComponent implements OnInit {
 
   constructor(private keyService: KeyService,
               private medicoService: MedicoService,
+              private loginService: LoginService,
               private router: Router) {
 
   }
@@ -51,5 +53,17 @@ export class MedicoPanelComponent implements OnInit {
 
   goToHistoricoConsultas() {
     this.router.navigate(['medico/historico-consultas']);
+  }
+
+  sair() {
+    this.loginService.logout(sessionStorage.getItem('key')).subscribe(
+      () => {
+        this.router.navigate(['']);
+      },
+      (error: any) => {
+        this.error = error;
+        console.log(this.error);
+      }
+    )
   }
 }

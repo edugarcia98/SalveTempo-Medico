@@ -7,6 +7,8 @@ import { KeyService } from 'src/app/geral/key/key.service';
 import { ConsultaService } from '../consulta.service';
 import { Consulta, Anamnese } from '../consulta';
 
+import { faArrowLeft, faFileMedicalAlt} from '@fortawesome/free-solid-svg-icons';
+
 @Component({
   selector: 'app-anamnese',
   templateUrl: './anamnese.component.html',
@@ -19,6 +21,8 @@ export class AnamneseComponent implements OnInit {
   error: any;
   consulta: Consulta;
   anamnese: Anamnese;
+  faArrowLeft = faArrowLeft;
+  faFileMedicalAlt = faFileMedicalAlt;
 
   constructor(private keyService: KeyService,
     private consultaService: ConsultaService,

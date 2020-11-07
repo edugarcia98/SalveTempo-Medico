@@ -7,6 +7,9 @@ import { KeyService } from 'src/app/geral/key/key.service';
 import { ConsultaService } from '../consulta.service';
 import { Consulta } from '../consulta';
 
+import {  faNotesMedical,faSearch } from '@fortawesome/free-solid-svg-icons';
+
+
 @Component({
   selector: 'app-show-consulta',
   templateUrl: './show-consulta.component.html',
@@ -19,6 +22,11 @@ export class ShowConsultaComponent implements OnInit {
   error: any;
   consultas: Consulta[];
   datas: Date[];
+  faNotesMedical =faNotesMedical;
+  faSearch=faSearch;
+  
+
+
 
   constructor(private keyService: KeyService,
     private consultaService: ConsultaService,
