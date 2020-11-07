@@ -1,14 +1,53 @@
-<h2>Unidades de Saúde</h2>
+<body>
 
-<br><br>
-<button type="button" class="btn btn-primary"
- (click)="goToCadastro()">
- Adicionar Relação
-</button>
+  <div class="cabecalho">
+    <div style="margin-left: 30px;">
+      <h2 class="pt-5" style="color: #f5dd29;">Unidades de Saúde</h2>
+      <button (click)="goToHomeMedico()" id="housebutton" type="button" style="background-color: #17a2b8; border: none;" class="btn btn-primary px-3"
+        placement="bottom" ngbTooltip="Home">
+        <svg width="1em"
+        height="1em" viewBox="0 0 16 16" class="bi bi-house-door-fill" fill="currentColor"
+        xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M6.5 10.995V14.5a.5.5 0 0 1-.5.5H2a.5.5 0 0 1-.5-.5v-7a.5.5 0 0 1 .146-.354l6-6a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 .146.354v7a.5.5 0 0 1-.5.5h-4a.5.5 0 0 1-.5-.5V11c0-.25-.25-.5-.5-.5H7c-.25 0-.5.25-.5.495z" />
+        <path fill-rule="evenodd" d="M13 2.5V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z" />
+      </svg>
 
-<br><br>
-<div *ngFor="let item of unidadesSaudeMedico">
-  <button type="button" class="btn btn-primary" (click)="goToDetails(item.id)">Informações</button>&nbsp;
-  <button type="button" class="btn btn-primary" (click)="goToDelete(item.id)">Excluir</button>&nbsp;
-  {{ item.unidadeSaude.nome }}
-</div>
+      </button>
+    </div>
+  </div>
+
+  <div class="container pt-5">
+    <button class="btn btn-secondary btn-unidade-saude" role="button" (click)="goToCadastro()">
+      Adicionar Relação
+    </button>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col"></th>
+          <th scope="col">Unidade de Saúde</th>
+          <th scope="col">Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of unidadesSaudeMedico">
+          <td>
+            <div class="dropdown" dropdown>
+              <button dropdownToggle class="btn btn-secondary btn-unidade-saude" role="button" placement="top" ngbTooltip="Opções">
+                <fa-icon [icon]="faBars"></fa-icon>
+              </button>
+              <div *dropdownMenu class="dropdown-menu">
+                <a class="dropdown-item" href="medico/unidades-saude/{{ item.id }}/detail">Informações</a>
+                <a class="dropdown-item" href="medico/unidade-saude/{{ item.id }}/delete">Excluir</a>
+              </div>
+            </div>
+          </td>
+          <td>{{ item.unidadeSaude.nome }}</td>
+          <td>{{ item.statusStr }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</body>

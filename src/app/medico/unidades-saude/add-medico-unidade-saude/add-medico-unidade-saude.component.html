@@ -1,40 +1,84 @@
-<h2>Cadastro de Unidade de Saúde</h2>
+<body>
+  
+  <div class="cabecalho">
+    <div style="margin-left: 30px;">
+      <h2 class="pt-5" style="color: #f5dd29;">Cadastro de Relação em Unidade de Saúde</h2>
+      <button (click)="goToHomeUnidadesSaude()" id="housebutton" type="button" style="background-color: #17a2b8; border: none;" class="btn btn-primary px-3"
+        placement="bottom" ngbTooltip="Voltar">
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-left-circle-fill" fill="currentColor"
+            xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd"
+              d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-4.5.5a.5.5 0 0 0 0-1H5.707l2.147-2.146a.5.5 0 1 0-.708-.708l-3 3a.5.5 0 0 0 0 .708l3 3a.5.5 0 0 0 .708-.708L5.707 8.5H11.5z" />
+          </svg>
 
-<label><b>Estado:</b></label><br>
-<select [(ngModel)]="selectedEstado" [ngModelOptions]="{standalone: true}" (change)="loadCidade()">
-  <option *ngFor="let estado of estados" value={{estado.id}}>
-    {{estado.nome}} ({{estado.sigla}})
-  </option>
-</select><br><br>
-<!--Verificar o datalist-->
-
-<label><b>Cidade:</b></label><br>
-<select [(ngModel)]="selectedCidade" [ngModelOptions]="{standalone: true}" (change)="loadUnidadeSaude()">
-  <option *ngFor="let cidade of cidades" value={{cidade.id}}>
-    {{cidade.nome}}
-  </option>
-</select><br><br>
-
-<label><b>Unidade de Saúde:</b></label><br>
-<select [(ngModel)]="selectedUnidadeSaude" [ngModelOptions]="{standalone: true}">
-  <option *ngFor="let unidadeSaude of unidadesSaude" value={{unidadeSaude.id}}>
-    {{unidadeSaude.nome}}
-  </option>
-</select><br><br>
-
-<label><b>Dias de Trabalho:</b></label><br><br>
-
-<div *ngFor="let dia of diasPeriodoTrabalho">
-  <input #trabalha type="checkbox" (click)="selecionaDiaSemana(dia, trabalha.checked)"/>{{ dia.diaSemana }}
-
-  <div id="div-dia-{{ dia.id }}" style="display: none;">
-    <input type="checkbox" id="div-manha-{{ dia.id }}" #manha (click)="selecionaPeriodo(dia, 'Manhã', manha.checked)"/>Manhã &nbsp;
-    <input type="checkbox" id="div-tarde-{{ dia.id }}" #tarde (click)="selecionaPeriodo(dia, 'Tarde', tarde.checked)"/>Tarde &nbsp;
-    <input type="checkbox" id="div-noite-{{ dia.id }}" #noite (click)="selecionaPeriodo(dia, 'Noite', noite.checked)"/>Noite &nbsp;
+      </button>
+    </div>
   </div>
-  <br>
-</div><br><br>
 
-<button type="button" class="btn btn-primary" (click)="cadastrarMedicoUnidadeSaude()">
- SALVAR
-</button>
+  <div class="container pt-5">
+
+    <div class="form-group">
+      <label for="estado-select"><h5>Estado:</h5></label>
+      <select class="form-control" id="estado-select" [(ngModel)]="selectedEstado" [ngModelOptions]="{standalone: true}" (change)="loadCidade()">
+        <option *ngFor="let estado of estados" value={{estado.id}}>
+          {{estado.nome}} ({{estado.sigla}})
+        </option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="cidade-select"><h5>Cidade:</h5></label>
+      <select class="form-control" id="cidade-select" [(ngModel)]="selectedCidade" [ngModelOptions]="{standalone: true}" (change)="loadUnidadeSaude()">
+        <option *ngFor="let cidade of cidades" value={{cidade.id}}>
+          {{cidade.nome}}
+        </option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="unidade-saude-select"><h5>Unidade de Saúde:</h5></label>
+      <select class="form-control" id="unidade-saude-select" [(ngModel)]="selectedUnidadeSaude" [ngModelOptions]="{standalone: true}">
+        <option *ngFor="let unidadeSaude of unidadesSaude" value={{unidadeSaude.id}}>
+          {{unidadeSaude.nome}}
+        </option>
+      </select><br><br>
+    </div>
+
+    <div class="card-body">
+      <div class="card" style="width: 100%; bottom: 15px;">
+        <div class="card-header header-unidade-saude">
+          <h5>Dias de Trabalho:</h5>
+        </div>
+        <ul class="list-group list-group-flush" *ngFor="let dia of diasPeriodoTrabalho">
+          <li class="list-group-item">
+            <div class="form-check">
+              <input #trabalha class="form-check-input" type="checkbox" (click)="selecionaDiaSemana(dia, trabalha.checked)"/>
+              <label class="form-check-label">
+                {{ dia.diaSemana }}
+              </label>
+            </div>
+
+            <div id="div-dia-{{ dia.id }}" style="display: none;">
+              <input type="checkbox" id="div-manha-{{ dia.id }}" #manha (click)="selecionaPeriodo(dia, 'Manhã', manha.checked)"/>Manhã &nbsp;
+              <input type="checkbox" id="div-tarde-{{ dia.id }}" #tarde (click)="selecionaPeriodo(dia, 'Tarde', tarde.checked)"/>Tarde &nbsp;
+              <input type="checkbox" id="div-noite-{{ dia.id }}" #noite (click)="selecionaPeriodo(dia, 'Noite', noite.checked)"/>Noite &nbsp;
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="text-center">
+      <button type="button" class="btn btn-secondary" (click)="cadastrarMedicoUnidadeSaude()">
+        SALVAR
+      </button>
+    </div>
+
+    <br>
+
+    <ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="default" type="ball-spin-clockwise">  
+      <p style="color: white">Aguarde... </p>  
+    </ngx-spinner> 
+
+  </div>
+</body>

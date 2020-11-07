@@ -10,6 +10,9 @@ import { DiaPeriodoTrabalho } from '../medico-unidade-saude';
 import { Estado } from '../endereco/estado';
 import { Cidade } from '../endereco/cidade';
 import { KeyService } from 'src/app/geral/key/key.service';
+import { NgxSpinnerService } from 'ngx-spinner';
+
+
 
 @Component({
   selector: 'app-add-medico-unidade-saude',
@@ -40,7 +43,8 @@ export class AddMedicoUnidadeSaudeComponent implements OnInit {
 
   constructor(private unidadeSaudeService: UnidadeSaudeService,
               private keyService: KeyService,
-              private router: Router) {
+              private router: Router,
+              private ngxSpinnerService: NgxSpinnerService) {
 
   }
 
@@ -61,11 +65,14 @@ export class AddMedicoUnidadeSaudeComponent implements OnInit {
   }
 
   loadCidade() {
+    this.ngxSpinnerService.show();
     this.unidadeSaudeService.getCidadeByEstadoId(this.selectedEstado.toString()).subscribe(
       (items: Cidade[]) => {
+        this.ngxSpinnerService.hide();
         this.cidades = items;
       },
       (error: any) => {
+        this.ngxSpinnerService.hide();
         this.error = error;
         console.log(this.error);
       }
@@ -73,11 +80,14 @@ export class AddMedicoUnidadeSaudeComponent implements OnInit {
   }
 
   loadUnidadeSaude() {
+    this.ngxSpinnerService.show();
     this.unidadeSaudeService.getUnidadesSaudeByCidadeId(this.selectedCidade.toString()).subscribe(
       (items: UnidadeSaude[]) => {
+        this.ngxSpinnerService.hide();
         this.unidadesSaude = items;
       },
       (error: any) => {
+        this.ngxSpinnerService.hide();
         this.error = error;
         console.log(this.error);
       }
@@ -154,5 +164,9 @@ export class AddMedicoUnidadeSaudeComponent implements OnInit {
         console.log(this.error);
       }
     )
+  }
+
+  goToHomeUnidadesSaude() {
+    this.router.navigate(['medico/unidades-saude']);
   }
 }

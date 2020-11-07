@@ -1,15 +1,79 @@
-<h2>{{ medicoUnidadeSaude?.unidadeSaude.nome }}</h2>
+<body>
+  <div class="cabecalho">
+    <div class="name">
+        <h2 class="pt-5" style="color: #f5dd29;; margin-bottom: 15px;">Unidade de Saúde</h2>
+        <h4 class="pt-5" style="margin-top: -60px;">{{ medicoUnidadeSaude?.unidadeSaude.nome }}</h4>
+        <button (click)="goToHomeUnidadesSaude()" id="housebutton" type="button" class="btn" placement="bottom" ngbTooltip="Voltar">
+            <svg style="color: #FFFFFF;" width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-left-circle-fill" fill="currentColor"
+              xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd"
+                d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-4.5.5a.5.5 0 0 0 0-1H5.707l2.147-2.146a.5.5 0 1 0-.708-.708l-3 3a.5.5 0 0 0 0 .708l3 3a.5.5 0 0 0 .708-.708L5.707 8.5H11.5z" />
+            </svg>
+        </button>
+    </div>
+  </div>
 
-<label><b>Endereço: </b></label>
-{{ medicoUnidadeSaude?.unidadeSaude.endereco.logradouro }},
-{{ medicoUnidadeSaude?.unidadeSaude.endereco.numero }} - 
-{{ medicoUnidadeSaude?.unidadeSaude.endereco.bairro }}, 
-{{ medicoUnidadeSaude?.unidadeSaude.endereco.cidade.nome }} - 
-{{ medicoUnidadeSaude?.unidadeSaude.endereco.cidade.estado.sigla }}<br><br>
+  <div class="container pt-5">
+
+    <div class="row">
+
+      <div class="col">
+        <div class="card card-unidade-saude">
+          <div class="card-body">
+            <h4 class="card-title">Informações Gerais</h4>
+          </div>
+          <div class="card-body">
+            <div class="card" style="width: 100%; bottom: 15px;">
+              <div class="card-header header-unidade-saude">
+                <b>Endereço: </b>
+              </div>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                  {{ medicoUnidadeSaude?.unidadeSaude.endereco.logradouro }},
+                  {{ medicoUnidadeSaude?.unidadeSaude.endereco.numero }} - 
+                  {{ medicoUnidadeSaude?.unidadeSaude.endereco.bairro }}, 
+                  {{ medicoUnidadeSaude?.unidadeSaude.endereco.cidade.nome }} - 
+                  {{ medicoUnidadeSaude?.unidadeSaude.endereco.cidade.estado.sigla }}
+                </li>
+              </ul>
+              <div class="card-header header-unidade-saude">
+                <b>Status: </b>
+              </div>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">{{ statusAtual | uppercase }}</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="card card-unidade-saude">
+          <div class="card-body">
+            <h4 class="card-title">Dias de Trabalho</h4>
+          </div>
+          <div class="card-body">
+            <div class="card" style="width: 100%; bottom: 15px;">
+              <ng-container *ngFor="let item of diasPeriodoTrabalho">
+                <div class="card-header header-unidade-saude">
+                  <b>{{ item.diaSemana }}:</b>
+                </div>
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item">{{ item.periodos }}</li>
+                </ul>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</body>
 
 <label><b>Dias de Trabalho:</b></label><br><br>
 <div *ngFor="let item of diasPeriodoTrabalho">
   <b>{{ item.diaSemana }}:</b>&nbsp;{{ item.periodos }}.
 </div><br><br>
-
-<label><b>Status:</b></label> {{ statusAtual }}.

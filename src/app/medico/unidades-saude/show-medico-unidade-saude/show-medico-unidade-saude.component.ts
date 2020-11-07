@@ -47,4 +47,8 @@ export class ShowMedicoUnidadeSaudeComponent implements OnInit {
       this.router.navigate(['not-authorized']);
     }
   }
+
+  goToHomeUnidadesSaude() {
+    this.router.navigate(['medico/unidades-saude']);
+  }
 }

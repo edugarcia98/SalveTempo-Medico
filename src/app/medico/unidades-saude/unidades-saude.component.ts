@@ -9,6 +9,8 @@ import { MedicoUnidadeSaude } from './medico-unidade-saude';
 
 import { KeyService } from 'src/app/geral/key/key.service';
 
+import { faBars } from '@fortawesome/free-solid-svg-icons';
+
 @Component({
   selector: 'app-unidades-saude',
   templateUrl: './unidades-saude.component.html',
@@ -19,10 +21,12 @@ export class UnidadesSaudeComponent implements OnInit {
   error: any;
   unidadesSaudeMedico: MedicoUnidadeSaude[];
 
+  faBars = faBars;
+
   constructor(private unidadeSaudeService: UnidadeSaudeService,
               private keyService: KeyService,
               private router: Router) {
-
+    this.unidadesSaudeMedico = [];
   }
 
   ngOnInit() {
@@ -30,7 +34,22 @@ export class UnidadesSaudeComponent implements OnInit {
       this.unidadeSaudeService.getUnidadesSaudeFromMedico(sessionStorage.getItem('key'),
       sessionStorage.getItem('id')).subscribe(
         (items: MedicoUnidadeSaude[]) => {
-          this.unidadesSaudeMedico = items;
+          
+          items.forEach(
+            (item: MedicoUnidadeSaude) => {
+
+              switch (item.status) {
+                case 'P': { item.statusStr = 'Pendente'; break }
+                case 'A': { item.statusStr = 'Aprovado'; break }
+                case 'R': { item.statusStr = 'Recusado'; break }
+              }
+
+              this.unidadesSaudeMedico.push(item);
+
+            }
+          );
+          
+
         },
         (error: any) => {
           this.error = error;
@@ -52,5 +71,9 @@ export class UnidadesSaudeComponent implements OnInit {
 
   goToDelete(id: number) {
     this.router.navigate([`medico/unidade-saude/${id}/delete`])
+  }
+
+  goToHomeMedico() {
+    this.router.navigate(['medico']);
   }
 }

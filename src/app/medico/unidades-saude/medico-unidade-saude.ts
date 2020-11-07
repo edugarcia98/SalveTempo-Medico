@@ -7,6 +7,7 @@ export interface MedicoUnidadeSaude {
     unidadeSaude: UnidadeSaude;
     diaPeriodoTrabalho: string;
     status: string;
+    statusStr: string;
 }
 
 export interface DiaPeriodoTrabalho {
